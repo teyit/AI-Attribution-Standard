@@ -97,31 +97,28 @@ a{color:var(--c-accent)}
 
 /* Result */
 .result-box{
-  background:var(--c-bg-alt);
-  border:1px solid var(--c-border);
+  background:#eef6f5;
+  border:1px solid #c8e0dc;
   border-radius:8px;
   padding:16px 20px;
   margin-bottom:24px;
   font-size:0.9rem;
   line-height:1.7;
+  color:#3a4a5c;
   display:none;
 }
 .result-box.visible{display:block}
 .result-summary{margin-bottom:0}
 
 /* Error */
+.result-box:has(.result-error){
+  background:var(--c-bg-alt);
+  border:1px solid var(--c-border);
+  color:var(--c-text);
+}
 .result-error{
   color:#c0392b;
   font-weight:600;
-}
-
-/* Note */
-.result-note{
-  margin-top:8px;
-  padding-top:8px;
-  border-top:1px dashed var(--c-border);
-  font-style:italic;
-  color:var(--c-text-muted);
 }
 
 /* Component cards */
@@ -169,8 +166,8 @@ a{color:var(--c-accent)}
   display:flex;
   gap:12px;
   align-items:flex-start;
-  background:#eef6f5;
-  border:1px solid #c8e0dc;
+  background:#f0f4f8;
+  border:1px solid #d0dae4;
   border-radius:8px;
   padding:16px;
 }
@@ -182,7 +179,7 @@ a{color:var(--c-accent)}
 }
 .aias-explanation .explanation-box p{
   font-size:0.85rem;
-  color:#2a4a46;
+  color:#3a4a5c;
   line-height:1.7;
   margin:0;
 }
@@ -256,7 +253,7 @@ a{color:var(--c-accent)}
 
   <section class="section aias-explanation">
     <div class="explanation-box">
-      <svg class="explanation-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#2a4a46" stroke-width="2"/><path d="M12 11v6" stroke="#2a4a46" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#2a4a46"/></svg>
+      <svg class="explanation-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#3a4a5c" stroke-width="2"/><path d="M12 11v6" stroke="#3a4a5c" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#3a4a5c"/></svg>
       <p>AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir "yayın dışı yapay zeka kullanımı" değerlendirmesi altında kaydedilebilir.</p>
     </div>
   </section>
@@ -441,9 +438,6 @@ a{color:var(--c-accent)}
     if (parsed.note) parts.push('Editör notu: ' + parsed.note);
 
     var summaryHTML = '<p class="result-summary">' + esc(parts.join(' ')) + '</p>';
-    if (parsed.note) {
-      summaryHTML += '<p class="result-note">Not: ' + esc(parsed.note) + '</p>';
-    }
     resultBox.className = 'result-box visible';
     resultBox.innerHTML = summaryHTML;
 
