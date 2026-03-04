@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIAS Yorumlayıcı — teyit.org</title>
+<meta name="description" content="AIAS (Yapay Zeka Atıf Standardı) standart ifade kodlarının ne anlama geldiğini gösterir.">
+<link rel="icon" href="https://teyit.org/favicon.ico">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c-primary:#1F3837;
+  --c-bg:#fff;
+  --c-bg-alt:#f5f5f5;
+  --c-text:#222;
+  --c-text-muted:#666;
+  --c-border:#e0e0e0;
+  --c-card-bg:#fff;
+  --c-accent:#2a6f6a;
+
+  --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --font-mono:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;
+}
+
+body{
+  font-family:var(--font-sans);
+  background:var(--c-bg);
+  color:var(--c-text);
+  line-height:1.6;
+  min-height:100vh;
+}
+a{color:var(--c-accent)}
+.container{max-width:960px;margin:0 auto;padding:0 20px}
+
+/* Header */
+.header{
+  background:var(--c-primary);
+  color:#fff;
+  padding:24px 0;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.header-logo{
+  width:40px;height:40px;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.header h1{font-size:1.4rem;font-weight:700}
+.header p{font-size:0.85rem;opacity:0.85;margin-top:2px}
+
+/* Section */
+.section{padding:32px 0}
+.section-title{
+  font-size:1.1rem;font-weight:700;
+  margin-bottom:16px;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--c-border);
+}
+
+/* Interpret form */
+.interpret-form{
+  display:flex;gap:8px;
+  margin-bottom:20px;
+}
+.interpret-input{
+  flex:1;
+  padding:10px 14px;
+  font-family:var(--font-mono);
+  font-size:0.9rem;
+  border:2px solid var(--c-border);
+  border-radius:6px;
+  background:var(--c-bg);
+  color:var(--c-text);
+  outline:none;
+  transition:border-color .2s;
+}
+.interpret-input:focus{border-color:var(--c-accent)}
+.interpret-input::placeholder{color:var(--c-text-muted);opacity:0.7}
+.interpret-btn{
+  padding:10px 20px;
+  background:var(--c-primary);
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  font-size:0.9rem;
+  font-weight:600;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:opacity .2s;
+}
+
+.interpret-btn:hover{opacity:0.85}
+
+/* Result */
+.result-box{
+  background:var(--c-bg-alt);
+  border:1px solid var(--c-border);
+  border-radius:8px;
+  padding:16px 20px;
+  margin-bottom:24px;
+  font-size:0.9rem;
+  line-height:1.7;
+  display:none;
+}
+.result-box.visible{display:block}
+.result-summary{margin-bottom:0}
+
+/* Error */
+.result-error{
+  color:#c0392b;
+  font-weight:600;
+}
+
+/* Note */
+.result-note{
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px dashed var(--c-border);
+  font-style:italic;
+  color:var(--c-text-muted);
+}
+
+/* Component cards */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:12px;
+  margin-top:16px;
+}
+.card{
+  background:var(--c-card-bg);
+  border:1px solid var(--c-border);
+  border-radius:8px;
+  padding:16px;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+}
+.card-icon{
+  width:36px;height:36px;
+  flex-shrink:0;
+}
+.card-icon svg{width:36px;height:36px}
+.card-body{flex:1;min-width:0}
+.card-name{font-weight:700;font-size:0.9rem;margin-bottom:2px}
+.card-code{
+  font-family:var(--font-mono);
+  font-size:0.8rem;
+  color:var(--c-text-muted);
+  margin-bottom:6px;
+  background:var(--c-bg-alt);
+  padding:0px 8px;
+  border-radius:4px;
+  border:1px solid var(--c-border);
+  display:inline-block;
+}
+.card-desc{font-size:0.82rem;color:var(--c-text-muted);line-height:1.5}
+
+/* Explanation */
+.aias-explanation{
+  padding-top:0px;
+  padding-bottom: 10px;
+}
+.aias-explanation .explanation-box{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  background:#eef6f5;
+  border:1px solid #c8e0dc;
+  border-radius:8px;
+  padding:16px;
+}
+.aias-explanation .explanation-icon{
+  flex-shrink:0;
+  width:20px;
+  height:20px;
+  margin-top:2px;
+}
+.aias-explanation .explanation-box p{
+  font-size:0.85rem;
+  color:#2a4a46;
+  line-height:1.7;
+  margin:0;
+}
+
+/* Library */
+.lib-group{margin-bottom:28px}
+.lib-group-title{
+  font-size:0.95rem;font-weight:700;
+  margin-bottom:10px;
+  color:var(--c-text-muted);
+}
+
+/* Info text */
+.info-text{
+  font-size:0.88rem;
+  color:var(--c-text-muted);
+  margin-bottom:16px;
+  line-height:1.6;
+}
+
+/* Footer */
+.footer{
+  padding:24px 0;
+  text-align:center;
+  font-size:0.8rem;
+  color:var(--c-text-muted);
+  border-top:1px solid var(--c-border);
+  margin-top:24px;
+}
+.footer a{color:var(--c-accent);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+
+
+/* Responsive */
+@media(max-width:600px){
+  .interpret-form{flex-direction:column}
+  .header h1{font-size:1.2rem}
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="header-logo"><svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 303 303" xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="151.5" cy="151.5" fill="#fff" r="60.5"/><path d="m298.593 145.738-50.783-13.304 41.686-31.703c2.143-1.618 2.911-4.489 1.9-6.996s-3.639-3.963-6.267-3.599l-52.036 6.955 26.321-45.412c1.334-2.305.97-5.257-.93-7.157-1.9-1.901-4.852-2.305-7.157-.93l-45.406 26.325 6.954-52.043c.364-2.669-1.132-5.257-3.598-6.268-2.466-1.051-5.337-.243-6.995 1.901l-31.739 41.691-13.302-50.749c-.687-2.628-3.032-4.448-5.741-4.448s-5.054 1.82-5.741 4.448l-13.302 50.749-31.739-41.691c-1.617-2.143-4.488-2.912-6.995-1.901s-3.962 3.599-3.598 6.268l6.954 52.043-45.406-26.325c-2.345-1.375-5.256-.971-7.157.93-1.9 1.901-2.305 4.853-.93 7.157l26.321 45.412-52.036-6.955c-2.628-.324-5.256 1.132-6.267 3.599-1.011 2.507-.243 5.338 1.9 6.996l41.686 31.703-50.743 13.304c-2.628.687-4.448 3.033-4.448 5.742s1.819 5.055 4.448 5.742l50.743 13.304-41.686 31.703c-2.143 1.618-2.911 4.489-1.9 6.996 1.051 2.507 3.639 4.003 6.267 3.599l52.036-6.955-26.321 45.412c-1.334 2.345-.97 5.257.93 7.157 1.9 1.901 4.852 2.305 7.157.93l45.406-26.325-6.954 52.043c-.364 2.669 1.132 5.257 3.598 6.268s5.337.243 6.995-1.901l31.739-41.691 13.302 50.79c.687 2.628 3.032 4.448 5.741 4.448s5.054-1.82 5.741-4.448l13.302-50.79 31.739 41.691c1.617 2.143 4.488 2.912 6.995 1.901s3.962-3.599 3.598-6.268l-6.954-52.043 45.406 26.325c2.345 1.334 5.256.971 7.157-.93 1.9-1.901 2.305-4.853.93-7.157l-26.321-45.412 52.036 6.955c2.628.364 5.256-1.132 6.267-3.599 1.011-2.507.243-5.338-1.9-6.996l-41.686-31.703 50.743-13.304c2.628-.687 4.448-3.033 4.448-5.742s-1.819-5.055-4.448-5.742zm-152.106 44.037c-4.488 4.489-11.806 4.489-16.294 0l-26.362-26.365c-4.488-4.489-4.488-11.808 0-16.296 4.488-4.489 11.806-4.489 16.294 0l18.195 18.197 44.556-44.562c4.488-4.489 11.806-4.489 16.294 0s4.488 11.808 0 16.296l-52.724 52.731h.04z" fill="#20534c" fill-rule="nonzero"/></svg></div>
+    <div>
+      <h1>AIAS (Yapay Zeka Atıf Standardı) Kod Açıklama Aracı</h1>
+      <p>Yapay Zeka Atıf Standardı kodlarının açıklamasını görüntüleyin</p>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="section">
+    <h2 class="section-title">Standart Kod Girerek Anlamını Göster</h2>
+    <p class="info-text">Yayınlanmış bir yapay zeka atıf beyanı standart kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code></p>
+    <div class="interpret-form">
+      <input type="text" class="interpret-input" id="stmtInput" placeholder="AIAS Ph RePr R ChatGPT, Claude v1.0" autocomplete="off">
+      <button class="interpret-btn" id="interpretBtn">Anlamını Göster</button>
+    </div>
+    <div class="result-box" id="resultBox"></div>
+    <div id="resultCards"></div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Bileşen Kütüphanesi (Tüm Kodlar)</h2>
+    <p class="info-text">AIAS beyanlarında kullanılan tüm bileşen kodları ve anlamları aşağıda listelenmiştir.</p>
+    <div id="library"></div>
+  </section>
+
+  <section class="section aias-explanation">
+    <div class="explanation-box">
+      <svg class="explanation-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#2a4a46" stroke-width="2"/><path d="M12 11v6" stroke="#2a4a46" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#2a4a46"/></svg>
+      <p>AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir "yayın dışı yapay zeka kullanımı" değerlendirmesi altında kaydedilebilir.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <a href="https://teyit.org" target="_blank" rel="noopener">teyit.org</a> &middot;
+    <a href="#" target="_blank" rel="noopener">AI Attribution Standard</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ── SVG Icons ──
+  var ICONS = {
+    entirely_human: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><circle cx="12" cy="12" fill-opacity=".6" r="11.5"/></g></svg>',
+    primarily_human: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><path d="m12 0v12h12c0 6.627-5.373 12-12 12-6.623 0-12-5.377-12-12 0-6.627 5.373-12 12-12z" fill-opacity=".6" transform="matrix(.920833 0 0 .920833 .95 .95)"/></g></svg>',
+    human_ai_blend: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><path d="m12 0v24c-6.627 0-12-5.373-12-12s5.373-12 12-12z" fill-opacity=".6" transform="matrix(.920833 0 0 .920833 .95 .95)"/></g></svg>',
+    primarily_ai: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><path d="m12 0v12h-12c-0-6.627 5.373-12 12-12z" fill-opacity=".6" transform="matrix(.920833 0 0 .920833 .95 .95)"/></g></svg>',
+    entirely_ai: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill="#161616" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/></svg>',
+    research: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g stroke="#161616"><circle cx="12" cy="12" fill="#fff" r="11.5"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" transform="matrix(-.012998 0 0 .012998 19.799037 4.201051)"><g stroke-width="57.7"><path d="m457.986 914.657-193.517 193.517c-55.066 55.066-138.676 61.223-186.187 13.711l-.149-.149c-47.511-47.511-41.356-131.121 13.711-186.187l193.517-193.517z"/><path d="m314.101 770.772 81.997-82"/><path d="m429.232 885.903 82-81.997"/></g><path d="m1153.85 459.648c0 147.732-78.813 284.239-206.751 358.109-127.935 73.862-285.555 73.862-413.494 0-127.934-73.863-206.747-210.368-206.747-358.109 0-147.728 78.813-284.24 206.747-358.109 127.939-73.863 285.555-73.863 413.494 0 127.938 73.862 206.751 210.372 206.751 358.109z" stroke-width="76.93"/></g></g></svg>',
+    production: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616" fill-rule="nonzero"><path d="m404.63 642c43.078 54.141 66.844 120.94 66.844 187.92 0 13.219 10.781 24 24 24h179.29c6.375 0 12.469-2.531 16.922-7.078s7.078-10.547 7.078-16.922c0-66.844 23.859-133.78 67.453-188.63 36.469-46.078 52.078-87.375 52.078-138.24 0-70.453-31.453-136.45-86.156-180.94-54.703-44.531-126.47-61.547-196.92-46.922-108.14 22.547-185.16 120.14-183.14 231.94.844 49.312 16.547 89.625 52.547 134.86zm140.44-319.78c56.156-11.766 113.3 1.781 156.84 37.219 43.453 35.391 68.391 87.703 68.391 143.76 0 39.609-12.141 71.062-41.766 108.38-45 56.766-71.859 124.92-76.922 194.39h-132.94c-5.062-69.609-31.688-137.63-76.453-193.92-29.297-36.703-41.531-67.312-42.141-105.7-1.547-88.875 59.391-166.26 144.98-184.13z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m492.71 946.31c1.312 0 2.625-.141 3.937-.375l184.92-30.844c13.078-2.156 21.938-14.531 19.688-27.609-2.156-13.078-14.625-21.938-27.609-19.688l-184.92 30.844c-13.077 2.156-21.938 14.531-19.688 27.609 1.969 11.812 12.188 20.062 23.673 20.062z" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m580.08 1091.9c31.219 0 56.531-25.312 56.531-56.531h-112.92c-.141 31.219 25.172 56.531 56.391 56.531z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.57257639715 1.04964927428)"/><path d="m164.06 535.55h121.08c13.219 0 24-10.781 24-24s-10.781-24-24-24h-121.08c-13.219 0-24 10.781-24 24s10.781 24 24 24z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m1004.106 487.55h-120.986c-13.219 0-24 10.781-24 24s10.781 24 24 24h121.08c13.219 0 24-10.781 24-24 0-13.172-10.781-24-24.094-24z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m304.08 825.47 85.547-85.547c9.375-9.375 9.375-24.609 0-33.938-9.375-9.375-24.609-9.375-33.938 0l-85.547 85.547c-9.375 9.375-9.375 24.609 0 33.938 4.687 4.688 10.781 7.078 16.922 7.078 6.094 0 12.328-2.39 17.016-7.078z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m795.47 324.14c6.141 0 12.234-2.391 16.922-7.078l85.547-85.547c9.375-9.375 9.375-24.609 0-33.938-9.375-9.375-24.609-9.375-33.938 0l-85.547 85.547c-9.375 9.375-9.375 24.609 0 33.938 4.781 4.781 10.922 7.078 17.016 7.078z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m355.78 317.16c4.687 4.688 10.781 7.078 16.922 7.078s12.234-2.39 16.922-7.078c9.375-9.375 9.375-24.609 0-33.938l-85.547-85.547c-9.375-9.375-24.609-9.375-33.938 0-9.375 9.375-9.375 24.609 0 33.938z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m812.39 705.94c-9.375-9.375-24.609-9.375-33.938 0-9.375 9.375-9.375 24.609 0 33.938l85.547 85.547c4.688 4.688 10.781 7.078 16.922 7.078s12.234-2.39 16.922-7.078c9.375-9.375 9.375-24.609 0-33.938z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/><path d="m584.06 236.63c13.219 0 24-10.781 24-24v-121.08c0-13.219-10.781-24-24-24s-24 10.781-24 24v121.08c0 13.219 10.781 24 24 24z" stroke="#161616" stroke-linejoin="round" stroke-miterlimit="2" stroke-width="8.86" transform="matrix(.01797364506 0 0 .01797364506 1.50105517194 2.1108102509)"/></g></svg>',
+    editing: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g stroke="#161616"><circle cx="12" cy="12" fill="#fff" r="11.5"/><g fill="none" stroke-linecap="round" stroke-linejoin="round" transform="matrix(-.012998 0 0 .012998 19.799037 4.201051)"><g stroke-width="57.7"><path d="m457.986 914.657-193.517 193.517c-55.066 55.066-138.676 61.223-186.187 13.711l-.149-.149c-47.511-47.511-41.356-131.121 13.711-186.187l193.517-193.517z"/><path d="m314.101 770.772 81.997-82"/><path d="m429.232 885.903 82-81.997"/></g><path d="m1153.85 459.648c0 147.732-78.813 284.239-206.751 358.109-127.935 73.862-285.555 73.862-413.494 0-127.934-73.863-206.747-210.368-206.747-358.109 0-147.728 78.813-284.24 206.747-358.109 127.939-73.863 285.555-73.863 413.494 0 127.938 73.862 206.751 210.372 206.751 358.109z" stroke-width="76.93"/></g></g></svg>',
+    reviewed: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616" fill-rule="nonzero" transform="matrix(.018333 0 0 .018333 1 1)"><path d="m1048.6 435.3c.043-69.762-25.445-137.13-71.656-189.39-46.215-52.262-109.96-85.801-179.2-94.289-69.246-8.488-139.21 8.66-196.68 48.211s-98.473 98.766-115.28 166.47c-55.148 1.148-108.73 18.539-154.05 49.988-45.316 31.445-80.352 75.562-100.72 126.82l-79.055 197.71c-1.52 3.789-2.086 7.898-1.652 11.957.433 4.063 1.859 7.957 4.148 11.336 2.289 3.387 5.375 6.156 8.981 8.07 3.609 1.914 7.632 2.914 11.719 2.911h118.7v118.7c.031 25.684 10.246 50.309 28.406 68.469s42.785 28.375 68.469 28.405h82.766v35.106c0 6.632 2.636 12.991 7.324 17.68 4.687 4.688 11.047 7.324 17.68 7.324 6.629 0 12.988-2.637 17.676-7.324 4.688-4.688 7.324-11.047 7.324-17.68v-60.106c0-3.281-.645-6.535-1.902-9.566-1.254-3.035-3.098-5.793-5.418-8.113-2.321-2.324-5.078-4.164-8.114-5.418-3.031-1.258-6.281-1.903-9.566-1.903h-107.77c-12.426-.019-24.336-4.964-33.125-13.75-8.785-8.785-13.73-20.695-13.75-33.125v-143.7c.004-3.285-.645-6.535-1.898-9.57-1.258-3.035-3.098-5.789-5.418-8.109-2.325-2.324-5.082-4.164-8.114-5.422-3.035-1.254-6.285-1.899-9.57-1.899h-106.79l65.332-163.43c16.223-40.691 43.699-75.918 79.215-101.56 35.512-25.637 77.598-40.629 121.33-43.219-.395 6.118-.93 12.199-.93 18.41.118 69.188 25.316 135.98 70.91 188.02 45.602 52.031 108.52 85.773 177.09 94.977v307.48c0 6.637 2.637 12.992 7.325 17.68 4.687 4.692 11.047 7.325 17.68 7.325 6.628 0 12.988-2.633 17.676-7.325 4.687-4.687 7.32-11.042 7.32-17.68v-305.3c73.547-3.175 143.03-34.594 193.99-87.711 50.961-53.125 79.473-123.85 79.598-197.46zm-285.79 235.79c-46.633 0-92.223-13.832-131-39.738-38.777-25.91-69-62.734-86.848-105.82-17.848-43.082-22.516-90.492-13.418-136.23 9.098-45.734 31.555-87.75 64.535-120.73 32.973-32.977 74.988-55.434 120.73-64.531 45.738-9.098 93.148-4.426 136.23 13.418 43.082 17.848 79.906 48.07 105.82 86.844 25.91 38.777 39.734 84.363 39.734 131-.063 62.516-24.926 122.45-69.129 166.66-44.207 44.207-104.14 69.066-166.66 69.137z"/><path d="m858.27 345.26-143.95 143.95-46.969-46.977c-2.316-2.359-5.07-4.238-8.113-5.523-3.043-1.289-6.313-1.957-9.614-1.977-3.304-.016-6.582.621-9.636 1.879-3.055 1.254-5.832 3.109-8.168 5.445-2.34 2.336-4.188 5.11-5.442 8.168-1.258 3.055-1.894 6.328-1.879 9.633.016 3.305.688 6.57 1.977 9.613 1.285 3.043 3.164 5.797 5.523 8.114l64.648 64.648c2.321 2.32 5.078 4.164 8.11 5.418 3.031 1.261 6.281 1.906 9.566 1.906 3.281 0 6.535-.645 9.567-1.906 3.031-1.254 5.789-3.098 8.109-5.418l161.62-161.62c4.609-4.704 7.176-11.035 7.145-17.621-.036-6.586-2.668-12.895-7.321-17.551-4.656-4.657-10.965-7.29-17.551-7.321-6.59-.035-12.918 2.535-17.625 7.145z"/></g></svg>',
+    not_reviewed: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616" fill-rule="nonzero" transform="matrix(.018333 0 0 .018333 1 1)"><path d="m1048.6 435.3c.043-69.762-25.445-137.13-71.656-189.39-46.215-52.262-109.96-85.801-179.2-94.289-69.246-8.488-139.21 8.66-196.68 48.211s-98.473 98.766-115.28 166.47c-55.148 1.148-108.73 18.539-154.05 49.988-45.316 31.445-80.352 75.562-100.72 126.82l-79.055 197.71c-1.52 3.789-2.086 7.898-1.652 11.957.433 4.063 1.859 7.957 4.148 11.336 2.289 3.387 5.375 6.156 8.981 8.07 3.609 1.914 7.632 2.914 11.719 2.911h118.7v118.7c.031 25.684 10.246 50.309 28.406 68.469s42.785 28.375 68.469 28.405h82.766v35.106c0 6.632 2.636 12.991 7.324 17.68 4.687 4.688 11.047 7.324 17.68 7.324 6.629 0 12.988-2.637 17.676-7.324 4.688-4.688 7.324-11.047 7.324-17.68v-60.106c0-3.281-.645-6.535-1.902-9.566-1.254-3.035-3.098-5.793-5.418-8.113-2.321-2.324-5.078-4.164-8.114-5.418-3.031-1.258-6.281-1.903-9.566-1.903h-107.77c-12.426-.019-24.336-4.964-33.125-13.75-8.785-8.785-13.73-20.695-13.75-33.125v-143.7c.004-3.285-.645-6.535-1.898-9.57-1.258-3.035-3.098-5.789-5.418-8.109-2.325-2.324-5.082-4.164-8.114-5.422-3.035-1.254-6.285-1.899-9.57-1.899h-106.79l65.332-163.43c16.223-40.691 43.699-75.918 79.215-101.56 35.512-25.637 77.598-40.629 121.33-43.219-.395 6.118-.93 12.199-.93 18.41.118 69.188 25.316 135.98 70.91 188.02 45.602 52.031 108.52 85.773 177.09 94.977v307.48c0 6.637 2.637 12.992 7.325 17.68 4.687 4.692 11.047 7.325 17.68 7.325 6.628 0 12.988-2.633 17.676-7.325 4.687-4.687 7.32-11.042 7.32-17.68v-305.3c73.547-3.175 143.03-34.594 193.99-87.711 50.961-53.125 79.473-123.85 79.598-197.46zm-285.79 235.79c-46.633 0-92.223-13.832-131-39.738-38.777-25.91-69-62.734-86.848-105.82-17.848-43.082-22.516-90.492-13.418-136.23 9.098-45.734 31.555-87.75 64.535-120.73 32.973-32.977 74.988-55.434 120.73-64.531 45.738-9.098 93.148-4.426 136.23 13.418 43.082 17.848 79.906 48.07 105.82 86.844 25.91 38.777 39.734 84.363 39.734 131-.063 62.516-24.926 122.45-69.129 166.66-44.207 44.207-104.14 69.066-166.66 69.137z"/><path d="m854.65 344.29c-2.324-2.32-5.078-4.164-8.113-5.418-3.032-1.258-6.282-1.906-9.567-1.906-3.281 0-6.531.648-9.566 1.906-3.027 1.254-5.785 3.098-8.106 5.418l-55.762 55.766-56.496-56.496c-2.312-2.359-5.07-4.238-8.113-5.527-3.043-1.285-6.312-1.957-9.617-1.977-3.301-.016-6.578.625-9.633 1.879-3.055 1.258-5.832 3.109-8.168 5.445s-4.183 5.114-5.441 8.168c-1.258 3.055-1.899 6.328-1.879 9.633.015 3.305.687 6.57 1.976 9.613 1.286 3.043 3.164 5.801 5.524 8.114l56.496 56.5-56.398 56.395c-2.364 2.312-4.239 5.07-5.528 8.113-1.285 3.039-1.957 6.309-1.976 9.613-.016 3.305.625 6.578 1.879 9.633 1.258 3.059 3.109 5.832 5.445 8.168s5.113 4.188 8.168 5.445c3.055 1.258 6.332 1.895 9.633 1.875 3.305-.015 6.57-.687 9.617-1.972 3.039-1.289 5.801-3.168 8.11-5.528l56.402-56.395 55.66 55.664c2.312 2.364 5.07 4.239 8.113 5.528 3.043 1.285 6.308 1.957 9.617 1.972 3.305.02 6.578-.617 9.633-1.875 3.051-1.261 5.832-3.109 8.168-5.445s4.183-5.109 5.441-8.168c1.254-3.055 1.899-6.328 1.879-9.633-.016-3.304-.687-6.574-1.976-9.617-1.286-3.039-3.165-5.801-5.524-8.109l-55.66-55.664 55.762-55.762c2.32-2.325 4.16-5.078 5.418-8.114 1.258-3.031 1.906-6.281 1.906-9.566 0-3.281-.648-6.531-1.906-9.566-1.258-3.032-3.098-5.79-5.418-8.11z" transform="matrix(1.080232 0 0 1.080232 -61.713449 -27.989487)"/></g></svg>'
+  };
+
+  // ── Constants ──
+  var PROPORTION = {
+    Eh:  { key:'entirely_human',  name:'Tamamen insan',              desc:'Bu içerik tamamen insan tarafından, yapay zeka kullanılmadan üretilmiştir.' },
+    Ph:  { key:'primarily_human', name:'Büyük ölçüde insan',           desc:'Bu içerik büyük ölçüde insan tarafından üretilmiştir.' },
+    HAb: { key:'human_ai_blend',  name:'İnsan-Yapay zeka hibrit', desc:'Bu içerik, insan ve yapay zeka katkılarının dengeli bir karışımıyla oluşturulmuştur.' },
+    PAI: { key:'primarily_ai',    name:'Büyük ölçüde yapay zeka',      desc:'Bu içerik büyük ölçüde yapay zeka tarafından üretilmiştir.' },
+    EAI: { key:'entirely_ai',     name:'Tamamen yapay zeka',          desc:'Bu içerik tamamen yapay zeka tarafından üretilmiştir.' }
+  };
+
+  var STAGES = {
+    Re: { key:'research',   name:'Araştırma',  desc:'Yapay zeka, kaynak tarama ve veri analizi gibi araştırma süreçlerinde kullanılmıştır.' },
+    Pr: { key:'production', name:'Üretim',    desc:'Yapay zeka, taslak yazımı ve içerik üretimi gibi üretim süreçlerinde kullanılmıştır.' },
+    Ed: { key:'editing',    name:'Düzenleme', desc:'Yapay zeka, metin redaksiyonu ve dilbilgisi düzeltme gibi düzenleme süreçlerinde kullanılmıştır.' }
+  };
+
+  var REVIEW = {
+    R:  { key:'reviewed',     name:'İncelendi ve onaylandı', desc:'Yapay zeka tarafından üretilen içerik editör(ler) tarafından incelenmiş ve onaylanmıştır.' },
+    Nr: { key:'not_reviewed', name:'İncelenmedi',                desc:'Yapay zeka tarafından üretilen içerik editör tarafından incelenmemiştir.' }
+  };
+
+  // ── Parser ──
+  function parseStatement(raw) {
+    var s = raw.trim();
+    if (s.indexOf('AIAS ') !== 0) return { error: 'Beyan "AIAS " ön eki ile başlamalıdır.' };
+    s = s.slice(5); // remove "AIAS "
+
+    // Extract note
+    var note = null;
+    var pipeIdx = s.indexOf(' | ');
+    if (pipeIdx !== -1) {
+      note = s.slice(pipeIdx + 3).trim();
+      s = s.slice(0, pipeIdx).trim();
+    }
+
+    // Check version suffix (v*.*)
+    var verMatch = s.match(/\s+(v\d+\.\d+)$/);
+    if (!verMatch) return { error: 'Beyan sürüm numarası (ör: v1.0) ile bitmelidir.' };
+    var version = verMatch[1];
+    s = s.slice(0, verMatch.index).trim();
+
+    if (!s) return { error: 'Oran kodu eksik.' };
+
+    // Tokenize by space
+    var tokens = s.split(/\s+/);
+    var idx = 0;
+
+    // Proportion
+    var pToken = tokens[idx];
+    var proportion = null;
+    // Try 3-char, 2-char codes
+    if (PROPORTION[pToken]) {
+      proportion = pToken;
+      idx++;
+    } else {
+      return { error: 'Geçersiz oran kodu: "' + pToken + '". Geçerli kodlar: Eh, Ph, HAb, PAI, EAI' };
+    }
+
+    // If entirely human, no stages/review/models needed
+    if (proportion === 'Eh') {
+      return { proportion: proportion, stages: [], review: null, models: [], version: version, note: note };
+    }
+
+    if (idx >= tokens.length) return { error: 'Aşama kodları eksik.' };
+
+    // Stages: greedy parse from token
+    var stageToken = tokens[idx];
+    var stages = [];
+    var remaining = stageToken;
+    var stageKeys = ['Re', 'Pr', 'Ed'];
+    while (remaining.length > 0) {
+      var matched = false;
+      for (var si = 0; si < stageKeys.length; si++) {
+        if (remaining.indexOf(stageKeys[si]) === 0) {
+          stages.push(stageKeys[si]);
+          remaining = remaining.slice(stageKeys[si].length);
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) break;
+    }
+    if (remaining.length > 0 || stages.length === 0) {
+      return { error: 'Geçersiz aşama kodu: "' + stageToken + '". Geçerli kodlar: Re, Pr, Ed (birleşik: RePrEd)' };
+    }
+    idx++;
+
+    if (idx >= tokens.length) return { error: 'İnceleme kodu eksik.' };
+
+    // Review
+    var rToken = tokens[idx];
+    if (!REVIEW[rToken]) {
+      return { error: 'Geçersiz inceleme kodu: "' + rToken + '". Geçerli kodlar: R, Nr' };
+    }
+    var review = rToken;
+    idx++;
+
+    // Models: remaining tokens joined (comma-separated within)
+    var models = [];
+    if (idx < tokens.length) {
+      var modelStr = tokens.slice(idx).join(' ');
+      models = modelStr.split(',').map(function(m) { return m.trim(); }).filter(Boolean);
+    }
+
+    return { proportion: proportion, stages: stages, review: review, models: models, version: version, note: note };
+  }
+
+  // ── Render helpers ──
+  function iconHTML(key, size) {
+    size = size || 36;
+    var svg = ICONS[key];
+    if (!svg) return '';
+    return '<span class="card-icon" style="width:' + size + 'px;height:' + size + 'px">' +
+      svg.replace('viewBox=', 'width="' + size + '" height="' + size + '" viewBox=') + '</span>';
+  }
+
+  function cardHTML(iconKey, name, code, desc) {
+    return '<div class="card">' +
+      iconHTML(iconKey) +
+      '<div class="card-body">' +
+        '<div class="card-name">' + esc(name) + '</div>' +
+        '<div class="card-code">' + esc(code) + '</div>' +
+        '<div class="card-desc">' + esc(desc) + '</div>' +
+      '</div></div>';
+  }
+
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  // ── Interpret & render ──
+  function interpret(stmt) {
+    var resultBox = document.getElementById('resultBox');
+    var resultCards = document.getElementById('resultCards');
+
+    var parsed = parseStatement(stmt);
+
+    if (parsed.error) {
+      resultBox.className = 'result-box visible';
+      resultBox.innerHTML = '<p class="result-error">' + esc(parsed.error) + '</p>';
+      resultCards.innerHTML = '';
+      return;
+    }
+
+    // Build summary
+    var p = PROPORTION[parsed.proportion];
+    var parts = [p.desc];
+    parsed.stages.forEach(function(code) {
+      parts.push(STAGES[code].desc);
+    });
+    if (parsed.review) parts.push(REVIEW[parsed.review].desc);
+    if (parsed.models.length) parts.push('Şu model veya uygulamalar kullanılmıştır: ' + parsed.models.join(', ') + '.');
+    if (parsed.note) parts.push('Editör notu: ' + parsed.note);
+
+    var summaryHTML = '<p class="result-summary">' + esc(parts.join(' ')) + '</p>';
+    if (parsed.note) {
+      summaryHTML += '<p class="result-note">Not: ' + esc(parsed.note) + '</p>';
+    }
+    resultBox.className = 'result-box visible';
+    resultBox.innerHTML = summaryHTML;
+
+    // Build cards
+    var cards = '';
+
+    // AIAS prefix card
+    cards += '<div class="card">' +
+      '<div class="card-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:var(--font-mono);background:var(--c-bg-alt);border-radius:50%;border:1.5px solid var(--c-border)">AIAS</div>' +
+      '<div class="card-body">' +
+        '<div class="card-name">Yapay Zeka Atıf Beyanı</div>' +
+        '<div class="card-code">AIAS</div>' +
+        '<div class="card-desc">Bu ön ek, bir yapay zeka atıf beyanını tanımlamak için kullanılır.</div>' +
+      '</div></div>';
+
+    // Proportion
+    cards += cardHTML(p.key, p.name, parsed.proportion, p.desc);
+
+    // Stages
+    parsed.stages.forEach(function(code) {
+      var st = STAGES[code];
+      cards += cardHTML(st.key, st.name, code, st.desc);
+    });
+
+    // Review
+    if (parsed.review) {
+      var rv = REVIEW[parsed.review];
+      cards += cardHTML(rv.key, rv.name, parsed.review, rv.desc);
+    }
+
+    // Models
+    if (parsed.models.length) {
+      cards += '<div class="card">' +
+        '<span class="card-icon" style="width:36px;height:36px"><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><path d="m65.625 14.062c1.293 0 2.344 1.051 2.344 2.344v4.375c6.051 1.48 10.789 6.312 12.121 12.422h4.285c1.293 0 2.344 1.051 2.344 2.344s-1.051 2.343-2.344 2.343h-3.906v10.938h3.906c1.293 0 2.344 1.051 2.344 2.344s-1.051 2.344-2.344 2.344h-3.906v10.156h3.906c1.293 0 2.344 1.051 2.344 2.344s-1.051 2.344-2.344 2.344h-4.285c-1.332 6.109-6.071 10.941-12.121 12.422v4.375c0 1.293-1.051 2.343-2.344 2.343s-2.344-1.05-2.344-2.343v-3.907h-10.938v3.907c0 1.293-1.051 2.343-2.344 2.343s-2.343-1.05-2.343-2.343v-3.907h-10.156v3.907c0 1.293-1.051 2.343-2.344 2.343s-2.344-1.05-2.344-2.343v-4.207c-6.422-1.239-11.512-6.223-12.902-12.59h-4.285c-1.293 0-2.344-1.051-2.344-2.344s1.051-2.344 2.344-2.344h3.906v-10.156h-3.906c-1.293 0-2.344-1.051-2.344-2.344s1.051-2.344 2.344-2.344h3.906v-10.938h-3.906c-1.293 0-2.344-1.05-2.344-2.343s1.051-2.344 2.344-2.344h4.285c1.391-6.367 6.48-11.352 12.902-12.594v-4.203c0-1.293 1.051-2.344 2.344-2.344s2.344 1.051 2.344 2.344v3.906h10.156v-3.906c0-1.293 1.05-2.344 2.343-2.344s2.344 1.051 2.344 2.344v3.906h10.938v-3.906c0-1.293 1.051-2.344 2.344-2.344zm-29.688 10.938c-6.473 0-11.719 5.246-11.719 11.719v28.125c0 6.473 5.246 11.719 11.719 11.719h28.125c6.473 0 11.719-5.246 11.719-11.719v-28.125c0-6.473-5.246-11.719-11.719-11.719zm11.297 10.684c1.156-2.223 4.375-2.223 5.531 0 2.094 4.441 5.016 8.184 9.277 10.738l2.985 1.797c1.777 1.238 1.777 3.887 0 5.125l-2.985 1.797c-4.089 2.453-7.261 6.152-9.171 10.508-1.129 2.398-4.649 2.558-5.743 0-1.816-4.242-4.886-7.828-8.793-10.277l-3.179-1.91c-2.024-1.215-2.024-4.145 0-5.36l3.179-1.91c4.082-2.559 6.871-6.207 8.899-10.508zm2.766 4.949c-2.446 4.25-6.016 7.633-10.199 10.148 4.203 2.516 7.746 5.879 10.199 10.148 2.453-4.269 5.996-7.633 10.199-10.148-4.204-2.527-7.743-5.875-10.199-10.148z" fill="#161616" fill-rule="nonzero" transform="matrix(.210224 0 0 .210224 1.488845 1.324608)"/></svg></span>' +
+        '<div class="card-body">' +
+          '<div class="card-name">Modeller</div>' +
+          '<div class="card-code">' + esc(parsed.models.join(', ')) + '</div>' +
+          '<div class="card-desc">İçeriğin üretiminde kullanılan yapay zeka modelleri veya uygulamaları.</div>' +
+        '</div></div>';
+    }
+
+    // Version card
+    cards += '<div class="card">' +
+      '<div class="card-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;font-family:var(--font-mono);background:var(--c-bg-alt);border-radius:50%;border:1.5px solid var(--c-border)">' + esc(parsed.version) + '</div>' +
+      '<div class="card-body">' +
+        '<div class="card-name">Sürüm</div>' +
+        '<div class="card-code">' + esc(parsed.version) + '</div>' +
+        '<div class="card-desc">Atıf beyanının sürüm numarası. Bu numara, atıf aracı geliştikçe değişecektir.</div>' +
+      '</div></div>';
+
+    resultCards.innerHTML = '<div class="cards">' + cards + '</div>';
+  }
+
+  // ── Library ──
+  function renderLibrary() {
+    var html = '';
+
+    // Proportion
+    html += '<div class="lib-group"><div class="lib-group-title">Yapay Zeka Kullanım Oranı Kodları</div><div class="cards">';
+    ['Eh','Ph','HAb','PAI','EAI'].forEach(function(code) {
+      var p = PROPORTION[code];
+      html += cardHTML(p.key, p.name, code, p.desc);
+    });
+    html += '</div></div>';
+
+    // Stages
+    html += '<div class="lib-group"><div class="lib-group-title">Yapay Zeka Kullanılan Aşamaların Kodları</div><div class="cards">';
+    ['Re','Pr','Ed'].forEach(function(code) {
+      var st = STAGES[code];
+      html += cardHTML(st.key, st.name, code, st.desc);
+    });
+    html += '</div></div>';
+
+    // Review
+    html += '<div class="lib-group"><div class="lib-group-title">İnsan Denetimi Kodları</div><div class="cards">';
+    ['R','Nr'].forEach(function(code) {
+      var rv = REVIEW[code];
+      html += cardHTML(rv.key, rv.name, code, rv.desc);
+    });
+    html += '</div></div>';
+
+    document.getElementById('library').innerHTML = html;
+  }
+
+  // ── Init ──
+  var input = document.getElementById('stmtInput');
+  var btn = document.getElementById('interpretBtn');
+
+  btn.addEventListener('click', function() {
+    var v = input.value.trim();
+    if (v) {
+      interpret(v);
+      // Update URL without reload
+      var url = new URL(window.location);
+      url.searchParams.set('s', v);
+      history.replaceState(null, '', url);
+    }
+  });
+
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') btn.click();
+  });
+
+  // Auto-interpret from query string
+  var params = new URLSearchParams(window.location.search);
+  var stmt = params.get('s');
+  if (stmt) {
+    input.value = stmt;
+    interpret(stmt);
+  }
+
+  renderLibrary();
+})();
+</script>
+</body>
+</html>
