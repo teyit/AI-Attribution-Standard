@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AIAS Kod Açıklama Aracı — teyit.org</title>
 <meta name="description" content="AIAS (Yapay Zeka Atıf Standardı) standart ifade kodlarının ne anlama geldiğini gösterir.">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aias.teyit.org">
+<meta property="og:title" content="AIAS Kod Açıklama Aracı — teyit.org">
+<meta property="og:description" content="AIAS (Yapay Zeka Atıf Standardı) standart ifade kodlarının ne anlama geldiğini gösterir.">
+<meta property="og:image" content="https://teyit.org/img/teyit-og.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://aias.teyit.org">
+<meta name="twitter:title" content="AIAS Kod Açıklama Aracı — teyit.org">
+<meta name="twitter:description" content="AIAS (Yapay Zeka Atıf Standardı) standart ifade kodlarının ne anlama geldiğini gösterir.">
+<meta name="twitter:image" content="https://teyit.org/img/teyit-og.jpg">
+
 <link rel="icon" href="https://teyit.org/favicon.ico">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -254,7 +269,7 @@ a{color:var(--c-accent)}
   <section class="section aias-explanation">
     <div class="explanation-box">
       <svg class="explanation-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#3a4a5c" stroke-width="2"/><path d="M12 11v6" stroke="#3a4a5c" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#3a4a5c"/></svg>
-      <p>AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir "yayın dışı yapay zeka kullanımı" değerlendirmesi altında kaydedilebilir.</p>
+      <p>AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir “yayın dışı yapay zeka kullanımı” değerlendirmesi altında kaydedilebilir.</p>
     </div>
   </section>
 </main>
@@ -305,7 +320,7 @@ a{color:var(--c-accent)}
   // ── Parser ──
   function parseStatement(raw) {
     var s = raw.trim();
-    if (s.indexOf('AIAS ') !== 0) return { error: 'Beyan "AIAS " ön eki ile başlamalıdır.' };
+    if (s.indexOf('AIAS ') !== 0) return { error: 'Beyan “AIAS” ön eki ile başlamalıdır.' };
     s = s.slice(5); // remove "AIAS "
 
     // Extract note
@@ -318,7 +333,7 @@ a{color:var(--c-accent)}
 
     // Check version suffix (v*.*)
     var verMatch = s.match(/\s+(v\d+\.\d+)$/);
-    if (!verMatch) return { error: 'Beyan sürüm numarası (ör: v1.0) ile bitmelidir.' };
+    if (!verMatch) return { error: 'Beyan sürüm numarası (örn: v1.0) ile bitmelidir.' };
     var version = verMatch[1];
     s = s.slice(0, verMatch.index).trim();
 
@@ -448,9 +463,9 @@ a{color:var(--c-accent)}
     cards += '<div class="card">' +
       '<div class="card-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:var(--font-mono);background:var(--c-bg-alt);border-radius:50%;border:1.5px solid var(--c-border)">AIAS</div>' +
       '<div class="card-body">' +
-        '<div class="card-name">Yapay Zeka Atıf Beyanı</div>' +
+        '<div class="card-name">Yapay Zeka Atıf Standardı</div>' +
         '<div class="card-code">AIAS</div>' +
-        '<div class="card-desc">Bu ön ek, bir yapay zeka atıf beyanını tanımlamak için kullanılır.</div>' +
+        '<div class="card-desc">Bu ön ek, bir yapay zeka atıf beyanını tanımlamak için kullanılan standart ifadedir.</div>' +
       '</div></div>';
 
     // Proportion
