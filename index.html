@@ -326,102 +326,103 @@ a{color:var(--c-accent)}
 }
 .builder-slider-track{
   position:relative;
-  height:28px;
+  height:50px;
+  display:flex;
+  align-content:stretch;
+  -webkit-user-select:none;
+  user-select:none;
+}
+.builder-slider-track::before{
+  content:"";
+  position:absolute;
+  height:2px;
+  width:calc(100% * 4 / 5);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  background:var(--c-border);
 }
 .slider-hint{
   position:absolute;
-  top:-48px;left:50%;
+  top:-25px;left:50%;
   transform:translateX(-50%);
-  width:48px;height:48px;
+  width:30px;height:30px;
   pointer-events:none;
   z-index:10;
-  opacity:.55;
+  opacity:.70;
   transition:opacity .4s ease;
 }
 .slider-hint.hidden{
   opacity:0;
   visibility:hidden;
 }
-.builder-proportion-slider{
-  -webkit-appearance:none;
-  appearance:none;
-  width:100%;
-  height:4px;
-  background:var(--c-border);
-  border-radius:2px;
-  outline:none;
-  position:absolute;
-  top:12px;left:0;
-  margin:0;
-  z-index:2;
-  cursor:pointer;
+.builder-slider-track input[type="radio"]{
+  display:none;
 }
-.builder-proportion-slider::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  appearance:none;
-  width:18px;height:18px;
-  border-radius:50%;
-  background:var(--c-primary);
-  border:2px solid #fff;
-  box-shadow:0 1px 3px rgba(0,0,0,0.3);
-  cursor:pointer;
-  z-index:3;
+.slider-dot{
+  display:inline-block;
   position:relative;
-}
-.builder-proportion-slider::-moz-range-thumb{
-  width:18px;height:18px;
-  border-radius:50%;
-  background:var(--c-primary);
-  border:2px solid #fff;
-  box-shadow:0 1px 3px rgba(0,0,0,0.3);
+  flex:1;
+  height:100%;
   cursor:pointer;
 }
-.builder-proportion-slider::-moz-range-track{
-  height:4px;
-  background:var(--c-border);
-  border-radius:2px;
-  border:none;
-}
-.builder-slider-ticks{
+.slider-dot::after{
+  content:"";
   position:absolute;
-  top:4px;left:6px;right:6px;
-  display:flex;
-  justify-content:space-between;
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:26px;height:26px;
+  border:2px solid var(--c-primary);
+  background:var(--c-bg);
+  border-radius:50%;
   pointer-events:none;
   z-index:1;
+  transition:all .15s ease-in-out;
 }
-.builder-slider-tick{
-  width:2px;height:20px;
-  background:var(--c-border);
-  transition:background .15s;
+.slider-dot:hover::after{
+  transform:translate(-50%,-50%) scale(1.25);
 }
-.builder-slider-tick.active{
+input[type="radio"]:checked + .slider-dot::after{
+  border-width:4px;
+  transform:translate(-50%,-50%) scale(0.75);
+}
+.slider-pos{
+  display:block;
+  position:absolute;
+  top:50%;
+  width:12px;height:12px;
   background:var(--c-primary);
+  border-radius:50%;
+  transition:all .15s ease-in-out;
+  transform:translate(-50%,-50%);
+  border:2px solid var(--c-bg);
+  opacity:1;
+  z-index:2;
+  pointer-events:none;
+  left:10%;
 }
+input[name="bSlider"][value="0"]:checked ~ .slider-pos{left:10%}
+input[name="bSlider"][value="1"]:checked ~ .slider-pos{left:30%}
+input[name="bSlider"][value="2"]:checked ~ .slider-pos{left:50%}
+input[name="bSlider"][value="3"]:checked ~ .slider-pos{left:70%}
+input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
 .builder-slider-labels{
   display:flex;
-  justify-content:space-between;
   margin-top:6px;
-  padding:0 6px;
 }
 .builder-slider-label{
-  width:0;flex:none;
-  overflow:visible;
+  flex:1;
   text-align:center;
   display:flex;
   flex-direction:column;
   align-items:center;
   min-height:36px;
   cursor:pointer;
-  white-space:nowrap;
 }
 .builder-slider-label .bl-text{
   font-size:0.78rem;
   line-height:1rem;
   color:var(--c-text-muted);
   transition:color .15s, font-weight .15s;
-  width:100px;
-  white-space:normal;
   text-align:center;
 }
 .builder-slider-label.active .bl-text{
@@ -880,8 +881,7 @@ a{color:var(--c-accent)}
   .topnav-brand{font-size:0.82rem}
   .topnav-tab{font-size:0.78rem}
   .cards{grid-template-columns:1fr}
-  .builder-slider-labels{padding:0 2px}
-  .builder-slider-label .bl-text{width:64px;font-size:0.7rem}
+  .builder-slider-label .bl-text{width:auto;font-size:0.7rem}
   .builder-options{padding-left:0}
   .builder-text-input{margin-left:0;width:100%}
   .builder-hint{padding-left:0}
@@ -1100,14 +1100,17 @@ a{color:var(--c-accent)}
         </div>
         <div class="builder-slider-track">
           <div class="slider-hint" id="sliderHint"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%"><style>.hand{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.arrow{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.arrow-left{animation:moveLeft 4s infinite ease-in-out}.arrow-right{animation:moveRight 4s infinite ease-in-out}@keyframes moveLeft{0%,40%,100%{transform:translateX(0)}10%,30%{transform:translateX(-20px)}}@keyframes moveRight{0%,50%,100%{transform:translateX(0)}60%,80%{transform:translateX(20px)}}</style><g class="arrow-left"><line x1="60" y1="50" x2="20" y2="50" class="arrow"/><polyline points="40,30 20,50 40,70" class="arrow"/></g><g class="arrow-right"><line x1="140" y1="50" x2="180" y2="50" class="arrow"/><polyline points="160,30 180,50 160,70" class="arrow"/></g><path d="M 85 105 L 85 45 A 15 15 0 0 1 115 45 L 115 80 A 10 10 0 0 1 135 85 L 135 95 A 10 10 0 0 1 155 100 L 155 110 A 10 10 0 0 1 175 120 L 175 140 C 175 170 150 190 120 190 L 90 190 C 60 190 50 170 40 140 L 25 110 A 10 10 0 0 1 45 100 L 65 130 C 70 135 85 130 85 105 Z" class="hand"/></svg></div>
-          <input type="range" class="builder-proportion-slider" id="bSlider" min="0" max="4" step="1" value="0">
-          <div class="builder-slider-ticks">
-            <span class="builder-slider-tick active" data-idx="0"></span>
-            <span class="builder-slider-tick" data-idx="1"></span>
-            <span class="builder-slider-tick" data-idx="2"></span>
-            <span class="builder-slider-tick" data-idx="3"></span>
-            <span class="builder-slider-tick" data-idx="4"></span>
-          </div>
+          <input type="radio" name="bSlider" id="bSlider0" value="0" checked>
+          <label for="bSlider0" class="slider-dot"></label>
+          <input type="radio" name="bSlider" id="bSlider1" value="1">
+          <label for="bSlider1" class="slider-dot"></label>
+          <input type="radio" name="bSlider" id="bSlider2" value="2">
+          <label for="bSlider2" class="slider-dot"></label>
+          <input type="radio" name="bSlider" id="bSlider3" value="3">
+          <label for="bSlider3" class="slider-dot"></label>
+          <input type="radio" name="bSlider" id="bSlider4" value="4">
+          <label for="bSlider4" class="slider-dot"></label>
+          <div class="slider-pos"></div>
         </div>
         <div class="builder-slider-labels">
           <div class="builder-slider-label active" data-idx="0">
@@ -1703,8 +1706,8 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
   // ── Builder ──
   var proportionCodes = ['Eh','Ph','HAb','PAI','EAI'];
 
-  var bSlider = document.getElementById('bSlider');
-  var bTicks = document.querySelectorAll('.builder-slider-tick');
+  var bSliderRadios = document.querySelectorAll('input[name="bSlider"]');
+  var bSlider = { value: '0' };
   var bLabels = document.querySelectorAll('.builder-slider-label');
   var bStagesEl = document.getElementById('bStages');
   var bReviewEl = document.getElementById('bReview');
@@ -1715,19 +1718,23 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
   var builderIconsEl = document.getElementById('builderIcons');
   var builderTextEl = document.getElementById('builderText');
 
+  function getSliderValue() {
+    var checked = document.querySelector('input[name="bSlider"]:checked');
+    return checked ? checked.value : '0';
+  }
+
   function updateSliderUI() {
+    bSlider.value = getSliderValue();
     var idx = parseInt(bSlider.value);
-    bTicks.forEach(function(tick, i) { tick.classList.toggle('active', i === idx); });
     bLabels.forEach(function(lbl, i) { lbl.classList.toggle('active', i === idx); });
   }
 
   function updateBuilder() {
+    updateSliderUI();
     var idx = parseInt(bSlider.value);
     var pCode = proportionCodes[idx];
     var isAIUsed = pCode !== 'Eh';
     var isEntirelyAi = pCode === 'EAI';
-
-    updateSliderUI();
 
     // Toggle AI fields visibility
     if (isAIUsed) {
@@ -1877,12 +1884,18 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
     if (sliderHint) sliderHint.classList.add('hidden');
   }
 
-  // Slider events
-  bSlider.addEventListener('input', function() { hideSliderHint(); updateBuilder(); });
+  // Slider events (radio buttons)
+  bSliderRadios.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      hideSliderHint();
+      updateBuilder();
+    });
+  });
   bLabels.forEach(function(lbl, i) {
     lbl.addEventListener('click', function() {
       hideSliderHint();
-      bSlider.value = i;
+      var radio = document.getElementById('bSlider' + i);
+      if (radio) radio.checked = true;
       updateBuilder();
     });
   });
