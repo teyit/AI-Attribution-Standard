@@ -15,7 +15,7 @@ window.TRANSLATIONS.en = {
   nav_interpret: 'Interpret Code',
 
   // -- Home hero --
-  home_hero_title: 'A detailed and transparent attribution standard for AI usage',
+  home_hero_title: 'Comprehensive and transparent attribution standard for AI usage',
   home_hero_desc1: 'AIAS (AI Attribution Standard) provides an attribution statement standard that specifies not just whether AI was used in content creation, but <strong>how and to what extent it was used</strong>. This approach distinguishes between different levels and types of AI contributions, strengthening content creators\' ownership and users\' trust.',
   home_hero_desc2: 'This tool is adapted for the media industry based on the open-source <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> project developed by the IBM Research team.',
   home_btn_builder: 'Create Statement',
@@ -24,12 +24,12 @@ window.TRANSLATIONS.en = {
   // -- Home anatomy --
   home_anatomy_title: 'Attribution Statement Code Format',
   home_anatomy_desc: 'AIAS (AI Attribution Standard) summarizes every dimension of AI usage in a single standardized code.',
-  anatomy_label_prefix: 'Attribution standard<br>key code',
+  anatomy_label_prefix: 'Attribution standard<br>identifier',
   anatomy_label_stages: 'At which stages<br>did AI contribute?',
   anatomy_label_models: 'AI models and<br>applications used',
   anatomy_label_note: 'Editor note<br>(optional)',
   anatomy_label_proportion: 'How much did<br>AI contribute?',
-  anatomy_label_review: 'Was there<br>human review?',
+  anatomy_label_review: 'Was AI content<br>reviewed by a human?',
   anatomy_label_version: 'Standard<br>version number',
   anatomy_label_icons: 'Icons representing<br>the statements',
   anatomy_note_example: '| Cover image generated with AI.',
