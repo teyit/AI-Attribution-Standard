@@ -43,6 +43,7 @@ body{
   color:var(--c-text);
   line-height:1.6;
   min-height:100vh;
+  scroll-behavior:smooth;
 }
 a{color:var(--c-accent)}
 .container{max-width:960px;margin:0 auto;padding:0 20px}
@@ -51,6 +52,7 @@ a{color:var(--c-accent)}
 .topnav{
   background:#1F3837;
   border-bottom:none;
+  position:-webkit-sticky;
   position:sticky;
   top:0;
   z-index:100;
@@ -359,6 +361,12 @@ a{color:var(--c-accent)}
   border:2px solid #fff;
   box-shadow:0 1px 3px rgba(0,0,0,0.3);
   cursor:pointer;
+}
+.builder-proportion-slider::-moz-range-track{
+  height:4px;
+  background:var(--c-border);
+  border-radius:2px;
+  border:none;
 }
 .builder-slider-ticks{
   position:absolute;
@@ -820,7 +828,25 @@ a{color:var(--c-accent)}
   margin-top:16px;
 }
 
-/* Responsive */
+/* Responsive — tablet */
+@media(max-width:960px){
+  .home-hero-visual{flex:0 0 200px}
+  .home-hero-visual svg{width:160px;height:160px}
+  .home-hero-title{font-size:1.6rem}
+  .topnav-brand{padding-right:16px;margin-right:4px;font-size:0.88rem}
+  .topnav-tab{padding:0 14px;font-size:0.85rem}
+}
+@media(max-width:768px){
+  .home-hero-inner{flex-direction:column;gap:24px}
+  .home-hero-visual{flex:none;order:-1}
+  .home-hero-visual svg{width:140px;height:140px}
+  .topnav-inner{flex-wrap:wrap;height:auto;min-height:48px}
+  .topnav-brand{font-size:0.85rem;padding-right:12px}
+  .topnav-tab{padding:0 12px;font-size:0.82rem}
+  .lang-select{margin-left:auto}
+}
+
+/* Responsive — mobile */
 @media(max-width:600px){
   .interpret-form{flex-direction:column}
   .home-hero-inner{flex-direction:column;gap:24px}
@@ -828,7 +854,7 @@ a{color:var(--c-accent)}
   .home-hero-visual svg{width:120px;height:120px}
   .home-hero-title{font-size:1.5rem}
   .home-hero-buttons{flex-direction:column}
-  .anatomy-grid{gap:0 8px}
+  .anatomy-grid{gap:0 8px;grid-template-columns:repeat(8,minmax(32px,auto))}
   .ag-code{font-size:0.85rem}
   .anatomy-part-label{font-size:0.6rem}
   .anatomy-line{height:10px}
@@ -845,6 +871,26 @@ a{color:var(--c-accent)}
   .builder-result-code{flex-direction:column;align-items:stretch;text-align:center}
   .builder-copy-btn{align-self:center}
 }
+
+/* Accessibility */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    transition-duration:0.01ms !important;
+    animation-duration:0.01ms !important;
+  }
+}
+:focus-visible{
+  outline:2px solid var(--c-accent);
+  outline-offset:2px;
+}
+.topnav-tab:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:-2px;
+}
+.lang-select:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:1px;
+}
 </style>
 </head>
 <body>
@@ -852,20 +898,20 @@ a{color:var(--c-accent)}
 <nav class="topnav">
   <div class="container topnav-inner">
     <div class="topnav-brand">
-      <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 303 303" xmlns="http://www.w3.org/2000/svg"><circle cx="151.5" cy="151.5" fill="#eef6f5" r="60.5"/><path d="m298.593 145.738-50.783-13.304 41.686-31.703c2.143-1.618 2.911-4.489 1.9-6.996s-3.639-3.963-6.267-3.599l-52.036 6.955 26.321-45.412c1.334-2.305.97-5.257-.93-7.157-1.9-1.901-4.852-2.305-7.157-.93l-45.406 26.325 6.954-52.043c.364-2.669-1.132-5.257-3.598-6.268-2.466-1.051-5.337-.243-6.995 1.901l-31.739 41.691-13.302-50.749c-.687-2.628-3.032-4.448-5.741-4.448s-5.054 1.82-5.741 4.448l-13.302 50.749-31.739-41.691c-1.617-2.143-4.488-2.912-6.995-1.901s-3.962 3.599-3.598 6.268l6.954 52.043-45.406-26.325c-2.345-1.375-5.256-.971-7.157.93-1.9 1.901-2.305 4.853-.93 7.157l26.321 45.412-52.036-6.955c-2.628-.324-5.256 1.132-6.267 3.599-1.011 2.507-.243 5.338 1.9 6.996l41.686 31.703-50.743 13.304c-2.628.687-4.448 3.033-4.448 5.742s1.819 5.055 4.448 5.742l50.743 13.304-41.686 31.703c-2.143 1.618-2.911 4.489-1.9 6.996 1.051 2.507 3.639 4.003 6.267 3.599l52.036-6.955-26.321 45.412c-1.334 2.345-.97 5.257.93 7.157 1.9 1.901 4.852 2.305 7.157.93l45.406-26.325-6.954 52.043c-.364 2.669 1.132 5.257 3.598 6.268s5.337.243 6.995-1.901l31.739-41.691 13.302 50.79c.687 2.628 3.032 4.448 5.741 4.448s5.054-1.82 5.741-4.448l13.302-50.79 31.739 41.691c1.617 2.143 4.488 2.912 6.995 1.901s3.962-3.599 3.598-6.268l-6.954-52.043 45.406 26.325c2.345 1.334 5.256.971 7.157-.93 1.9-1.901 2.305-4.853.93-7.157l-26.321-45.412 52.036 6.955c2.628.364 5.256-1.132 6.267-3.599 1.011-2.507.243-5.338-1.9-6.996l-41.686-31.703 50.743-13.304c2.628-.687 4.448-3.033 4.448-5.742s-1.819-5.055-4.448-5.742zm-152.106 44.037c-4.488 4.489-11.806 4.489-16.294 0l-26.362-26.365c-4.488-4.489-4.488-11.808 0-16.296 4.488-4.489 11.806-4.489 16.294 0l18.195 18.197 44.556-44.562c4.488-4.489 11.806-4.489 16.294 0s4.488 11.808 0 16.296l-52.724 52.731h.04z" fill="#20534c" fill-rule="nonzero"/></svg>
+      <svg aria-hidden="true" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 303 303" xmlns="http://www.w3.org/2000/svg"><circle cx="151.5" cy="151.5" fill="#eef6f5" r="60.5"/><path d="m298.593 145.738-50.783-13.304 41.686-31.703c2.143-1.618 2.911-4.489 1.9-6.996s-3.639-3.963-6.267-3.599l-52.036 6.955 26.321-45.412c1.334-2.305.97-5.257-.93-7.157-1.9-1.901-4.852-2.305-7.157-.93l-45.406 26.325 6.954-52.043c.364-2.669-1.132-5.257-3.598-6.268-2.466-1.051-5.337-.243-6.995 1.901l-31.739 41.691-13.302-50.749c-.687-2.628-3.032-4.448-5.741-4.448s-5.054 1.82-5.741 4.448l-13.302 50.749-31.739-41.691c-1.617-2.143-4.488-2.912-6.995-1.901s-3.962 3.599-3.598 6.268l6.954 52.043-45.406-26.325c-2.345-1.375-5.256-.971-7.157.93-1.9 1.901-2.305 4.853-.93 7.157l26.321 45.412-52.036-6.955c-2.628-.324-5.256 1.132-6.267 3.599-1.011 2.507-.243 5.338 1.9 6.996l41.686 31.703-50.743 13.304c-2.628.687-4.448 3.033-4.448 5.742s1.819 5.055 4.448 5.742l50.743 13.304-41.686 31.703c-2.143 1.618-2.911 4.489-1.9 6.996 1.051 2.507 3.639 4.003 6.267 3.599l52.036-6.955-26.321 45.412c-1.334 2.345-.97 5.257.93 7.157 1.9 1.901 4.852 2.305 7.157.93l45.406-26.325-6.954 52.043c-.364 2.669 1.132 5.257 3.598 6.268s5.337.243 6.995-1.901l31.739-41.691 13.302 50.79c.687 2.628 3.032 4.448 5.741 4.448s5.054-1.82 5.741-4.448l13.302-50.79 31.739 41.691c1.617 2.143 4.488 2.912 6.995 1.901s3.962-3.599 3.598-6.268l-6.954-52.043 45.406 26.325c2.345 1.334 5.256.971 7.157-.93 1.9-1.901 2.305-4.853.93-7.157l-26.321-45.412 52.036 6.955c2.628.364 5.256-1.132 6.267-3.599 1.011-2.507.243-5.338-1.9-6.996l-41.686-31.703 50.743-13.304c2.628-.687 4.448-3.033 4.448-5.742s-1.819-5.055-4.448-5.742zm-152.106 44.037c-4.488 4.489-11.806 4.489-16.294 0l-26.362-26.365c-4.488-4.489-4.488-11.808 0-16.296 4.488-4.489 11.806-4.489 16.294 0l18.195 18.197 44.556-44.562c4.488-4.489 11.806-4.489 16.294 0s4.488 11.808 0 16.296l-52.724 52.731h.04z" fill="#20534c" fill-rule="nonzero"/></svg>
       <span data-i18n="nav_brand">AIAS - Yapay Zeka Atıf Standardı</span>
     </div>
-    <div class="topnav-tabs">
-      <button class="topnav-tab active" data-tab="home" data-i18n="nav_home">Anasayfa</button>
-      <button class="topnav-tab" data-tab="builder" data-i18n="nav_builder">Atıf Beyanı Oluştur</button>
-      <button class="topnav-tab" data-tab="interpret" data-i18n="nav_interpret">Kodu Yorumla</button>
+    <div class="topnav-tabs" role="tablist">
+      <button class="topnav-tab active" id="tab-btn-home" data-tab="home" role="tab" aria-selected="true" aria-controls="tab-home" data-i18n="nav_home">Anasayfa</button>
+      <button class="topnav-tab" id="tab-btn-builder" data-tab="builder" role="tab" aria-selected="false" aria-controls="tab-builder" data-i18n="nav_builder">Atıf Beyanı Oluştur</button>
+      <button class="topnav-tab" id="tab-btn-interpret" data-tab="interpret" role="tab" aria-selected="false" aria-controls="tab-interpret" data-i18n="nav_interpret">Kodu Yorumla</button>
     </div>
-    <select class="lang-select" id="langSelect"></select>
+    <select class="lang-select" id="langSelect" aria-label="Language / Dil"></select>
   </div>
 </nav>
 
 <!-- HOME TAB -->
-<div id="tab-home" class="tab-content active">
+<div id="tab-home" class="tab-content active" role="tabpanel" aria-labelledby="tab-btn-home">
   <div class="home-hero">
     <div class="container home-hero-inner">
       <div class="home-hero-text">
@@ -882,15 +928,14 @@ a{color:var(--c-accent)}
         </div>
       </div>
       <div class="home-hero-visual">
-        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 303 303" xmlns="http://www.w3.org/2000/svg"><circle cx="151.5" cy="151.5" fill="#eef6f5" r="60.5"/><path d="m298.593 145.738-50.783-13.304 41.686-31.703c2.143-1.618 2.911-4.489 1.9-6.996s-3.639-3.963-6.267-3.599l-52.036 6.955 26.321-45.412c1.334-2.305.97-5.257-.93-7.157-1.9-1.901-4.852-2.305-7.157-.93l-45.406 26.325 6.954-52.043c.364-2.669-1.132-5.257-3.598-6.268-2.466-1.051-5.337-.243-6.995 1.901l-31.739 41.691-13.302-50.749c-.687-2.628-3.032-4.448-5.741-4.448s-5.054 1.82-5.741 4.448l-13.302 50.749-31.739-41.691c-1.617-2.143-4.488-2.912-6.995-1.901s-3.962 3.599-3.598 6.268l6.954 52.043-45.406-26.325c-2.345-1.375-5.256-.971-7.157.93-1.9 1.901-2.305 4.853-.93 7.157l26.321 45.412-52.036-6.955c-2.628-.324-5.256 1.132-6.267 3.599-1.011 2.507-.243 5.338 1.9 6.996l41.686 31.703-50.743 13.304c-2.628.687-4.448 3.033-4.448 5.742s1.819 5.055 4.448 5.742l50.743 13.304-41.686 31.703c-2.143 1.618-2.911 4.489-1.9 6.996 1.051 2.507 3.639 4.003 6.267 3.599l52.036-6.955-26.321 45.412c-1.334 2.345-.97 5.257.93 7.157 1.9 1.901 4.852 2.305 7.157.93l45.406-26.325-6.954 52.043c-.364 2.669 1.132 5.257 3.598 6.268s5.337.243 6.995-1.901l31.739-41.691 13.302 50.79c.687 2.628 3.032 4.448 5.741 4.448s5.054-1.82 5.741-4.448l13.302-50.79 31.739 41.691c1.617 2.143 4.488 2.912 6.995 1.901s3.962-3.599 3.598-6.268l-6.954-52.043 45.406 26.325c2.345 1.334 5.256.971 7.157-.93 1.9-1.901 2.305-4.853.93-7.157l-26.321-45.412 52.036 6.955c2.628.364 5.256-1.132 6.267-3.599 1.011-2.507.243-5.338-1.9-6.996l-41.686-31.703 50.743-13.304c2.628-.687 4.448-3.033 4.448-5.742s-1.819-5.055-4.448-5.742zm-152.106 44.037c-4.488 4.489-11.806 4.489-16.294 0l-26.362-26.365c-4.488-4.489-4.488-11.808 0-16.296 4.488-4.489 11.806-4.489 16.294 0l18.195 18.197 44.556-44.562c4.488-4.489 11.806-4.489 16.294 0s4.488 11.808 0 16.296l-52.724 52.731h.04z" fill="#20534c" fill-rule="nonzero"/></svg>
+        <svg aria-hidden="true" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 303 303" xmlns="http://www.w3.org/2000/svg"><circle cx="151.5" cy="151.5" fill="#eef6f5" r="60.5"/><path d="m298.593 145.738-50.783-13.304 41.686-31.703c2.143-1.618 2.911-4.489 1.9-6.996s-3.639-3.963-6.267-3.599l-52.036 6.955 26.321-45.412c1.334-2.305.97-5.257-.93-7.157-1.9-1.901-4.852-2.305-7.157-.93l-45.406 26.325 6.954-52.043c.364-2.669-1.132-5.257-3.598-6.268-2.466-1.051-5.337-.243-6.995 1.901l-31.739 41.691-13.302-50.749c-.687-2.628-3.032-4.448-5.741-4.448s-5.054 1.82-5.741 4.448l-13.302 50.749-31.739-41.691c-1.617-2.143-4.488-2.912-6.995-1.901s-3.962 3.599-3.598 6.268l6.954 52.043-45.406-26.325c-2.345-1.375-5.256-.971-7.157.93-1.9 1.901-2.305 4.853-.93 7.157l26.321 45.412-52.036-6.955c-2.628-.324-5.256 1.132-6.267 3.599-1.011 2.507-.243 5.338 1.9 6.996l41.686 31.703-50.743 13.304c-2.628.687-4.448 3.033-4.448 5.742s1.819 5.055 4.448 5.742l50.743 13.304-41.686 31.703c-2.143 1.618-2.911 4.489-1.9 6.996 1.051 2.507 3.639 4.003 6.267 3.599l52.036-6.955-26.321 45.412c-1.334 2.345-.97 5.257.93 7.157 1.9 1.901 4.852 2.305 7.157.93l45.406-26.325-6.954 52.043c-.364 2.669 1.132 5.257 3.598 6.268s5.337.243 6.995-1.901l31.739-41.691 13.302 50.79c.687 2.628 3.032 4.448 5.741 4.448s5.054-1.82 5.741-4.448l13.302-50.79 31.739 41.691c1.617 2.143 4.488 2.912 6.995 1.901s3.962-3.599 3.598-6.268l-6.954-52.043 45.406 26.325c2.345 1.334 5.256.971 7.157-.93 1.9-1.901 2.305-4.853.93-7.157l-26.321-45.412 52.036 6.955c2.628.364 5.256-1.132 6.267-3.599 1.011-2.507.243-5.338-1.9-6.996l-41.686-31.703 50.743-13.304c2.628-.687 4.448-3.033 4.448-5.742s-1.819-5.055-4.448-5.742zm-152.106 44.037c-4.488 4.489-11.806 4.489-16.294 0l-26.362-26.365c-4.488-4.489-4.488-11.808 0-16.296 4.488-4.489 11.806-4.489 16.294 0l18.195 18.197 44.556-44.562c4.488-4.489 11.806-4.489 16.294 0s4.488 11.808 0 16.296l-52.724 52.731h.04z" fill="#20534c" fill-rule="nonzero"/></svg>
       </div>
     </div>
   </div>
 
   <div class="container">
     <!-- Anatomy of an attribution statement -->
-    <section class="home-section
-    ">
+    <section class="home-section">
       <h2 class="home-section-title" data-i18n="home_anatomy_title">Atıf Beyanı Kod Formatı</h2>
       <p class="home-section-text" data-i18n="home_anatomy_desc">AIAS (Yapay Zeka Atıf Standardı), yapay zeka kullanımının her boyutunu tek bir standart kod ile özetler.</p>
       <div class="anatomy-box">
@@ -952,12 +997,12 @@ a{color:var(--c-accent)}
 
     <!-- Why is this needed? -->
     <section class="home-section">
-      <h2 class="home-section-title" data-i18n="home_why_title">Buna neden ihtiyaç var?</h2>
-      <p class="home-section-text" data-i18n="home_why_p1">
-        Üretken yapay zekanın kullanımı yaygınlaştıkça, “YZ desteğiyle hazırlanmıştır" gibi genel ifadeler artık yeterli olmamaya başladı. YZ yardımı ile yazılan bir makalede YZ yalnızca imla hatalarını mı düzeltti, yoksa fikirlerin çoğunu mu üretti? İçeriğin büyük bölümünü mü oluşturdu, yoksa yalnızca birkaç cümleye mi yardım etti? Bu tür sorular, içerik üreticilerinin sahiplik algısını ve tüketicilerin güvenini etkiler. AIAS, bu belirsizliği ortadan kaldırarak YZ katkısının kapsamını, kullanılan araçları ve denetim düzeyini açıkça ortaya koyar.
+      <h2 class=”home-section-title” data-i18n=”home_why_title”>Buna neden ihtiyaç var?</h2>
+      <p class=”home-section-text” data-i18n=”home_why_p1”>
+        Üretken yapay zekanın kullanımı yaygınlaştıkça, “YZ desteğiyle hazırlanmıştır” gibi genel ifadeler artık yeterli olmamaya başladı. YZ yardımı ile yazılan bir makalede YZ yalnızca imla hatalarını mı düzeltti, yoksa fikirlerin çoğunu mu üretti? İçeriğin büyük bölümünü mü oluşturdu, yoksa yalnızca birkaç cümleye mi yardım etti? Bu tür sorular, içerik üreticilerinin sahiplik algısını ve tüketicilerin güvenini etkiler. AIAS, bu belirsizliği ortadan kaldırarak YZ katkısının kapsamını, kullanılan araçları ve denetim düzeyini açıkça ortaya koyar.
       </p>
-      <p class="home-section-text" data-i18n-html="home_why_p2">
-        Amacımız, içerik üreticilerinin sahiplik algısını doğru yansıtan ve tüketicilere güvenlerini kalibre etmek için daha fazla şeffaflık sunan, açık kaynaklı ve detaylı bir YZ atıf yöntemi geliştirmektir. Creative Commons lisansından ilham alınarak tasarlanan bu atıf beyanı yaklaşımı, kullanıcıların ortak üretim süreçlerindeki şeffaflık ihtiyaçlarına yönelik <a href="https://dl.acm.org/doi/full/10.1145/3706598.3713522" target="_blank">CHI 2025'te yayımlanan araştırmaya</a> dayanmaktadır.
+      <p class=”home-section-text” data-i18n-html=”home_why_p2”>
+        Amacımız, içerik üreticilerinin sahiplik algısını doğru yansıtan ve tüketicilere güvenlerini kalibre etmek için daha fazla şeffaflık sunan, açık kaynaklı ve detaylı bir YZ atıf yöntemi geliştirmektir. Creative Commons lisansından ilham alınarak tasarlanan bu atıf beyanı yaklaşımı, kullanıcıların ortak üretim süreçlerindeki şeffaflık ihtiyaçlarına yönelik <a href=”https://dl.acm.org/doi/full/10.1145/3706598.3713522” target=”_blank”>CHI 2025'te yayımlanan araştırmaya</a> dayanmaktadır.
       </p>
     </section>
 
@@ -997,7 +1042,7 @@ a{color:var(--c-accent)}
 <!-- /HOME TAB -->
 
 <main class="container">
-  <div id="tab-interpret" class="tab-content">
+  <div id="tab-interpret" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-interpret">
   <section class="section">
     <h2 class="section-title" data-i18n="interpret_title">AIAS Kodu Girerek Anlamını Göster</h2>
     <p class="info-text" data-i18n-html="interpret_info">Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code></p>
@@ -1018,12 +1063,12 @@ a{color:var(--c-accent)}
   <section class="section aias-explanation">
     <div class="explanation-box">
       <svg class="explanation-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#3a4a5c" stroke-width="2"/><path d="M12 11v6" stroke="#3a4a5c" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#3a4a5c"/></svg>
-      <p data-i18n="interpret_explanation">AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir “yayın dışı yapay zeka kullanımı" değerlendirmesi altında kaydedilebilir.</p>
+      <p data-i18n=”interpret_explanation”>AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir “yayın dışı yapay zeka kullanımı” değerlendirmesi altında kaydedilebilir.</p>
     </div>
   </section>
   </div><!-- /tab-interpret -->
 
-  <div id="tab-builder" class="tab-content">
+  <div id="tab-builder" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-builder">
   <section class="section">
     <h2 class="section-title" data-i18n="builder_title">Atıf Beyanı Oluştur</h2>
     <p class="info-text" data-i18n="builder_info">İçerik oluşturma sürecinize katkı sağlayan yapay zeka kullanım bilgilerinizi girerek standart bir AIAS atıf beyanı kodu oluşturun.</p>
@@ -1178,17 +1223,27 @@ a{color:var(--c-accent)}
   </div>
 </footer>
 
+<script>
+// ── Translations ──
+// To add a new language: copy the 'tr' block, change the key and translate all values.
+// External files (lang/tr.js, lang/en.js) can also be used via <script src="lang/xx.js">
+window.TRANSLATIONS = window.TRANSLATIONS || {};
+</script>
 <script src="lang/tr.js"></script>
 <script src="lang/en.js"></script>
 <script>
 (function(){
+  // Fallback: if external lang files didn't load, define them inline
+  if (!window.TRANSLATIONS.tr || !window.TRANSLATIONS.en) {
+    console.warn('AIAS: External lang files not loaded, check lang/ directory or serve via HTTP.');
+  }
+
   // ── i18n Engine ──
-  var TRANSLATIONS = window.TRANSLATIONS || {};
   var currentLang = 'tr';
 
   function t(key, params) {
-    var lang = TRANSLATIONS[currentLang] || TRANSLATIONS['tr'];
-    var str = lang[key] || (TRANSLATIONS['tr'] && TRANSLATIONS['tr'][key]) || key;
+    var lang = window.TRANSLATIONS[currentLang] || window.TRANSLATIONS.tr;
+    var str = lang[key] || (window.TRANSLATIONS.tr && window.TRANSLATIONS.tr[key]) || key;
     if (params) {
       Object.keys(params).forEach(function(k) {
         str = str.replace(new RegExp('\\{' + k + '\\}', 'g'), params[k]);
@@ -1198,7 +1253,7 @@ a{color:var(--c-accent)}
   }
 
   function applyLanguage(lang) {
-    if (!TRANSLATIONS[lang]) lang = 'tr';
+    if (!window.TRANSLATIONS[lang]) lang = 'tr';
     currentLang = lang;
 
     // Update html lang attribute
@@ -1284,7 +1339,7 @@ a{color:var(--c-accent)}
     langs.forEach(function(code) {
       var opt = document.createElement('option');
       opt.value = code;
-      opt.textContent = TRANSLATIONS[code]._meta.label;
+      opt.textContent = window.TRANSLATIONS[code]._meta.label;
       sel.appendChild(opt);
     });
 
@@ -1295,14 +1350,13 @@ a{color:var(--c-accent)}
     try { storedLang = localStorage.getItem('aias-lang'); } catch(e) {}
 
     var initLang = 'tr';
-    if (urlLang && TRANSLATIONS[urlLang]) {
+    if (urlLang && window.TRANSLATIONS[urlLang]) {
       initLang = urlLang;
-    } else if (storedLang && TRANSLATIONS[storedLang]) {
+    } else if (storedLang && window.TRANSLATIONS[storedLang]) {
       initLang = storedLang;
     }
 
     sel.value = initLang;
-    currentLang = initLang;
     if (initLang !== 'tr') {
       applyLanguage(initLang);
     }
@@ -1600,8 +1654,13 @@ a{color:var(--c-accent)}
   var tabBtns = document.querySelectorAll('.topnav-tab');
 
   window.switchTab = function(tabName) {
-    tabBtns.forEach(function(b) { b.classList.remove('active'); });
-    document.querySelector('[data-tab="' + tabName + '"]').classList.add('active');
+    tabBtns.forEach(function(b) {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    var activeBtn = document.querySelector('[data-tab="' + tabName + '"]');
+    activeBtn.classList.add('active');
+    activeBtn.setAttribute('aria-selected', 'true');
     document.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
     document.getElementById('tab-' + tabName).classList.add('active');
     var url = new URL(window.location);
@@ -1808,32 +1867,38 @@ a{color:var(--c-accent)}
   bModelsEl.addEventListener('input', updateBuilder);
   bNoteEl.addEventListener('input', updateBuilder);
 
-  // Copy button
+  // Copy helper with fallback for older browsers
+  function copyToClipboard(text, btnEl) {
+    function onSuccess() {
+      btnEl.textContent = t('copy_btn_done');
+      setTimeout(function() { btnEl.textContent = t('copy_btn'); }, 2000);
+    }
+    function fallbackCopy() {
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try { document.execCommand('copy'); onSuccess(); } catch(e) { /* silent */ }
+      document.body.removeChild(textarea);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+  }
+
+  // Copy buttons
   document.getElementById('builderCopyBtn').addEventListener('click', function() {
-    var code = builderCodeEl.textContent;
-    navigator.clipboard.writeText(code).then(function() {
-      var copyBtn = document.getElementById('builderCopyBtn');
-      copyBtn.textContent = t('copy_btn_done');
-      setTimeout(function() { copyBtn.textContent = t('copy_btn'); }, 2000);
-    });
+    copyToClipboard(builderCodeEl.textContent, this);
   });
-
   document.getElementById('builderTextCopyBtn').addEventListener('click', function() {
-    var text = builderTextEl.textContent;
-    navigator.clipboard.writeText(text).then(function() {
-      var copyBtn = document.getElementById('builderTextCopyBtn');
-      copyBtn.textContent = t('copy_btn_done');
-      setTimeout(function() { copyBtn.textContent = t('copy_btn'); }, 2000);
-    });
+    copyToClipboard(builderTextEl.textContent, this);
   });
-
   document.getElementById('builderEmbedCopyBtn').addEventListener('click', function() {
-    var embedCode = document.getElementById('builderEmbed').textContent;
-    navigator.clipboard.writeText(embedCode).then(function() {
-      var copyBtn = document.getElementById('builderEmbedCopyBtn');
-      copyBtn.textContent = t('copy_btn_done');
-      setTimeout(function() { copyBtn.textContent = t('copy_btn'); }, 2000);
-    });
+    copyToClipboard(document.getElementById('builderEmbed').textContent, this);
   });
 
   // Initial render
