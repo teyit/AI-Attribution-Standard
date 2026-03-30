@@ -103,9 +103,21 @@ a{color:var(--c-accent)}
   border-bottom-color:#fff;
 }
 
+/* GitHub link */
+.topnav-github{
+  display:flex;
+  align-items:center;
+  color:rgba(255,255,255,0.7);
+  margin-left:auto;
+  padding:0 8px;
+  flex-shrink:0;
+  transition:color .15s;
+}
+.topnav-github:hover{color:#fff}
+.topnav-github + .lang-select{margin-left:8px}
+
 /* Language selector */
 .lang-select{
-  margin-left:auto;
   align-self:center;
   padding:4px 8px;
   font-size:0.8rem;
@@ -310,7 +322,6 @@ a{color:var(--c-accent)}
 /* Slider */
 .builder-slider-container{
   max-width:100%;
-  padding:0 4px;
 }
 .builder-slider-icon{
   position:absolute;
@@ -926,6 +937,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
       <button class="topnav-tab" id="tab-btn-builder" data-tab="builder" role="tab" aria-selected="false" aria-controls="tab-builder" data-i18n="nav_builder">Atıf Beyanı Oluştur</button>
       <button class="topnav-tab" id="tab-btn-interpret" data-tab="interpret" role="tab" aria-selected="false" aria-controls="tab-interpret" data-i18n="nav_interpret">Kodu Yorumla</button>
     </div>
+    <a href="https://github.com/teyit/AI-Attribution-Standard" target="_blank" rel="noopener" class="topnav-github" aria-label="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 .3a12 12 0 00-3.8 23.38c.6.12.82-.26.82-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.2.08 1.84 1.23 1.84 1.23 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 016.02 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 011.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.22.7.82.58A12 12 0 0012 .3"/></svg></a>
     <select class="lang-select" id="langSelect" aria-label="Language / Dil"></select>
   </div>
 </nav>
@@ -940,7 +952,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
           AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zekanın yalnızca kullanılıp kullanılmadığını değil, <strong>nasıl ve ne ölçüde kullanıldığını</strong> belirten bir atıf beyanı standardı sunar. Bu yaklaşım, farklı düzey ve türdeki YZ katkılarını birbirinden ayırarak içerik üreticilerinin sahipliğini ve kullanıcıların güvenini güçlendirir.
         </p>
         <p class="home-hero-desc" data-i18n-html="home_hero_desc2">
-          Bu araç, IBM Research ekibinin geliştirdiği açık kaynaklı <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> projesini temel alarak medya sektörü için uyarlanmıştır.
+          Bu araç, IBM Research ekibinin geliştirdiği <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> projesini temel alarak medya sektörü için uyarlanmış ve <a href="https://github.com/teyit/AI-Attribution-Standard" target="_blank">açık kaynak</a> olarak yayımlanmıştır.
         </p>
         <div class="home-hero-buttons">
           <button class="home-btn home-btn-primary" onclick="switchTab('builder')" data-i18n="home_btn_builder">Atıf Beyanı Oluştur</button>
@@ -1241,7 +1253,8 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
 <footer class="footer">
   <div class="container">
     <a href="https://teyit.org" target="_blank" rel="noopener" data-i18n="footer_teyit">teyit.org</a> &middot;
-    <a href="#" target="_blank" rel="noopener" data-i18n="footer_aias">AI Attribution Standard</a>
+    <a href="#" target="_blank" rel="noopener" data-i18n="footer_aias">AI Attribution Standard</a> &middot;
+    <a href="https://github.com/teyit/AI-Attribution-Standard" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 

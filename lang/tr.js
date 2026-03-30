@@ -17,7 +17,7 @@ window.TRANSLATIONS.tr = {
   // -- Home hero --
   home_hero_title: 'Yapay zeka kullanımında detaylı ve şeffaf atıf beyanı standardı',
   home_hero_desc1: 'AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zekanın yalnızca kullanılıp kullanılmadığını değil, <strong>nasıl ve ne ölçüde kullanıldığını</strong> belirten bir atıf beyanı standardı sunar. Bu yaklaşım, farklı düzey ve türdeki YZ katkılarını birbirinden ayırarak içerik üreticilerinin sahipliğini ve kullanıcıların güvenini güçlendirir.',
-  home_hero_desc2: 'Bu araç, IBM Research ekibinin geliştirdiği açık kaynaklı <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> projesini temel alarak medya sektörü için uyarlanmıştır.',
+  home_hero_desc2: 'Bu araç, IBM Research ekibinin geliştirdiği <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> projesini temel alarak medya sektörü için uyarlanmış ve <a href="https://github.com/teyit/AI-Attribution-Standard" target="_blank">açık kaynak</a> olarak yayımlanmıştır.',
   home_btn_builder: 'Atıf Beyanı Oluştur',
   home_btn_interpret: 'Kodu Yorumla',
 

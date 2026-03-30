@@ -17,7 +17,7 @@ window.TRANSLATIONS.en = {
   // -- Home hero --
   home_hero_title: 'Comprehensive and transparent attribution standard for AI usage',
   home_hero_desc1: 'AIAS (AI Attribution Standard) provides an attribution statement standard that specifies not just whether AI was used in content creation, but <strong>how and to what extent it was used</strong>. This approach distinguishes between different levels and types of AI contributions, strengthening content creators\' ownership and users\' trust.',
-  home_hero_desc2: 'This tool is adapted for the media industry based on the open-source <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> project developed by the IBM Research team.',
+  home_hero_desc2: 'This tool is adapted for the media industry based on the <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> project developed by the IBM Research team, and published as <a href="https://github.com/teyit/AI-Attribution-Standard" target="_blank">open source</a>.',
   home_btn_builder: 'Create Statement',
   home_btn_interpret: 'Interpret Code',
 
