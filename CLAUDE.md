@@ -13,7 +13,7 @@ AIAS (AI Attribution Standard) — icerik uretiminde yapay zekanin nasil ve ne o
 Tek dosyali statik HTML uygulamasi. Framework, build sureci veya npm bagimliligi yok.
 
 ```
-index.html          # Tum HTML + CSS + JS (tek dosya, ~1900 satir)
+index.html          # Tum HTML + CSS + JS (tek dosya, ~1970 satir)
 lang/tr.js          # Turkce ceviri dosyasi
 lang/en.js          # Ingilizce ceviri dosyasi
 LICENSE             # Apache License 2.0
@@ -24,8 +24,8 @@ README.md           # Proje dokumantasyonu
 ### index.html Yapisi
 
 ```
-<style>        ~900 satir CSS (satir 24-893)
-<body>         HTML yaklasik satir 895-1230
+<style>        ~900 satir CSS (satir 24-925)
+<body>         HTML yaklasik satir 927-1260
 <script>       Ceviri dosyalari yuklenir (lang/tr.js, lang/en.js)
 <script>       Ana uygulama JS'i (~700 satir, IIFE icinde)
 ```
@@ -33,7 +33,7 @@ README.md           # Proje dokumantasyonu
 ## Uc Sekme (Tab)
 
 1. **home** — Tanitim, AIAS kod formati anatomisi, neden gerekli, nasil kullanilir
-2. **builder** — Adim adim atif beyani kodu olusturucu (slider + secenekler + onizleme)
+2. **builder** — Adim adim atif beyani kodu olusturucu (radio button dot-slider + secenekler + onizleme)
 3. **interpret** — Mevcut AIAS kodlarini cozumleyici
 
 ## CSS Konvansiyonlari
@@ -43,7 +43,7 @@ README.md           # Proje dokumantasyonu
 - Responsive breakpoint'ler: `960px` (tablet), `768px` (kucuk tablet), `600px` (mobil)
 - `prefers-reduced-motion` ve `:focus-visible` destegi mevcut
 - Sticky nav icin `-webkit-sticky` fallback'i var
-- Vendor prefix'ler: `-webkit-appearance`, `-moz-range-thumb`, `-moz-range-track`
+- Vendor prefix'ler: `-webkit-user-select`
 
 ## JavaScript Konvansiyonlari
 
@@ -87,7 +87,8 @@ Bir AIAS kodu su formati izler: `AIAS-1.[oran].[asamalar].[inceleme].[modeller] 
 
 - Tab navigasyonu: `role="tablist"`, `role="tab"`, `role="tabpanel"`, `aria-selected`, `aria-controls`, `aria-labelledby`
 - Dekoratif SVG'ler `aria-hidden="true"` tasir
-- Dil secici `aria-label` iceriri
+- Dil secici `aria-label` icerir
+- Navbar'da GitHub repo linki (`aria-label` ile)
 - Klavye focus: `:focus-visible` stilleri tanimli
 - Hareket hassasiyeti: `prefers-reduced-motion` medya sorgusu tanimli
 

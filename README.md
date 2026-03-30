@@ -41,7 +41,7 @@ Bir AIAS atıf beyanı kodu şu boyutları tek bir standart kodda özetler:
 
 Bu proje, IBM Research ekibinin geliştirdiği açık kaynaklı **[AI Attribution Toolkit](https://github.com/aiattribution/aiattribution.github.io)** projesini temel almaktadır. Orijinal araştırma, [CHI 2025](https://dl.acm.org/doi/full/10.1145/3706598.3713522) konferansında yayınlanmıştır.
 
-teyit.org olarak bu araç setini medya sektörünün ihtiyaçlarına göre uyarlayarak Türkçe ve İngilizce dillerinde kullanıma sunduk.
+teyit.org olarak bu araç setini medya sektörünün ihtiyaçlarına göre uyarlayarak Türkçe ve İngilizce dillerinde açık kaynak olarak yayımladık.
 
 ## Katkı Sağlama
 
@@ -92,7 +92,7 @@ Contributions from all news organizations are welcome. See [CONTRIBUTING.md](CON
 
 ### Attribution
 
-Based on the open-source [AI Attribution Toolkit](https://github.com/aiattribution/aiattribution.github.io) by IBM Research, published at [CHI 2025](https://dl.acm.org/doi/full/10.1145/3706598.3713522). Adapted for the media industry by [teyit.org](https://teyit.org).
+Based on the open-source [AI Attribution Toolkit](https://github.com/aiattribution/aiattribution.github.io) by IBM Research, published at [CHI 2025](https://dl.acm.org/doi/full/10.1145/3706598.3713522). Adapted and published as open source for the media industry by [teyit.org](https://teyit.org).
 
 ### License
 

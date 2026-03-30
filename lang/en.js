@@ -12,7 +12,7 @@ window.TRANSLATIONS.en = {
   nav_brand: 'AIAS - AI Attribution Standard',
   nav_home: 'Home',
   nav_builder: 'Create Statement',
-  nav_interpret: 'Interpret Code',
+  nav_interpret: 'Interpret Statement',
 
   // -- Home hero --
   home_hero_title: 'Comprehensive and transparent attribution standard for AI usage',
@@ -54,10 +54,10 @@ window.TRANSLATIONS.en = {
   home_feedback_text: 'This tool is continuously being improved. You can share your suggestions, questions, or comments on <a href="https://github.com/teyit/AI-Attribution-Standard/issues" target="_blank">GitHub</a>.',
 
   // -- Interpret tab --
-  interpret_title: 'Enter an AIAS Code to See Its Meaning',
+  interpret_title: 'Interpret an Attribution Statement',
   interpret_info: 'Enter a published AIAS code to see what it means. Example: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code>',
-  interpret_placeholder: 'E.g.: AIAS HAb Ed R ChatGPT, Claude v1.0',
-  interpret_btn: 'Show Meaning',
+  interpret_placeholder: 'Type or paste an AIAS code, e.g.: AIAS HAb Ed R ChatGPT, Claude v1.0',
+  interpret_btn: 'Interpret',
   interpret_library_title: 'Component Library (All Codes)',
   interpret_library_info: 'All component codes used in AIAS statements and their meanings are listed below.',
   interpret_explanation: 'AIAS (AI Attribution Standard) is used to transparently declare AI usage in content creation. The attribution statement is evaluated solely based on the final published content (as presented to the reader). AI usage in non-publication materials such as research notes, draft documents, internal communications, meeting notes, briefing documents, raw data work, and similar is not included in this statement; it can optionally be recorded under a separate "non-publication AI usage" assessment.',
@@ -98,7 +98,7 @@ window.TRANSLATIONS.en = {
   stage_editing_desc: '(text editing, style and grammar correction, etc.)',
 
   // -- Builder review labels --
-  review_yes_label: 'AI outputs were reviewed and approved by an editor',
+  review_yes_label: 'AI outputs were reviewed and approved by a human',
   review_no_label: 'AI outputs were not reviewed',
 
   // -- Data: Proportion --
