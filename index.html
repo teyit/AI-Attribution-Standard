@@ -328,6 +328,20 @@ a{color:var(--c-accent)}
   position:relative;
   height:28px;
 }
+.slider-hint{
+  position:absolute;
+  top:-48px;left:50%;
+  transform:translateX(-50%);
+  width:48px;height:48px;
+  pointer-events:none;
+  z-index:10;
+  opacity:.55;
+  transition:opacity .4s ease;
+}
+.slider-hint.hidden{
+  opacity:0;
+  visibility:hidden;
+}
 .builder-proportion-slider{
   -webkit-appearance:none;
   appearance:none;
@@ -841,9 +855,11 @@ a{color:var(--c-accent)}
   .home-hero-visual{flex:none;order:-1}
   .home-hero-visual svg{width:140px;height:140px}
   .topnav-inner{flex-wrap:wrap;height:auto;min-height:48px}
-  .topnav-brand{font-size:0.85rem;padding-right:12px}
-  .topnav-tab{padding:0 12px;font-size:0.82rem}
-  .lang-select{margin-left:auto}
+  .topnav-brand{font-size:0.85rem;padding-right:0;border-right:none;flex:1;min-width:0}
+  .topnav-brand span{overflow:hidden;text-overflow:ellipsis}
+  .lang-select{order:1;margin-left:auto;flex-shrink:0;padding:0}
+  .topnav-tabs{order:2;width:100%;border-top:1px solid rgba(255,255,255,0.15)}
+  .topnav-tab{padding:4px 12px 0;font-size:0.82rem;flex:1;justify-content:center}
 }
 
 /* Responsive — mobile */
@@ -854,21 +870,22 @@ a{color:var(--c-accent)}
   .home-hero-visual svg{width:120px;height:120px}
   .home-hero-title{font-size:1.5rem}
   .home-hero-buttons{flex-direction:column}
-  .anatomy-grid{gap:0 8px;grid-template-columns:repeat(8,minmax(32px,auto))}
-  .ag-code{font-size:0.85rem}
-  .anatomy-part-label{font-size:0.6rem}
-  .anatomy-line{height:10px}
-  .ag-label-top,.ag-label-bottom{min-height:36px}
+  .anatomy-box{padding:16px 8px}
+  .anatomy-grid{gap:0 6px;min-width:580px}
+  .ag-code{font-size:0.8rem}
+  .anatomy-part-label{font-size:0.55rem;white-space:normal;line-height:1.2}
+  .anatomy-line{height:8px}
+  .ag-label-top,.ag-label-bottom{min-height:32px}
   .home-features{grid-template-columns:1fr}
-  .topnav-brand{font-size:0.82rem;padding-right:12px;margin-right:4px}
-  .topnav-tab{padding:0 12px;font-size:0.82rem}
+  .topnav-brand{font-size:0.82rem}
+  .topnav-tab{font-size:0.78rem}
   .cards{grid-template-columns:1fr}
   .builder-slider-labels{padding:0 2px}
   .builder-slider-label .bl-text{width:64px;font-size:0.7rem}
   .builder-options{padding-left:0}
   .builder-text-input{margin-left:0;width:100%}
   .builder-hint{padding-left:0}
-  .builder-result-code{flex-direction:column;align-items:stretch;text-align:center}
+  .builder-result-code{flex-direction:column;align-items:stretch}
   .builder-copy-btn{align-self:center}
 }
 
@@ -1047,7 +1064,7 @@ a{color:var(--c-accent)}
     <h2 class="section-title" data-i18n="interpret_title">AIAS Kodu Girerek Anlamını Göster</h2>
     <p class="info-text" data-i18n-html="interpret_info">Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code></p>
     <div class="interpret-form">
-      <input type="text" class="interpret-input" id="stmtInput" data-i18n-placeholder="interpret_placeholder" placeholder="Örn: AIAS HAb Ed R ChatGPT, Claude v1.0" autocomplete="off">
+      <input type="text" class="interpret-input" id="stmtInput" data-i18n-placeholder="interpret_placeholder" placeholder="Örn.: AIAS HAb Ed R ChatGPT, Claude v1.0" autocomplete="off">
       <button class="interpret-btn" id="interpretBtn" data-i18n="interpret_btn">Anlamını Göster</button>
     </div>
     <div class="result-box" id="resultBox"></div>
@@ -1082,6 +1099,7 @@ a{color:var(--c-accent)}
           <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 9V7c0-1.1-.9-2-2-2h-3c0-1.66-1.34-3-3-3S9 3.34 9 5H6c-1.1 0-2 .9-2 2v2c-1.66 0-3 1.34-3 3s1.34 3 3 3v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4c1.66 0 3-1.34 3-3s-1.34-3-3-3zM9.5 8c.83 0 1.5.67 1.5 1.5S10.33 11 9.5 11 8 10.33 8 9.5 8.67 8 9.5 8zm5 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM16 16H8v-2h8v2z" fill="currentColor"/></svg></span>
         </div>
         <div class="builder-slider-track">
+          <div class="slider-hint" id="sliderHint"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%"><style>.hand{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.arrow{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.arrow-left{animation:moveLeft 4s infinite ease-in-out}.arrow-right{animation:moveRight 4s infinite ease-in-out}@keyframes moveLeft{0%,40%,100%{transform:translateX(0)}10%,30%{transform:translateX(-20px)}}@keyframes moveRight{0%,50%,100%{transform:translateX(0)}60%,80%{transform:translateX(20px)}}</style><g class="arrow-left"><line x1="60" y1="50" x2="20" y2="50" class="arrow"/><polyline points="40,30 20,50 40,70" class="arrow"/></g><g class="arrow-right"><line x1="140" y1="50" x2="180" y2="50" class="arrow"/><polyline points="160,30 180,50 160,70" class="arrow"/></g><path d="M 85 105 L 85 45 A 15 15 0 0 1 115 45 L 115 80 A 10 10 0 0 1 135 85 L 135 95 A 10 10 0 0 1 155 100 L 155 110 A 10 10 0 0 1 175 120 L 175 140 C 175 170 150 190 120 190 L 90 190 C 60 190 50 170 40 140 L 25 110 A 10 10 0 0 1 45 100 L 65 130 C 70 135 85 130 85 105 Z" class="hand"/></svg></div>
           <input type="range" class="builder-proportion-slider" id="bSlider" min="0" max="4" step="1" value="0">
           <div class="builder-slider-ticks">
             <span class="builder-slider-tick active" data-idx="0"></span>
@@ -1339,7 +1357,8 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
     langs.forEach(function(code) {
       var opt = document.createElement('option');
       opt.value = code;
-      opt.textContent = window.TRANSLATIONS[code]._meta.label;
+      var meta = window.TRANSLATIONS[code]._meta;
+      opt.textContent = (meta.flag ? meta.flag + ' ' : '') + meta.label;
       sel.appendChild(opt);
     });
 
@@ -1852,10 +1871,17 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
     embedEl.textContent = embedCode;
   }
 
+  // Slider hint
+  var sliderHint = document.getElementById('sliderHint');
+  function hideSliderHint() {
+    if (sliderHint) sliderHint.classList.add('hidden');
+  }
+
   // Slider events
-  bSlider.addEventListener('input', updateBuilder);
+  bSlider.addEventListener('input', function() { hideSliderHint(); updateBuilder(); });
   bLabels.forEach(function(lbl, i) {
     lbl.addEventListener('click', function() {
+      hideSliderHint();
       bSlider.value = i;
       updateBuilder();
     });

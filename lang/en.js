@@ -1,6 +1,6 @@
 window.TRANSLATIONS = window.TRANSLATIONS || {};
 window.TRANSLATIONS.en = {
-  _meta: { label: 'English' },
+  _meta: { label: 'English', flag: '\ud83c\uddec\ud83c\udde7' },
 
   // -- Meta --
   meta_title: 'AIAS AI Attribution Standard — teyit.org',
