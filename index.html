@@ -101,6 +101,24 @@ a{color:var(--c-accent)}
   border-bottom-color:#fff;
 }
 
+/* Language selector */
+.lang-select{
+  margin-left:auto;
+  align-self:center;
+  padding:4px 8px;
+  font-size:0.8rem;
+  font-family:var(--font-sans);
+  background:rgba(255,255,255,0.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:4px;
+  cursor:pointer;
+  outline:none;
+  flex-shrink:0;
+}
+.lang-select:hover{background:rgba(255,255,255,0.2)}
+.lang-select option{color:#222;background:#fff}
+
 /* Section */
 .section{padding:32px 0}
 .section-title{
@@ -835,13 +853,14 @@ a{color:var(--c-accent)}
   <div class="container topnav-inner">
     <div class="topnav-brand">
       <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 303 303" xmlns="http://www.w3.org/2000/svg"><circle cx="151.5" cy="151.5" fill="#eef6f5" r="60.5"/><path d="m298.593 145.738-50.783-13.304 41.686-31.703c2.143-1.618 2.911-4.489 1.9-6.996s-3.639-3.963-6.267-3.599l-52.036 6.955 26.321-45.412c1.334-2.305.97-5.257-.93-7.157-1.9-1.901-4.852-2.305-7.157-.93l-45.406 26.325 6.954-52.043c.364-2.669-1.132-5.257-3.598-6.268-2.466-1.051-5.337-.243-6.995 1.901l-31.739 41.691-13.302-50.749c-.687-2.628-3.032-4.448-5.741-4.448s-5.054 1.82-5.741 4.448l-13.302 50.749-31.739-41.691c-1.617-2.143-4.488-2.912-6.995-1.901s-3.962 3.599-3.598 6.268l6.954 52.043-45.406-26.325c-2.345-1.375-5.256-.971-7.157.93-1.9 1.901-2.305 4.853-.93 7.157l26.321 45.412-52.036-6.955c-2.628-.324-5.256 1.132-6.267 3.599-1.011 2.507-.243 5.338 1.9 6.996l41.686 31.703-50.743 13.304c-2.628.687-4.448 3.033-4.448 5.742s1.819 5.055 4.448 5.742l50.743 13.304-41.686 31.703c-2.143 1.618-2.911 4.489-1.9 6.996 1.051 2.507 3.639 4.003 6.267 3.599l52.036-6.955-26.321 45.412c-1.334 2.345-.97 5.257.93 7.157 1.9 1.901 4.852 2.305 7.157.93l45.406-26.325-6.954 52.043c-.364 2.669 1.132 5.257 3.598 6.268s5.337.243 6.995-1.901l31.739-41.691 13.302 50.79c.687 2.628 3.032 4.448 5.741 4.448s5.054-1.82 5.741-4.448l13.302-50.79 31.739 41.691c1.617 2.143 4.488 2.912 6.995 1.901s3.962-3.599 3.598-6.268l-6.954-52.043 45.406 26.325c2.345 1.334 5.256.971 7.157-.93 1.9-1.901 2.305-4.853.93-7.157l-26.321-45.412 52.036 6.955c2.628.364 5.256-1.132 6.267-3.599 1.011-2.507.243-5.338-1.9-6.996l-41.686-31.703 50.743-13.304c2.628-.687 4.448-3.033 4.448-5.742s-1.819-5.055-4.448-5.742zm-152.106 44.037c-4.488 4.489-11.806 4.489-16.294 0l-26.362-26.365c-4.488-4.489-4.488-11.808 0-16.296 4.488-4.489 11.806-4.489 16.294 0l18.195 18.197 44.556-44.562c4.488-4.489 11.806-4.489 16.294 0s4.488 11.808 0 16.296l-52.724 52.731h.04z" fill="#20534c" fill-rule="nonzero"/></svg>
-      AIAS - Yapay Zeka Atıf Standardı
+      <span data-i18n="nav_brand">AIAS - Yapay Zeka Atıf Standardı</span>
     </div>
     <div class="topnav-tabs">
-      <button class="topnav-tab active" data-tab="home">Anasayfa</button>
-      <button class="topnav-tab" data-tab="builder">Atıf Beyanı Oluştur</button>
-      <button class="topnav-tab" data-tab="interpret">Kodu Yorumla</button>
+      <button class="topnav-tab active" data-tab="home" data-i18n="nav_home">Anasayfa</button>
+      <button class="topnav-tab" data-tab="builder" data-i18n="nav_builder">Atıf Beyanı Oluştur</button>
+      <button class="topnav-tab" data-tab="interpret" data-i18n="nav_interpret">Kodu Yorumla</button>
     </div>
+    <select class="lang-select" id="langSelect"></select>
   </div>
 </nav>
 
@@ -850,16 +869,16 @@ a{color:var(--c-accent)}
   <div class="home-hero">
     <div class="container home-hero-inner">
       <div class="home-hero-text">
-        <h1 class="home-hero-title">Yapay zeka kullanımında detaylı ve şeffaf atıf beyanı standardı</h1>
-        <p class="home-hero-desc">
+        <h1 class="home-hero-title" data-i18n="home_hero_title">Yapay zeka kullanımında detaylı ve şeffaf atıf beyanı standardı</h1>
+        <p class="home-hero-desc" data-i18n-html="home_hero_desc1">
           AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zekanın yalnızca kullanılıp kullanılmadığını değil, <strong>nasıl ve ne ölçüde kullanıldığını</strong> belirten bir atıf beyanı standardı sunar. Bu yaklaşım, farklı düzey ve türdeki YZ katkılarını birbirinden ayırarak içerik üreticilerinin sahipliğini ve kullanıcıların güvenini güçlendirir.
         </p>
-        <p class="home-hero-desc">
+        <p class="home-hero-desc" data-i18n-html="home_hero_desc2">
           Bu araç, IBM Research ekibinin geliştirdiği açık kaynaklı <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> projesini temel alarak medya sektörü için uyarlanmıştır.
         </p>
         <div class="home-hero-buttons">
-          <button class="home-btn home-btn-primary" onclick="switchTab('builder')">Atıf Beyanı Oluştur</button>
-          <button class="home-btn home-btn-secondary" onclick="switchTab('interpret')">Kodu Yorumla</button>
+          <button class="home-btn home-btn-primary" onclick="switchTab('builder')" data-i18n="home_btn_builder">Atıf Beyanı Oluştur</button>
+          <button class="home-btn home-btn-secondary" onclick="switchTab('interpret')" data-i18n="home_btn_interpret">Kodu Yorumla</button>
         </div>
       </div>
       <div class="home-hero-visual">
@@ -870,29 +889,30 @@ a{color:var(--c-accent)}
 
   <div class="container">
     <!-- Anatomy of an attribution statement -->
-    <section class="home-section">
-      <h2 class="home-section-title">Atıf Beyanı Kod Formatı</h2>
-      <p class="home-section-text">AIAS (Yapay Zeka Atıf Standardı), yapay zeka kullanımının her boyutunu tek bir standart kod ile özetler.</p>
+    <section class="home-section
+    ">
+      <h2 class="home-section-title" data-i18n="home_anatomy_title">Atıf Beyanı Kod Formatı</h2>
+      <p class="home-section-text" data-i18n="home_anatomy_desc">AIAS (Yapay Zeka Atıf Standardı), yapay zeka kullanımının her boyutunu tek bir standart kod ile özetler.</p>
       <div class="anatomy-box">
         <div class="anatomy-grid">
           <!-- Row 1: top labels -->
           <div class="ag-label-top">
-            <span class="anatomy-part-label">Atıf standardı<br>anahtar kodu</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_prefix">Atıf standardı<br>anahtar kodu</span>
             <span class="anatomy-line"></span>
           </div>
           <div class="ag-label-top ag-empty"></div>
           <div class="ag-label-top">
-            <span class="anatomy-part-label">YZ hangi<br>aşamada katkı sağladı?</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_stages">YZ hangi<br>aşamada katkı sağladı?</span>
             <span class="anatomy-line"></span>
           </div>
           <div class="ag-label-top ag-empty"></div>
           <div class="ag-label-top">
-            <span class="anatomy-part-label">Kullanılan YZ<br>modelleri ve uygulamaları</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_models">Kullanılan YZ<br>modelleri ve uygulamaları</span>
             <span class="anatomy-line"></span>
           </div>
           <div class="ag-label-top ag-empty"></div>
           <div class="ag-label-top">
-            <span class="anatomy-part-label">Editör notu<br>(opsiyonel)</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_note">Editör notu<br>(opsiyonel)</span>
             <span class="anatomy-line"></span>
           </div>
           <div class="ag-label-top ag-empty"></div>
@@ -903,70 +923,71 @@ a{color:var(--c-accent)}
           <div class="ag-code ag-border-bottom"><span>R</span></div>
           <div class="ag-code ag-border-top"><span>ChatGPT, Gemini</span></div>
           <div class="ag-code ag-border-bottom"><span>v1.0</span></div>
-          <div class="ag-code ag-border-top"><span>| Kapak görseli YZ ile üretildi.</span></div>
+          <div class="ag-code ag-border-top"><span data-i18n="anatomy_note_example">| Kapak görseli YZ ile üretildi.</span></div>
           <div class="ag-code ag-border-bottom ag-icons-cell"><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><path d="m12 0v12h12c0 6.627-5.373 12-12 12-6.623 0-12-5.377-12-12 0-6.627 5.373-12 12-12z" fill-opacity=".6" transform="matrix(.920833 0 0 .920833 .95 .95)"/></g></svg><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g stroke="#161616"><circle cx="12" cy="12" fill="#fff" r="11.5"/><path d="m557.76 211.05c-4.375 6.441-8.262 15.051-16.031 32.27l-12.648 28.027-254.64 441.04c-12.223 21.176-18.336 31.762-21.402 43.328-1.016 3.84-1.777 7.734-2.281 11.672-1.516 11.871.16 23.98 3.508 48.195l15.816 114.36 106.94-43.48c22.652-9.207 33.973-13.809 43.5-21.059 3.156-2.402 6.152-5.012 8.961-7.809 8.488-8.441 14.601-19.027 26.824-40.203l254.63-441.04 17.948-24.965c11.028-15.34 16.539-23.012 19.93-30.02 17.984-37.16 8.375-81.785-23.293-108.26-5.976-4.992-14.156-9.714-30.516-19.16-16.363-9.445-24.543-14.168-31.855-16.848-38.762-14.191-82.211-.195-105.4 33.953zm112.21 176.28-129.91-75-241.33 418c-8.18 14.168-12.27 21.246-14.312 28.988-.68 2.566-1.187 5.176-1.519 7.805-1.004 7.945.136 16.043 2.41 32.238l11.777 83.816 78.477-31.707c15.16-6.129 22.746-9.196 29.121-14.031 2.113-1.606 4.117-3.348 6.004-5.223 5.675-5.641 9.765-12.719 17.945-26.887zm-90.754-151.14c15.141-31.449 53.828-43.383 84.055-25.934l33.492 19.336c30.227 17.453 39.234 56.93 19.566 85.766l-31.359 45.988-129.91-75z" fill="#161616" stroke-miterlimit="2" stroke-width="17.12" transform="matrix(.018584 .002351 -.00238 .018816 4.392389 .094858)"/></g></svg><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616" fill-rule="nonzero" transform="matrix(.018333 0 0 .018333 1 1)"><path d="m1048.6 435.3c.043-69.762-25.445-137.13-71.656-189.39-46.215-52.262-109.96-85.801-179.2-94.289-69.246-8.488-139.21 8.66-196.68 48.211s-98.473 98.766-115.28 166.47c-55.148 1.148-108.73 18.539-154.05 49.988-45.316 31.445-80.352 75.562-100.72 126.82l-79.055 197.71c-1.52 3.789-2.086 7.898-1.652 11.957.433 4.063 1.859 7.957 4.148 11.336 2.289 3.387 5.375 6.156 8.981 8.07 3.609 1.914 7.632 2.914 11.719 2.911h118.7v118.7c.031 25.684 10.246 50.309 28.406 68.469s42.785 28.375 68.469 28.405h82.766v35.106c0 6.632 2.636 12.991 7.324 17.68 4.687 4.688 11.047 7.324 17.68 7.324 6.629 0 12.988-2.637 17.676-7.324 4.688-4.688 7.324-11.047 7.324-17.68v-60.106c0-3.281-.645-6.535-1.902-9.566-1.254-3.035-3.098-5.793-5.418-8.113-2.321-2.324-5.078-4.164-8.114-5.418-3.031-1.258-6.281-1.903-9.566-1.903h-107.77c-12.426-.019-24.336-4.964-33.125-13.75-8.785-8.785-13.73-20.695-13.75-33.125v-143.7c.004-3.285-.645-6.535-1.898-9.57-1.258-3.035-3.098-5.789-5.418-8.109-2.325-2.324-5.082-4.164-8.114-5.422-3.035-1.254-6.285-1.899-9.57-1.899h-106.79l65.332-163.43c16.223-40.691 43.699-75.918 79.215-101.56 35.512-25.637 77.598-40.629 121.33-43.219-.395 6.118-.93 12.199-.93 18.41.118 69.188 25.316 135.98 70.91 188.02 45.602 52.031 108.52 85.773 177.09 94.977v307.48c0 6.637 2.637 12.992 7.325 17.68 4.687 4.692 11.047 7.325 17.68 7.325 6.628 0 12.988-2.633 17.676-7.325 4.687-4.687 7.32-11.042 7.32-17.68v-305.3c73.547-3.175 143.03-34.594 193.99-87.711 50.961-53.125 79.473-123.85 79.598-197.46zm-285.79 235.79c-46.633 0-92.223-13.832-131-39.738-38.777-25.91-69-62.734-86.848-105.82-17.848-43.082-22.516-90.492-13.418-136.23 9.098-45.734 31.555-87.75 64.535-120.73 32.973-32.977 74.988-55.434 120.73-64.531 45.738-9.098 93.148-4.426 136.23 13.418 43.082 17.848 79.906 48.07 105.82 86.844 25.91 38.777 39.734 84.363 39.734 131-.063 62.516-24.926 122.45-69.129 166.66-44.207 44.207-104.14 69.066-166.66 69.137z"/><path d="m858.27 345.26-143.95 143.95-46.969-46.977c-2.316-2.359-5.07-4.238-8.113-5.523-3.043-1.289-6.313-1.957-9.614-1.977-3.304-.016-6.582.621-9.636 1.879-3.055 1.254-5.832 3.109-8.168 5.445-2.34 2.336-4.188 5.11-5.442 8.168-1.258 3.055-1.894 6.328-1.879 9.633.016 3.305.688 6.57 1.977 9.613 1.285 3.043 3.164 5.797 5.523 8.114l64.648 64.648c2.321 2.32 5.078 4.164 8.11 5.418 3.031 1.261 6.281 1.906 9.566 1.906 3.281 0 6.535-.645 9.567-1.906 3.031-1.254 5.789-3.098 8.109-5.418l161.62-161.62c4.609-4.704 7.176-11.035 7.145-17.621-.036-6.586-2.668-12.895-7.321-17.551-4.656-4.657-10.965-7.29-17.551-7.321-6.59-.035-12.918 2.535-17.625 7.145z"/></g></svg></div>
           <!-- Row 3: bottom labels -->
           <div class="ag-label-bottom ag-empty"></div>
           <div class="ag-label-bottom">
             <span class="anatomy-line"></span>
-            <span class="anatomy-part-label">YZ ne kadar<br>katkı sağladı?</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_proportion">YZ ne kadar<br>katkı sağladı?</span>
           </div>
           <div class="ag-label-bottom ag-empty"></div>
           <div class="ag-label-bottom">
             <span class="anatomy-line"></span>
-            <span class="anatomy-part-label">İnsan<br>denetimi var mı?</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_review">İnsan<br>denetimi var mı?</span>
           </div>
           <div class="ag-label-bottom ag-empty"></div>
           <div class="ag-label-bottom">
             <span class="anatomy-line"></span>
-            <span class="anatomy-part-label">Standart<br>sürüm numarası</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_version">Standart<br>sürüm numarası</span>
           </div>
           <div class="ag-label-bottom ag-empty"></div>
           <div class="ag-label-bottom">
             <span class="anatomy-line"></span>
-            <span class="anatomy-part-label">İfadelere karşılık<br>gelen ikonlar</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_icons">İfadelere karşılık<br>gelen ikonlar</span>
           </div>
+      </div>
       </div>
     </section>
 
     <!-- Why is this needed? -->
     <section class="home-section">
-      <h2 class="home-section-title">Buna neden ihtiyaç var?</h2>
-      <p class="home-section-text">
-        Üretken yapay zekanın kullanımı yaygınlaştıkça, “YZ desteğiyle hazırlanmıştır” gibi genel ifadeler artık yeterli olmamaya başladı. YZ yardımı ile yazılan bir makalede YZ yalnızca imla hatalarını mı düzeltti, yoksa fikirlerin çoğunu mu üretti? İçeriğin büyük bölümünü mü oluşturdu, yoksa yalnızca birkaç cümleye mi yardım etti? Bu tür sorular, içerik üreticilerinin sahiplik algısını ve tüketicilerin güvenini etkiler. AIAS, bu belirsizliği ortadan kaldırarak YZ katkısının kapsamını, kullanılan araçları ve denetim düzeyini açıkça ortaya koyar.
+      <h2 class="home-section-title" data-i18n="home_why_title">Buna neden ihtiyaç var?</h2>
+      <p class="home-section-text" data-i18n="home_why_p1">
+        Üretken yapay zekanın kullanımı yaygınlaştıkça, “YZ desteğiyle hazırlanmıştır" gibi genel ifadeler artık yeterli olmamaya başladı. YZ yardımı ile yazılan bir makalede YZ yalnızca imla hatalarını mı düzeltti, yoksa fikirlerin çoğunu mu üretti? İçeriğin büyük bölümünü mü oluşturdu, yoksa yalnızca birkaç cümleye mi yardım etti? Bu tür sorular, içerik üreticilerinin sahiplik algısını ve tüketicilerin güvenini etkiler. AIAS, bu belirsizliği ortadan kaldırarak YZ katkısının kapsamını, kullanılan araçları ve denetim düzeyini açıkça ortaya koyar.
       </p>
-      <p class="home-section-text">
+      <p class="home-section-text" data-i18n-html="home_why_p2">
         Amacımız, içerik üreticilerinin sahiplik algısını doğru yansıtan ve tüketicilere güvenlerini kalibre etmek için daha fazla şeffaflık sunan, açık kaynaklı ve detaylı bir YZ atıf yöntemi geliştirmektir. Creative Commons lisansından ilham alınarak tasarlanan bu atıf beyanı yaklaşımı, kullanıcıların ortak üretim süreçlerindeki şeffaflık ihtiyaçlarına yönelik <a href="https://dl.acm.org/doi/full/10.1145/3706598.3713522" target="_blank">CHI 2025'te yayımlanan araştırmaya</a> dayanmaktadır.
       </p>
     </section>
 
     <!-- How to use -->
     <section class="home-section">
-      <h2 class="home-section-title">Atıf beyanı nasıl kullanılır?</h2>
-      <p class="home-section-text">
+      <h2 class="home-section-title" data-i18n="home_howto_title">Atıf beyanı nasıl kullanılır?</h2>
+      <p class="home-section-text" data-i18n="home_howto_desc">
         Atıf beyanları metin olarak kopyalanabilir ve içeriğinize eklenebilir. Beyanı çalışmanıza nasıl dahil edeceğiniz; içerik türüne, bağlamına, hedef kitlenizin ihtiyaçlarına ve/veya kurumunuzun gereksinimlerine bağlıdır.
       </p>
       <div class="home-features">
         <div class="home-feature">
-          <div class="home-feature-title">Dijital yayınlar</div>
-          <div class="home-feature-desc">Makale, blog yazısı veya web içeriklerinin altına atıf beyanı metni eklenebilir. Beyanı bu web sitesine bağlayarak okuyucuların yorumlamasını kolaylaştırabilirsiniz.</div>
+          <div class="home-feature-title" data-i18n="home_feature1_title">Dijital yayınlar</div>
+          <div class="home-feature-desc" data-i18n="home_feature1_desc">Makale, blog yazısı veya web içeriklerinin altına atıf beyanı metni eklenebilir. Beyanı bu web sitesine bağlayarak okuyucuların yorumlamasını kolaylaştırabilirsiniz.</div>
         </div>
         <div class="home-feature">
-          <div class="home-feature-title">Haber bültenleri</div>
-          <div class="home-feature-desc">E-posta veya bülten olarak gönderilen haber içeriklerinde atıf beyanı eklenerek YZ desteğinin kapsamı abonelere şeffaf biçimde iletilebilir.</div>
+          <div class="home-feature-title" data-i18n="home_feature2_title">Haber bültenleri</div>
+          <div class="home-feature-desc" data-i18n="home_feature2_desc">E-posta veya bülten olarak gönderilen haber içeriklerinde atıf beyanı eklenerek YZ desteğinin kapsamı abonelere şeffaf biçimde iletilebilir.</div>
         </div>
         <div class="home-feature">
-          <div class="home-feature-title">Podcast ve video içerikler</div>
-          <div class="home-feature-desc">Podcast açıklamalarına veya video içeriklerin bilgi kutusuna atıf beyanı eklenerek YZ kullanımı dinleyici ve izleyicilere şeffaf biçimde aktarılabilir.</div>
+          <div class="home-feature-title" data-i18n="home_feature3_title">Podcast ve video içerikler</div>
+          <div class="home-feature-desc" data-i18n="home_feature3_desc">Podcast açıklamalarına veya video içeriklerin bilgi kutusuna atıf beyanı eklenerek YZ kullanımı dinleyici ve izleyicilere şeffaf biçimde aktarılabilir.</div>
         </div>
       </div>
     </section>
 
     <!-- Feedback -->
     <section class="home-section" style="padding-bottom:32px">
-      <h2 class="home-section-title">Geri bildirim</h2>
+      <h2 class="home-section-title" data-i18n="home_feedback_title">Geri bildirim</h2>
       <div class="home-feedback">
-        <p class="home-section-text" style="margin-bottom:0">
+        <p class="home-section-text" style="margin-bottom:0" data-i18n-html="home_feedback_text">
           Bu araç sürekli geliştirilmektedir. Öneri, soru veya yorumlarınızı <a href="https://github.com/teyit/AI-Attribution-Standard/issues" target="_blank">GitHub</a> üzerinden paylaşabilirsiniz.
         </p>
       </div>
@@ -978,38 +999,38 @@ a{color:var(--c-accent)}
 <main class="container">
   <div id="tab-interpret" class="tab-content">
   <section class="section">
-    <h2 class="section-title">AIAS Kodu Girerek Anlamını Göster</h2>
-    <p class="info-text">Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code></p>
+    <h2 class="section-title" data-i18n="interpret_title">AIAS Kodu Girerek Anlamını Göster</h2>
+    <p class="info-text" data-i18n-html="interpret_info">Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code></p>
     <div class="interpret-form">
-      <input type="text" class="interpret-input" id="stmtInput" placeholder="Örn: AIAS HAb Ed R ChatGPT, Claude v1.0" autocomplete="off">
-      <button class="interpret-btn" id="interpretBtn">Anlamını Göster</button>
+      <input type="text" class="interpret-input" id="stmtInput" data-i18n-placeholder="interpret_placeholder" placeholder="Örn: AIAS HAb Ed R ChatGPT, Claude v1.0" autocomplete="off">
+      <button class="interpret-btn" id="interpretBtn" data-i18n="interpret_btn">Anlamını Göster</button>
     </div>
     <div class="result-box" id="resultBox"></div>
     <div id="resultCards"></div>
   </section>
 
   <section class="section">
-    <h2 class="section-title">Bileşen Kütüphanesi (Tüm Kodlar)</h2>
-    <p class="info-text">AIAS beyanlarında kullanılan tüm bileşen kodları ve anlamları aşağıda listelenmiştir.</p>
+    <h2 class="section-title" data-i18n="interpret_library_title">Bileşen Kütüphanesi (Tüm Kodlar)</h2>
+    <p class="info-text" data-i18n="interpret_library_info">AIAS beyanlarında kullanılan tüm bileşen kodları ve anlamları aşağıda listelenmiştir.</p>
     <div id="library"></div>
   </section>
 
   <section class="section aias-explanation">
     <div class="explanation-box">
       <svg class="explanation-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#3a4a5c" stroke-width="2"/><path d="M12 11v6" stroke="#3a4a5c" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#3a4a5c"/></svg>
-      <p>AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir “yayın dışı yapay zeka kullanımı” değerlendirmesi altında kaydedilebilir.</p>
+      <p data-i18n="interpret_explanation">AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zeka kullanımını şeffaf şekilde beyan etmek için kullanılır. Atıf beyanı, yalnızca yayımlanan nihai içerik (okuyucuya sunulan son şekli üzerinden) değerlendirilerek yapılır. Araştırma notları, taslak dokümanlar, iç yazışmalar, toplantı notları, briefing dokümanları, ham veri çalışmaları ve benzeri yayın dışı üretimlerdeki yapay zeka kullanımı bu beyana dahil edilmez; opsiyonel olarak ayrı bir “yayın dışı yapay zeka kullanımı" değerlendirmesi altında kaydedilebilir.</p>
     </div>
   </section>
   </div><!-- /tab-interpret -->
 
   <div id="tab-builder" class="tab-content">
   <section class="section">
-    <h2 class="section-title">Atıf Beyanı Oluştur</h2>
-    <p class="info-text">İçerik oluşturma sürecinize katkı sağlayan yapay zeka kullanım bilgilerinizi girerek standart bir AIAS atıf beyanı kodu oluşturun.</p>
+    <h2 class="section-title" data-i18n="builder_title">Atıf Beyanı Oluştur</h2>
+    <p class="info-text" data-i18n="builder_info">İçerik oluşturma sürecinize katkı sağlayan yapay zeka kullanım bilgilerinizi girerek standart bir AIAS atıf beyanı kodu oluşturun.</p>
 
     <!-- 1. Proportion slider -->
     <div class="builder-group">
-      <div class="builder-group-title"><span class="builder-step-num">1</span> Yayımlanan nihai içeriğin ne kadarı yapay zeka tarafından oluşturuldu?</div>
+      <div class="builder-group-title"><span class="builder-step-num">1</span> <span data-i18n="builder_q1">Yayımlanan nihai içeriğin ne kadarı yapay zeka tarafından oluşturuldu?</span></div>
       <div class="builder-slider-container">
         <div class="builder-slider-icons">
           <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z" fill="currentColor"/></svg></span>
@@ -1027,23 +1048,23 @@ a{color:var(--c-accent)}
         </div>
         <div class="builder-slider-labels">
           <div class="builder-slider-label active" data-idx="0">
-            <span class="bl-text">Tamamen insan</span>
+            <span class="bl-text" data-i18n="slider_entirely_human">Tamamen insan</span>
             <span class="bl-guide">%0 AI</span>
           </div>
           <div class="builder-slider-label" data-idx="1">
-            <span class="bl-text">Büyük ölçüde insan</span>
+            <span class="bl-text" data-i18n="slider_primarily_human">Büyük ölçüde insan</span>
             <span class="bl-guide"></span>
           </div>
           <div class="builder-slider-label" data-idx="2">
-            <span class="bl-text">İnsan-Yapay zeka hibrit</span>
+            <span class="bl-text" data-i18n="slider_human_ai_blend">İnsan-Yapay zeka hibrit</span>
             <span class="bl-guide"></span>
           </div>
           <div class="builder-slider-label" data-idx="3">
-            <span class="bl-text">Büyük ölçüde yapay zeka</span>
+            <span class="bl-text" data-i18n="slider_primarily_ai">Büyük ölçüde yapay zeka</span>
             <span class="bl-guide"></span>
           </div>
           <div class="builder-slider-label" data-idx="4">
-            <span class="bl-text">Tamamen yapay zeka</span>
+            <span class="bl-text" data-i18n="slider_entirely_ai">Tamamen yapay zeka</span>
             <span class="bl-guide">%100 AI</span>
           </div>
         </div>
@@ -1053,24 +1074,24 @@ a{color:var(--c-accent)}
     <div class="builder-ai-fields hidden" id="builderAiFields">
       <!-- 2. Stages -->
       <div class="builder-group" id="bStagesGroup">
-        <div class="builder-group-title"><span class="builder-step-num">2</span> Yapay zeka hangi aşamalarda katkı sağladı?</div>
+        <div class="builder-group-title"><span class="builder-step-num">2</span> <span data-i18n="builder_q2">Yapay zeka hangi aşamalarda katkı sağladı?</span></div>
         <div class="builder-options" id="bStages">
           <label class="builder-opt">
             <input type="checkbox" name="bStage" value="Re">
-            <span class="opt-label">Araştırma</span>
-            <span class="opt-desc">(kaynak tarama, veri analizi, doğrulama desteği, vb.)</span>
+            <span class="opt-label" data-i18n="stage_research_label">Araştırma</span>
+            <span class="opt-desc" data-i18n="stage_research_desc">(kaynak tarama, veri analizi, doğrulama desteği, vb.)</span>
             <span class="opt-code">Re</span>
           </label>
           <label class="builder-opt">
             <input type="checkbox" name="bStage" value="Pr">
-            <span class="opt-label">Üretim</span>
-            <span class="opt-desc">(taslak yazımı, başlık/özet üretimi, çeviri, görsel üretimi, vb.)</span>
+            <span class="opt-label" data-i18n="stage_production_label">Üretim</span>
+            <span class="opt-desc" data-i18n="stage_production_desc">(taslak yazımı, başlık/özet üretimi, çeviri, görsel üretimi, vb.)</span>
             <span class="opt-code">Pr</span>
           </label>
           <label class="builder-opt">
             <input type="checkbox" name="bStage" value="Ed">
-            <span class="opt-label">Düzenleme</span>
-            <span class="opt-desc">(metin redaksiyonu, stil ve dilbilgisi düzeltme, vb.)</span>
+            <span class="opt-label" data-i18n="stage_editing_label">Düzenleme</span>
+            <span class="opt-desc" data-i18n="stage_editing_desc">(metin redaksiyonu, stil ve dilbilgisi düzeltme, vb.)</span>
             <span class="opt-code">Ed</span>
           </label>
         </div>
@@ -1078,23 +1099,23 @@ a{color:var(--c-accent)}
 
       <!-- 3. Models -->
       <div class="builder-group">
-        <div class="builder-group-title"><span class="builder-step-num">3</span> Hangi yapay zeka modelleri kullanıldı?</div>
-        <input type="text" class="builder-text-input" id="bModels" placeholder="ChatGPT, Claude (virgülle ayırın)">
-        <p class="builder-hint">Birden fazla model varsa virgülle ayırın. (Opsiyonel)</p>
+        <div class="builder-group-title"><span class="builder-step-num">3</span> <span data-i18n="builder_q3">Hangi yapay zeka modelleri kullanıldı?</span></div>
+        <input type="text" class="builder-text-input" id="bModels" data-i18n-placeholder="builder_models_placeholder" placeholder="ChatGPT, Claude (virgülle ayırın)">
+        <p class="builder-hint" data-i18n="builder_models_hint">Birden fazla model varsa virgülle ayırın. (Opsiyonel)</p>
       </div>
 
       <!-- 4. Review -->
       <div class="builder-group">
-        <div class="builder-group-title"><span class="builder-step-num">4</span> İnsan denetimi var mı?</div>
+        <div class="builder-group-title"><span class="builder-step-num">4</span> <span data-i18n="builder_q4">İnsan denetimi var mı?</span></div>
         <div class="builder-options" id="bReview">
           <label class="builder-opt selected">
             <input type="radio" name="bReview" value="R" checked>
-            <span class="opt-label">Yapay zeka çıktıları editör tarafından incelendi ve onaylandı</span>
+            <span class="opt-label" data-i18n="review_yes_label">Yapay zeka çıktıları editör tarafından incelendi ve onaylandı</span>
             <span class="opt-code">R</span>
           </label>
           <label class="builder-opt">
             <input type="radio" name="bReview" value="Nr">
-            <span class="opt-label">Yapay zeka çıktıları incelenmedi</span>
+            <span class="opt-label" data-i18n="review_no_label">Yapay zeka çıktıları incelenmedi</span>
             <span class="opt-code">Nr</span>
           </label>
         </div>
@@ -1102,40 +1123,40 @@ a{color:var(--c-accent)}
 
       <!-- 5. Note -->
       <div class="builder-group">
-        <div class="builder-group-title"><span class="builder-step-num">5</span> Editör Notu <span style="font-weight:400;color:var(--c-text-muted)">(opsiyonel)</span></div>
-        <input type="text" class="builder-text-input" id="bNote" placeholder="AI kullanımına dair ek açıklama gerekiyorsa buraya yazın">
+        <div class="builder-group-title"><span class="builder-step-num">5</span> <span data-i18n="builder_q5">Editör Notu</span> <span style="font-weight:400;color:var(--c-text-muted)" data-i18n="builder_q5_optional">(opsiyonel)</span></div>
+        <input type="text" class="builder-text-input" id="bNote" data-i18n-placeholder="builder_note_placeholder" placeholder="AI kullanımına dair ek açıklama gerekiyorsa buraya yazın">
       </div>
     </div>
 
-    <div class="section-title">Beyan Çıktısı</div>
+    <div class="section-title" data-i18n="builder_output_title">Beyan Çıktısı</div>
     <div class="builder-output">
       <div id="builderResult">
-        <div class="builder-result-label">Oluşturulan AIAS Kodu</div>
+        <div class="builder-result-label" data-i18n="builder_result_code_label">Oluşturulan AIAS Kodu</div>
         <div class="builder-result-code">
           <span class="builder-code-inner"><span id="builderCode">AIAS Eh v1.0</span><span id="builderIcons" class="builder-icons"></span></span>
-          <button class="builder-copy-btn" id="builderCopyBtn">Kopyala</button>
+          <button class="builder-copy-btn" id="builderCopyBtn" data-i18n="copy_btn">Kopyala</button>
         </div>
       </div>
 
       <div id="builderEmbedResult">
-        <div class="builder-result-label">HTML Yerleştirme Kodu</div>
+        <div class="builder-result-label" data-i18n="builder_result_embed_label">HTML Yerleştirme Kodu</div>
         <div class="builder-result-code builder-embed-code">
           <code id="builderEmbed" class="builder-embed-text"></code>
-          <button class="builder-copy-btn" id="builderEmbedCopyBtn">Kopyala</button>
+          <button class="builder-copy-btn" id="builderEmbedCopyBtn" data-i18n="copy_btn">Kopyala</button>
         </div>
-        <div class="builder-embed-hint">Bu kodu web sayfanıza ekleyerek AIAS atıf beyanınızı okuyuculara gösterebilirsiniz.</div>
+        <div class="builder-embed-hint" data-i18n="builder_embed_hint">Bu kodu web sayfanıza ekleyerek AIAS atıf beyanınızı okuyuculara gösterebilirsiniz.</div>
       </div>
 
       <div id="builderTextResult">
-        <div class="builder-result-label">Metin İfadesi</div>
+        <div class="builder-result-label" data-i18n="builder_result_text_label">Metin İfadesi</div>
         <div class="builder-result-code">
           <span id="builderText" class="builder-result-text"></span>
-          <button class="builder-copy-btn" id="builderTextCopyBtn">Kopyala</button>
+          <button class="builder-copy-btn" id="builderTextCopyBtn" data-i18n="copy_btn">Kopyala</button>
         </div>
       </div>
 
       <div>
-        <div class="builder-result-label">Açıklama</div>
+        <div class="builder-result-label" data-i18n="builder_result_explanation_label">Açıklama</div>
         <div class="builder-explanation-rows" id="builderExplanation"></div>
       </div>
     </div>
@@ -1144,7 +1165,7 @@ a{color:var(--c-accent)}
   <section class="section aias-explanation">
     <div class="explanation-box">
       <svg class="explanation-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" stroke="#3a4a5c" stroke-width="2"/><path d="M12 11v6" stroke="#3a4a5c" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.5" r="1.2" fill="#3a4a5c"/></svg>
-      <p>Oluşturduğunuz AIAS kodunu içeriğinize ekleyerek yapay zeka kullanımını şeffaf şekilde beyan edebilirsiniz. Kod, <a href="https://aias.teyit.org" target="_blank" rel="noopener">aias.teyit.org</a> üzerinden herkes tarafından yorumlanabilir.</p>
+      <p data-i18n-html="builder_explanation">Oluşturduğunuz AIAS kodunu içeriğinize ekleyerek yapay zeka kullanımını şeffaf şekilde beyan edebilirsiniz. Kod, <a href="https://aias.teyit.org" target="_blank" rel="noopener">aias.teyit.org</a> üzerinden herkes tarafından yorumlanabilir.</p>
     </div>
   </section>
   </div><!-- /tab-builder -->
@@ -1152,13 +1173,145 @@ a{color:var(--c-accent)}
 
 <footer class="footer">
   <div class="container">
-    <a href="https://teyit.org" target="_blank" rel="noopener">teyit.org</a> &middot;
-    <a href="#" target="_blank" rel="noopener">AI Attribution Standard</a>
+    <a href="https://teyit.org" target="_blank" rel="noopener" data-i18n="footer_teyit">teyit.org</a> &middot;
+    <a href="#" target="_blank" rel="noopener" data-i18n="footer_aias">AI Attribution Standard</a>
   </div>
 </footer>
 
+<script src="lang/tr.js"></script>
+<script src="lang/en.js"></script>
 <script>
 (function(){
+  // ── i18n Engine ──
+  var TRANSLATIONS = window.TRANSLATIONS || {};
+  var currentLang = 'tr';
+
+  function t(key, params) {
+    var lang = TRANSLATIONS[currentLang] || TRANSLATIONS['tr'];
+    var str = lang[key] || (TRANSLATIONS['tr'] && TRANSLATIONS['tr'][key]) || key;
+    if (params) {
+      Object.keys(params).forEach(function(k) {
+        str = str.replace(new RegExp('\\{' + k + '\\}', 'g'), params[k]);
+      });
+    }
+    return str;
+  }
+
+  function applyLanguage(lang) {
+    if (!TRANSLATIONS[lang]) lang = 'tr';
+    currentLang = lang;
+
+    // Update html lang attribute
+    document.documentElement.lang = lang;
+
+    // Update meta tags
+    document.title = t('meta_title');
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t('meta_description'));
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', t('og_title'));
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', t('og_description'));
+    var twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute('content', t('og_title'));
+    var twDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twDesc) twDesc.setAttribute('content', t('og_description'));
+
+    // Apply data-i18n (textContent)
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      el.textContent = t(el.getAttribute('data-i18n'));
+    });
+
+    // Apply data-i18n-html (innerHTML)
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+      el.innerHTML = t(el.getAttribute('data-i18n-html'));
+    });
+
+    // Apply data-i18n-placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+      el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+    });
+
+    // Rebuild data objects with translated strings
+    updateDataObjects();
+
+    // Re-render dynamic content
+    renderLibrary();
+    updateBuilder();
+
+    // Re-interpret if there's an active result
+    var stmtVal = document.getElementById('stmtInput').value.trim();
+    if (stmtVal && document.getElementById('resultBox').classList.contains('visible')) {
+      interpret(stmtVal);
+    }
+
+    // Update language selector
+    var sel = document.getElementById('langSelect');
+    if (sel) sel.value = lang;
+
+    // Persist
+    try { localStorage.setItem('aias-lang', lang); } catch(e) {}
+    var url = new URL(window.location);
+    if (lang === 'tr') {
+      url.searchParams.delete('lang');
+    } else {
+      url.searchParams.set('lang', lang);
+    }
+    history.replaceState(null, '', url);
+  }
+
+  function updateDataObjects() {
+    var pKeys = ['Eh','Ph','HAb','PAI','EAI'];
+    pKeys.forEach(function(code) {
+      PROPORTION[code].name = t('proportion_' + code + '_name');
+      PROPORTION[code].desc = t('proportion_' + code + '_desc');
+    });
+    var sKeys = ['Re','Pr','Ed'];
+    sKeys.forEach(function(code) {
+      STAGES[code].name = t('stage_' + code + '_name');
+      STAGES[code].desc = t('stage_' + code + '_desc');
+    });
+    var rKeys = ['R','Nr'];
+    rKeys.forEach(function(code) {
+      REVIEW[code].name = t('review_' + code + '_name');
+      REVIEW[code].desc = t('review_' + code + '_desc');
+    });
+  }
+
+  function initLanguageSelector() {
+    var sel = document.getElementById('langSelect');
+    var langs = Object.keys(window.TRANSLATIONS);
+    langs.forEach(function(code) {
+      var opt = document.createElement('option');
+      opt.value = code;
+      opt.textContent = TRANSLATIONS[code]._meta.label;
+      sel.appendChild(opt);
+    });
+
+    // Determine initial language
+    var params = new URLSearchParams(window.location.search);
+    var urlLang = params.get('lang');
+    var storedLang = null;
+    try { storedLang = localStorage.getItem('aias-lang'); } catch(e) {}
+
+    var initLang = 'tr';
+    if (urlLang && TRANSLATIONS[urlLang]) {
+      initLang = urlLang;
+    } else if (storedLang && TRANSLATIONS[storedLang]) {
+      initLang = storedLang;
+    }
+
+    sel.value = initLang;
+    currentLang = initLang;
+    if (initLang !== 'tr') {
+      applyLanguage(initLang);
+    }
+
+    sel.addEventListener('change', function() {
+      applyLanguage(sel.value);
+    });
+  }
+
   // ── SVG Icons ──
   var ICONS = {
     entirely_human: '<svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><circle cx="12" cy="12" fill-opacity=".6" r="11.5"/></g></svg>',
@@ -1196,7 +1349,7 @@ a{color:var(--c-accent)}
   // ── Parser ──
   function parseStatement(raw) {
     var s = raw.trim();
-    if (s.indexOf('AIAS ') !== 0) return { error: 'Beyan "AIAS" ön eki ile başlamalıdır.' };
+    if (s.indexOf('AIAS ') !== 0) return { error: t('error_no_prefix') };
     s = s.slice(5); // remove "AIAS "
 
     // Extract note
@@ -1209,11 +1362,11 @@ a{color:var(--c-accent)}
 
     // Check version suffix (v*.*)
     var verMatch = s.match(/\s+(v\d+\.\d+)$/);
-    if (!verMatch) return { error: 'Beyan sürüm numarası (örn: v1.0) ile bitmelidir.' };
+    if (!verMatch) return { error: t('error_no_version') };
     var version = verMatch[1];
     s = s.slice(0, verMatch.index).trim();
 
-    if (!s) return { error: 'Oran kodu eksik.' };
+    if (!s) return { error: t('error_no_proportion') };
 
     // Tokenize by space
     var tokens = s.split(/\s+/);
@@ -1227,7 +1380,7 @@ a{color:var(--c-accent)}
       proportion = pToken;
       idx++;
     } else {
-      return { error: 'Geçersiz oran kodu: "' + pToken + '". Geçerli kodlar: Eh, Ph, HAb, PAI, EAI' };
+      return { error: t('error_invalid_proportion', { code: pToken }) };
     }
 
     // If entirely human, no stages/review/models needed
@@ -1235,7 +1388,7 @@ a{color:var(--c-accent)}
       return { proportion: proportion, stages: [], review: null, models: [], version: version, note: note };
     }
 
-    if (idx >= tokens.length) return { error: 'İnceleme kodu eksik.' };
+    if (idx >= tokens.length) return { error: t('error_no_review') };
 
     // Stages: try greedy parse from next token (optional)
     var stages = [];
@@ -1260,12 +1413,12 @@ a{color:var(--c-accent)}
       idx++;
     }
 
-    if (idx >= tokens.length) return { error: 'İnceleme kodu eksik.' };
+    if (idx >= tokens.length) return { error: t('error_no_review') };
 
     // Review
     var rToken = tokens[idx];
     if (!REVIEW[rToken]) {
-      return { error: 'Geçersiz inceleme kodu: "' + rToken + '". Geçerli kodlar: R, Nr' };
+      return { error: t('error_invalid_review', { code: rToken }) };
     }
     var review = rToken;
     idx++;
@@ -1326,8 +1479,8 @@ a{color:var(--c-accent)}
       parts.push(STAGES[code].desc);
     });
     if (parsed.review) parts.push(REVIEW[parsed.review].desc);
-    if (parsed.models.length) parts.push('Şu model veya uygulamalar kullanılmıştır: ' + parsed.models.join(', ') + '.');
-    if (parsed.note) parts.push('Editör notu: ' + parsed.note);
+    if (parsed.models.length) parts.push(t('models_used', { models: parsed.models.join(', ') }));
+    if (parsed.note) parts.push(t('editor_note', { note: parsed.note }));
 
     var summaryHTML = '<p class="result-summary">' + esc(parts.join(' ')) + '</p>';
     resultBox.className = 'result-box visible';
@@ -1340,9 +1493,9 @@ a{color:var(--c-accent)}
     cards += '<div class="card">' +
       '<div class="card-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;font-family:var(--font-mono);background:var(--c-bg-alt);border-radius:50%;border:1.5px solid var(--c-border)">AIAS</div>' +
       '<div class="card-body">' +
-        '<div class="card-name">Yapay Zeka Atıf Standardı</div>' +
+        '<div class="card-name">' + esc(t('card_aias_name')) + '</div>' +
         '<div class="card-code">AIAS</div>' +
-        '<div class="card-desc">Bu ön ek, bir yapay zeka atıf beyanını tanımlamak için kullanılan standart ifadedir.</div>' +
+        '<div class="card-desc">' + esc(t('card_aias_desc')) + '</div>' +
       '</div></div>';
 
     // Proportion
@@ -1365,9 +1518,9 @@ a{color:var(--c-accent)}
       cards += '<div class="card">' +
         '<span class="card-icon" style="width:36px;height:36px"><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="36" height="36"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><path d="m65.625 14.062c1.293 0 2.344 1.051 2.344 2.344v4.375c6.051 1.48 10.789 6.312 12.121 12.422h4.285c1.293 0 2.344 1.051 2.344 2.344s-1.051 2.343-2.344 2.343h-3.906v10.938h3.906c1.293 0 2.344 1.051 2.344 2.344s-1.051 2.344-2.344 2.344h-3.906v10.156h3.906c1.293 0 2.344 1.051 2.344 2.344s-1.051 2.344-2.344 2.344h-4.285c-1.332 6.109-6.071 10.941-12.121 12.422v4.375c0 1.293-1.051 2.343-2.344 2.343s-2.344-1.05-2.344-2.343v-3.907h-10.938v3.907c0 1.293-1.051 2.343-2.344 2.343s-2.343-1.05-2.343-2.343v-3.907h-10.156v3.907c0 1.293-1.051 2.343-2.344 2.343s-2.344-1.05-2.344-2.343v-4.207c-6.422-1.239-11.512-6.223-12.902-12.59h-4.285c-1.293 0-2.344-1.051-2.344-2.344s1.051-2.344 2.344-2.344h3.906v-10.156h-3.906c-1.293 0-2.344-1.051-2.344-2.344s1.051-2.344 2.344-2.344h3.906v-10.938h-3.906c-1.293 0-2.344-1.05-2.344-2.343s1.051-2.344 2.344-2.344h4.285c1.391-6.367 6.48-11.352 12.902-12.594v-4.203c0-1.293 1.051-2.344 2.344-2.344s2.344 1.051 2.344 2.344v3.906h10.156v-3.906c0-1.293 1.05-2.344 2.343-2.344s2.344 1.051 2.344 2.344v3.906h10.938v-3.906c0-1.293 1.051-2.344 2.344-2.344zm-29.688 10.938c-6.473 0-11.719 5.246-11.719 11.719v28.125c0 6.473 5.246 11.719 11.719 11.719h28.125c6.473 0 11.719-5.246 11.719-11.719v-28.125c0-6.473-5.246-11.719-11.719-11.719zm11.297 10.684c1.156-2.223 4.375-2.223 5.531 0 2.094 4.441 5.016 8.184 9.277 10.738l2.985 1.797c1.777 1.238 1.777 3.887 0 5.125l-2.985 1.797c-4.089 2.453-7.261 6.152-9.171 10.508-1.129 2.398-4.649 2.558-5.743 0-1.816-4.242-4.886-7.828-8.793-10.277l-3.179-1.91c-2.024-1.215-2.024-4.145 0-5.36l3.179-1.91c4.082-2.559 6.871-6.207 8.899-10.508zm2.766 4.949c-2.446 4.25-6.016 7.633-10.199 10.148 4.203 2.516 7.746 5.879 10.199 10.148 2.453-4.269 5.996-7.633 10.199-10.148-4.204-2.527-7.743-5.875-10.199-10.148z" fill="#161616" fill-rule="nonzero" transform="matrix(.210224 0 0 .210224 1.488845 1.324608)"/></svg></span>' +
         '<div class="card-body">' +
-          '<div class="card-name">Modeller</div>' +
+          '<div class="card-name">' + esc(t('card_models_name')) + '</div>' +
           '<div class="card-code">' + esc(parsed.models.join(', ')) + '</div>' +
-          '<div class="card-desc">İçeriğin üretiminde kullanılan yapay zeka modelleri veya uygulamaları.</div>' +
+          '<div class="card-desc">' + esc(t('card_models_desc')) + '</div>' +
         '</div></div>';
     }
 
@@ -1375,9 +1528,9 @@ a{color:var(--c-accent)}
     cards += '<div class="card">' +
       '<div class="card-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;font-family:var(--font-mono);background:var(--c-bg-alt);border-radius:50%;border:1.5px solid var(--c-border)">' + esc(parsed.version) + '</div>' +
       '<div class="card-body">' +
-        '<div class="card-name">Sürüm</div>' +
+        '<div class="card-name">' + esc(t('card_version_name')) + '</div>' +
         '<div class="card-code">' + esc(parsed.version) + '</div>' +
-        '<div class="card-desc">Atıf beyanının sürüm numarası. Bu numara, atıf standardı geliştikçe değişecektir.</div>' +
+        '<div class="card-desc">' + esc(t('card_version_desc')) + '</div>' +
       '</div></div>';
 
     resultCards.innerHTML = '<div class="cards">' + cards + '</div>';
@@ -1388,7 +1541,7 @@ a{color:var(--c-accent)}
     var html = '';
 
     // Proportion
-    html += '<div class="lib-group"><div class="lib-group-title">Yapay Zeka Kullanım Oranı Kodları</div><div class="cards">';
+    html += '<div class="lib-group"><div class="lib-group-title">' + esc(t('lib_proportion_title')) + '</div><div class="cards">';
     ['Eh','Ph','HAb','PAI','EAI'].forEach(function(code) {
       var p = PROPORTION[code];
       html += cardHTML(p.key, p.name, code, p.desc);
@@ -1396,7 +1549,7 @@ a{color:var(--c-accent)}
     html += '</div></div>';
 
     // Stages
-    html += '<div class="lib-group"><div class="lib-group-title">Yapay Zeka Kullanılan Aşamaların Kodları</div><div class="cards">';
+    html += '<div class="lib-group"><div class="lib-group-title">' + esc(t('lib_stages_title')) + '</div><div class="cards">';
     ['Re','Pr','Ed'].forEach(function(code) {
       var st = STAGES[code];
       html += cardHTML(st.key, st.name, code, st.desc);
@@ -1404,7 +1557,7 @@ a{color:var(--c-accent)}
     html += '</div></div>';
 
     // Review
-    html += '<div class="lib-group"><div class="lib-group-title">İnsan Denetimi Kodları</div><div class="cards">';
+    html += '<div class="lib-group"><div class="lib-group-title">' + esc(t('lib_review_title')) + '</div><div class="cards">';
     ['R','Nr'].forEach(function(code) {
       var rv = REVIEW[code];
       html += cardHTML(rv.key, rv.name, code, rv.desc);
@@ -1574,8 +1727,8 @@ a{color:var(--c-accent)}
     if (isAIUsed) {
       stages.forEach(function(s) { textParts.push(STAGES[s].desc); });
       if (rCode) textParts.push(REVIEW[rCode].desc);
-      if (models.length) textParts.push('Şu model veya uygulamalar kullanılmıştır: ' + models.join(', ') + '.');
-      if (note) textParts.push('Editör notu: ' + note);
+      if (models.length) textParts.push(t('models_used', { models: models.join(', ') }));
+      if (note) textParts.push(t('editor_note', { note: note }));
     }
     builderTextEl.textContent = textParts.join(' ');
 
@@ -1584,7 +1737,7 @@ a{color:var(--c-accent)}
     var rows = '';
 
     // AIAS prefix
-    rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">AIAS:</span> Bu ön ek, bir yapay zeka atıf beyanını tanımlamak için kullanılan standart ifadedir.</div></div>';
+    rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">AIAS:</span> ' + esc(t('card_aias_desc')) + '</div></div>';
 
     // Proportion
     var pr = PROPORTION[pCode];
@@ -1609,15 +1762,15 @@ a{color:var(--c-accent)}
 
     // Models
     if (isAIUsed && models.length) {
-      rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">' + esc(models.join(', ')) + ':</span> İçeriğin üretiminde kullanılan yapay zeka modelleri veya uygulamaları.</div></div>';
+      rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">' + esc(models.join(', ')) + ':</span> ' + esc(t('card_models_desc')) + '</div></div>';
     }
 
     // Version
-    rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">v1.0:</span> Atıf beyanının sürüm numarası. Bu numara, atıf standardı geliştikçe değişecektir.</div></div>';
+    rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">v1.0:</span> ' + esc(t('card_version_desc')) + '</div></div>';
 
     // Note
     if (isAIUsed && note) {
-      rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">Editör notu:</span> ' + esc(note) + '</div></div>';
+      rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">' + esc(t('editor_note', { note: '' })).replace(/:\s*$/, ':') + '</span> ' + esc(note) + '</div></div>';
     }
 
     explEl.innerHTML = rows;
@@ -1660,8 +1813,8 @@ a{color:var(--c-accent)}
     var code = builderCodeEl.textContent;
     navigator.clipboard.writeText(code).then(function() {
       var copyBtn = document.getElementById('builderCopyBtn');
-      copyBtn.textContent = 'Kopyalandı!';
-      setTimeout(function() { copyBtn.textContent = 'Kopyala'; }, 2000);
+      copyBtn.textContent = t('copy_btn_done');
+      setTimeout(function() { copyBtn.textContent = t('copy_btn'); }, 2000);
     });
   });
 
@@ -1669,8 +1822,8 @@ a{color:var(--c-accent)}
     var text = builderTextEl.textContent;
     navigator.clipboard.writeText(text).then(function() {
       var copyBtn = document.getElementById('builderTextCopyBtn');
-      copyBtn.textContent = 'Kopyalandı!';
-      setTimeout(function() { copyBtn.textContent = 'Kopyala'; }, 2000);
+      copyBtn.textContent = t('copy_btn_done');
+      setTimeout(function() { copyBtn.textContent = t('copy_btn'); }, 2000);
     });
   });
 
@@ -1678,13 +1831,16 @@ a{color:var(--c-accent)}
     var embedCode = document.getElementById('builderEmbed').textContent;
     navigator.clipboard.writeText(embedCode).then(function() {
       var copyBtn = document.getElementById('builderEmbedCopyBtn');
-      copyBtn.textContent = 'Kopyalandı!';
-      setTimeout(function() { copyBtn.textContent = 'Kopyala'; }, 2000);
+      copyBtn.textContent = t('copy_btn_done');
+      setTimeout(function() { copyBtn.textContent = t('copy_btn'); }, 2000);
     });
   });
 
   // Initial render
   updateBuilder();
+
+  // Initialize language selector (must be after renderLibrary and updateBuilder are defined)
+  initLanguageSelector();
 
   // Check URL for tab param
   var tabParam = params.get('tab');
