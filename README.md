@@ -45,11 +45,7 @@ teyit.org olarak bu araç setini medya sektörünün ihtiyaçlarına göre uyarl
 
 ## Katkı Sağlama
 
-Bu proje, tüm yayın kuruluşlarının kullanımına ve katkısına açıktır. Katkıda bulunmak için:
-
-1. Repoyu fork edin
-2. Değişikliklerinizi yapın
-3. Pull request gönderin
+Bu proje, tüm yayın kuruluşlarının katkısına açıktır. Detaylar için [CONTRIBUTING.md](CONTRIBUTING.md) dosyasına bakınız.
 
 Hata bildirimleri ve öneriler için [Issues](https://github.com/teyit/AI-Attribution-Standard/issues) sayfasını kullanabilirsiniz.
 
@@ -58,3 +54,46 @@ Hata bildirimleri ve öneriler için [Issues](https://github.com/teyit/AI-Attrib
 Bu proje [Apache License 2.0](LICENSE) ile lisanslanmıştır.
 
 Orijinal proje ([AI Attribution Toolkit](https://github.com/aiattribution/aiattribution.github.io)) de Apache License 2.0 ile lisanslanmıştır. Atıf bilgileri için [NOTICE](NOTICE) dosyasına bakınız.
+
+---
+
+## English
+
+### AIAS — AI Attribution Standard
+
+AIAS (AI Attribution Standard) specifies not just whether AI was used in content creation, but **how and to what extent it was used**.
+
+Instead of vague statements like "prepared with AI assistance", AIAS expresses the stages, proportion, and tools of AI contribution in a standardized code.
+
+**Live:** [aias.teyit.org](https://aias.teyit.org)
+
+### Features
+
+- **Statement Builder** — Create AI attribution codes step by step
+- **Code Interpreter** — Analyze existing AIAS codes and see what they mean
+- **Multilingual** — Turkish and English interface
+- **Zero dependencies** — No framework or build process required
+- **Responsive** — Works on desktop, tablet, and mobile
+- **Accessible** — ARIA support, keyboard navigation, reduced motion preference
+
+### Getting Started
+
+Static HTML application. No installation or build step needed:
+
+```bash
+git clone https://github.com/teyit/AI-Attribution-Standard.git
+```
+
+Open `index.html` in a browser or serve with any static file server.
+
+### Contributing
+
+Contributions from all news organizations are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Attribution
+
+Based on the open-source [AI Attribution Toolkit](https://github.com/aiattribution/aiattribution.github.io) by IBM Research, published at [CHI 2025](https://dl.acm.org/doi/full/10.1145/3706598.3713522). Adapted for the media industry by [teyit.org](https://teyit.org).
+
+### License
+
+[Apache License 2.0](LICENSE). See [NOTICE](NOTICE) for attribution details.
