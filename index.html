@@ -290,7 +290,7 @@ a{color:var(--c-accent)}
 .builder-group{margin-bottom:28px}
 .builder-group-title{
   font-size:0.95rem;font-weight:700;
-  margin-bottom:10px;
+  margin-bottom:30px;
   color:var(--c-text);
 }
 .builder-step-num{
@@ -312,17 +312,20 @@ a{color:var(--c-accent)}
   max-width:100%;
   padding:0 4px;
 }
-.builder-slider-icons{
+.builder-slider-icon{
+  position:absolute;
+  transform:translateX(-50%);
+  bottom:calc(100% - 8px);
   display:flex;
-  justify-content:space-between;
-  font-size:1.1rem;
-  margin-bottom:4px;
-  padding:0 6px;
+  align-items:center;
   color:var(--c-primary);
+  z-index:3;
 }
-.builder-slider-icons span{
-  display:flex;justify-content:center;
-  width:0;overflow:visible;
+.builder-slider-icon.icon-left{
+  left:10%;
+}
+.builder-slider-icon.icon-right{
+  left:90%;
 }
 .builder-slider-track{
   position:relative;
@@ -331,6 +334,7 @@ a{color:var(--c-accent)}
   align-content:stretch;
   -webkit-user-select:none;
   user-select:none;
+  margin:0 36px;
 }
 .builder-slider-track::before{
   content:"";
@@ -408,6 +412,8 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
 .builder-slider-labels{
   display:flex;
   margin-top:6px;
+  width:100%;
+  padding:0 36px;
 }
 .builder-slider-label{
   flex:1;
@@ -1094,11 +1100,8 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
     <div class="builder-group">
       <div class="builder-group-title"><span class="builder-step-num">1</span> <span data-i18n="builder_q1">Yayımlanan nihai içeriğin ne kadarı yapay zeka tarafından oluşturuldu?</span></div>
       <div class="builder-slider-container">
-        <div class="builder-slider-icons">
-          <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z" fill="currentColor"/></svg></span>
-          <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 9V7c0-1.1-.9-2-2-2h-3c0-1.66-1.34-3-3-3S9 3.34 9 5H6c-1.1 0-2 .9-2 2v2c-1.66 0-3 1.34-3 3s1.34 3 3 3v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4c1.66 0 3-1.34 3-3s-1.34-3-3-3zM9.5 8c.83 0 1.5.67 1.5 1.5S10.33 11 9.5 11 8 10.33 8 9.5 8.67 8 9.5 8zm5 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM16 16H8v-2h8v2z" fill="currentColor"/></svg></span>
-        </div>
         <div class="builder-slider-track">
+          <span class="builder-slider-icon icon-left" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z" fill="currentColor"/></svg></span>
           <div class="slider-hint" id="sliderHint"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%"><style>.hand{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.arrow{fill:none;stroke:#000;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}.arrow-left{animation:moveLeft 4s infinite ease-in-out}.arrow-right{animation:moveRight 4s infinite ease-in-out}@keyframes moveLeft{0%,40%,100%{transform:translateX(0)}10%,30%{transform:translateX(-20px)}}@keyframes moveRight{0%,50%,100%{transform:translateX(0)}60%,80%{transform:translateX(20px)}}</style><g class="arrow-left"><line x1="60" y1="50" x2="20" y2="50" class="arrow"/><polyline points="40,30 20,50 40,70" class="arrow"/></g><g class="arrow-right"><line x1="140" y1="50" x2="180" y2="50" class="arrow"/><polyline points="160,30 180,50 160,70" class="arrow"/></g><path d="M 85 105 L 85 45 A 15 15 0 0 1 115 45 L 115 80 A 10 10 0 0 1 135 85 L 135 95 A 10 10 0 0 1 155 100 L 155 110 A 10 10 0 0 1 175 120 L 175 140 C 175 170 150 190 120 190 L 90 190 C 60 190 50 170 40 140 L 25 110 A 10 10 0 0 1 45 100 L 65 130 C 70 135 85 130 85 105 Z" class="hand"/></svg></div>
           <input type="radio" name="bSlider" id="bSlider0" value="0" checked>
           <label for="bSlider0" class="slider-dot"></label>
@@ -1111,6 +1114,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
           <input type="radio" name="bSlider" id="bSlider4" value="4">
           <label for="bSlider4" class="slider-dot"></label>
           <div class="slider-pos"></div>
+          <span class="builder-slider-icon icon-right" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><rect x="11" y="0" width="2" height="5" rx="1"/><circle cx="12" cy="0" r="2"/><rect x="4" y="6" width="16" height="13" rx="3"/><circle cx="9.25" cy="11.75" r="2" fill="var(--c-bg,#fff)"/><circle cx="14.75" cy="11.75" r="2" fill="var(--c-bg,#fff)"/><rect x="0" y="9" width="3" height="7" rx="1.5"/><rect x="21" y="9" width="3" height="7" rx="1.5"/></svg></span>
         </div>
         <div class="builder-slider-labels">
           <div class="builder-slider-label active" data-idx="0">
