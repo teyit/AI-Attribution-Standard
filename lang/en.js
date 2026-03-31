@@ -123,9 +123,9 @@ window.TRANSLATIONS.en = {
 
   // -- Data: Review --
   review_R_name: 'Reviewed and approved',
-  review_R_desc: 'Content produced by AI has been reviewed and approved by editor(s).',
+  review_R_desc: 'Content produced by AI has been reviewed and approved by human editor(s).',
   review_Nr_name: 'Not reviewed',
-  review_Nr_desc: 'Content produced by AI has not been reviewed by an editor.',
+  review_Nr_desc: 'Content produced by AI has not been reviewed by a human editor.',
 
   // -- Parser errors --
   error_no_prefix: 'Statement must start with the "AIAS" prefix.',

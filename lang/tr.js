@@ -15,7 +15,7 @@ window.TRANSLATIONS.tr = {
   nav_interpret: 'Kodu Yorumla',
 
   // -- Home hero --
-  home_hero_title: 'Yapay zeka kullanımında detaylı ve şeffaf atıf beyanı standardı',
+  home_hero_title: 'Yapay zeka kullanımında kapsamlı ve şeffaf atıf beyanı standardı',
   home_hero_desc1: 'AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zekanın yalnızca kullanılıp kullanılmadığını değil, <strong>nasıl ve ne ölçüde kullanıldığını</strong> belirten bir atıf beyanı standardı sunar. Bu yaklaşım, farklı düzey ve türdeki YZ katkılarını birbirinden ayırarak içerik üreticilerinin sahipliğini ve kullanıcıların güvenini güçlendirir.',
   home_hero_desc2: 'Bu araç, IBM Research ekibinin geliştirdiği <a href="https://github.com/aiattribution/aiattribution.github.io" target="_blank">AI Attribution Toolkit</a> projesini temel alarak medya sektörü için uyarlanmış ve <a href="https://github.com/teyit/AI-Attribution-Standard" target="_blank">açık kaynak</a> olarak yayımlanmıştır.',
   home_btn_builder: 'Atıf Beyanı Oluştur',
@@ -98,8 +98,8 @@ window.TRANSLATIONS.tr = {
   stage_editing_desc: '(metin redaksiyonu, stil ve dilbilgisi düzeltme, vb.)',
 
   // -- Builder review labels --
-  review_yes_label: 'Yapay zeka çıktıları editör tarafından incelendi ve onaylandı',
-  review_no_label: 'Yapay zeka çıktıları incelenmedi',
+  review_yes_label: 'Yapay zeka çıktıları insan editör(ler) tarafından incelendi ve onaylandı',
+  review_no_label: 'Yapay zeka çıktıları insan editör tarafından incelenmedi',
 
   // -- Data: Proportion --
   proportion_Eh_name: 'Tamamen insan',
@@ -123,9 +123,9 @@ window.TRANSLATIONS.tr = {
 
   // -- Data: Review --
   review_R_name: 'İncelendi ve onaylandı',
-  review_R_desc: 'Yapay zeka tarafından üretilen içerik editör(ler) tarafından incelenmiş ve onaylanmıştır.',
+  review_R_desc: 'Yapay zeka tarafından üretilen içerik insan editör(ler) tarafından incelenmiş ve onaylanmıştır.',
   review_Nr_name: 'İncelenmedi',
-  review_Nr_desc: 'Yapay zeka tarafından üretilen içerik editör tarafından incelenmemiştir.',
+  review_Nr_desc: 'Yapay zeka tarafından üretilen içerik insan editör tarafından incelenmemiştir.',
 
   // -- Parser errors --
   error_no_prefix: 'Beyan "AIAS" ön eki ile başlamalıdır.',

@@ -488,7 +488,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
 }
 .builder-opt .opt-icon{width:24px;height:24px;flex-shrink:0}
 .builder-opt .opt-icon svg{width:24px;height:24px}
-.builder-opt .opt-label{font-weight:600;flex-shrink:0}
+.builder-opt .opt-label{font-weight:600;min-width:0}
 .builder-opt .opt-desc{
   font-size:0.8rem;
   color:var(--c-text-muted);
@@ -869,7 +869,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   .home-hero-inner{flex-direction:column;gap:24px}
   .home-hero-visual{flex:none;order:-1}
   .home-hero-visual svg{width:140px;height:140px}
-  .topnav-inner{flex-wrap:wrap;height:auto;min-height:48px}
+  .topnav-inner{flex-wrap:wrap;height:auto;min-height:70px}
   .topnav-brand{font-size:0.85rem;padding-right:0;border-right:none;flex:1;min-width:0}
   .topnav-brand span{overflow:hidden;text-overflow:ellipsis}
   .lang-select{order:1;margin-left:auto;flex-shrink:0;padding:0}
@@ -947,7 +947,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   <div class="home-hero">
     <div class="container home-hero-inner">
       <div class="home-hero-text">
-        <h1 class="home-hero-title" data-i18n="home_hero_title">Yapay zeka kullanımında detaylı ve şeffaf atıf beyanı standardı</h1>
+        <h1 class="home-hero-title" data-i18n="home_hero_title">Yapay zeka kullanımında kapsamlı ve şeffaf atıf beyanı standardı</h1>
         <p class="home-hero-desc" data-i18n-html="home_hero_desc1">
           AIAS (Yapay Zeka Atıf Standardı), içerik üretiminde yapay zekanın yalnızca kullanılıp kullanılmadığını değil, <strong>nasıl ve ne ölçüde kullanıldığını</strong> belirten bir atıf beyanı standardı sunar. Bu yaklaşım, farklı düzey ve türdeki YZ katkılarını birbirinden ayırarak içerik üreticilerinin sahipliğini ve kullanıcıların güvenini güçlendirir.
         </p>
@@ -1189,7 +1189,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
         <div class="builder-options" id="bReview">
           <label class="builder-opt selected">
             <input type="radio" name="bReview" value="R" checked>
-            <span class="opt-label" data-i18n="review_yes_label">Yapay zeka çıktıları editör tarafından incelendi ve onaylandı</span>
+            <span class="opt-label" data-i18n="review_yes_label">Yapay zeka çıktıları insan editör(ler) tarafından incelendi ve onaylandı</span>
             <span class="opt-code">R</span>
           </label>
           <label class="builder-opt">
@@ -1432,8 +1432,8 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
   };
 
   var REVIEW = {
-    R:  { key:'reviewed',     name:'İncelendi ve onaylandı', desc:'Yapay zeka tarafından üretilen içerik editör(ler) tarafından incelenmiş ve onaylanmıştır.' },
-    Nr: { key:'not_reviewed', name:'İncelenmedi',                desc:'Yapay zeka tarafından üretilen içerik editör tarafından incelenmemiştir.' }
+    R:  { key:'reviewed',     name:'İncelendi ve onaylandı', desc:'Yapay zeka tarafından üretilen içerik insan editör(ler) tarafından incelenmiş ve onaylanmıştır.' },
+    Nr: { key:'not_reviewed', name:'İncelenmedi',                desc:'Yapay zeka tarafından üretilen içerik insan editör tarafından incelenmemiştir.' }
   };
 
   // ── Parser ──
