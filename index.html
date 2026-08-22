@@ -35,6 +35,9 @@
 
   --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
   --font-mono:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;
+
+  --ease-out:cubic-bezier(0.23,1,0.32,1);
+  --ease-in-out:cubic-bezier(0.77,0,0.175,1);
 }
 
 body{
@@ -43,7 +46,6 @@ body{
   color:var(--c-text);
   line-height:1.6;
   min-height:100vh;
-  scroll-behavior:smooth;
 }
 a{color:var(--c-accent)}
 .container{max-width:960px;margin:0 auto;padding:0 20px}
@@ -56,6 +58,20 @@ a{color:var(--c-accent)}
   position:sticky;
   top:0;
   z-index:100;
+}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .topnav{
+    background:rgba(31,56,55,0.9);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    backdrop-filter:blur(14px) saturate(160%);
+  }
+}
+@media(prefers-reduced-transparency:reduce){
+  .topnav{
+    background:#1F3837;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
 }
 .topnav-inner{
   display:flex;
@@ -171,10 +187,11 @@ a{color:var(--c-accent)}
   font-weight:600;
   cursor:pointer;
   white-space:nowrap;
-  transition:opacity .2s;
+  transition:opacity .2s, transform .15s var(--ease-out);
 }
 
 .interpret-btn:hover{opacity:0.85}
+.interpret-btn:active{transform:scale(0.97)}
 
 /* Result */
 .result-box{
@@ -188,7 +205,15 @@ a{color:var(--c-accent)}
   color:#3a4a5c;
   display:none;
 }
-.result-box.visible{display:block}
+.result-box.visible{display:block;animation:fade-up .25s var(--ease-out)}
+@keyframes fade-up{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+@keyframes fade-in{
+  from{opacity:0}
+  to{opacity:1}
+}
 .result-summary{margin-bottom:0}
 
 /* Error */
@@ -237,6 +262,16 @@ a{color:var(--c-accent)}
   display:inline-block;
 }
 .card-desc{font-size:0.82rem;color:var(--c-text-muted);line-height:1.5}
+
+/* Interpret result cards enter with a short stagger */
+#resultCards .card{animation:fade-up .28s var(--ease-out) backwards}
+#resultCards .card:nth-child(2){animation-delay:30ms}
+#resultCards .card:nth-child(3){animation-delay:60ms}
+#resultCards .card:nth-child(4){animation-delay:90ms}
+#resultCards .card:nth-child(5){animation-delay:120ms}
+#resultCards .card:nth-child(6){animation-delay:150ms}
+#resultCards .card:nth-child(7){animation-delay:180ms}
+#resultCards .card:nth-child(n+8){animation-delay:210ms}
 
 /* Explanation */
 .aias-explanation{
@@ -296,10 +331,11 @@ a{color:var(--c-accent)}
 
 .tabs{display:none}
 .tab-content{display:none}
-.tab-content.active{display:block}
+.tab-content.active{display:block;animation:fade-in .18s var(--ease-out)}
 
 /* Builder */
 .builder-group{margin-bottom:28px}
+#bStagesGroup{transition:opacity .2s ease}
 .builder-group-title{
   font-size:0.95rem;font-weight:700;
   margin-bottom:30px;
@@ -363,11 +399,12 @@ a{color:var(--c-accent)}
   pointer-events:none;
   z-index:10;
   opacity:.70;
-  transition:opacity .4s ease;
+  transition:opacity .3s ease, visibility 0s;
 }
 .slider-hint.hidden{
   opacity:0;
   visibility:hidden;
+  transition:opacity .3s ease, visibility 0s .3s;
 }
 .builder-slider-track input[type="radio"]{
   display:none;
@@ -390,35 +427,43 @@ a{color:var(--c-accent)}
   border-radius:50%;
   pointer-events:none;
   z-index:1;
-  transition:all .15s ease-in-out;
+  transition:transform .15s ease-in-out, border-width .15s ease-in-out;
 }
-.slider-dot:hover::after{
-  transform:translate(-50%,-50%) scale(1.25);
+@media(hover:hover) and (pointer:fine){
+  .slider-dot:hover::after{
+    transform:translate(-50%,-50%) scale(1.25);
+  }
 }
 input[type="radio"]:checked + .slider-dot::after{
   border-width:4px;
   transform:translate(-50%,-50%) scale(0.75);
 }
+/* Full-track overlay: translateX yuzdesi track genisligine denk gelir,
+   boylece nokta layout tetiklemeden compositor'da kayar */
 .slider-pos{
   display:block;
   position:absolute;
-  top:50%;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:2;
+  pointer-events:none;
+  transition:transform .3s var(--ease-in-out);
+}
+.slider-pos::before{
+  content:"";
+  position:absolute;
+  left:10%;top:50%;
   width:12px;height:12px;
   background:var(--c-primary);
   border-radius:50%;
-  transition:all .15s ease-in-out;
   transform:translate(-50%,-50%);
   border:2px solid var(--c-bg);
-  opacity:1;
-  z-index:2;
-  pointer-events:none;
-  left:10%;
 }
-input[name="bSlider"][value="0"]:checked ~ .slider-pos{left:10%}
-input[name="bSlider"][value="1"]:checked ~ .slider-pos{left:30%}
-input[name="bSlider"][value="2"]:checked ~ .slider-pos{left:50%}
-input[name="bSlider"][value="3"]:checked ~ .slider-pos{left:70%}
-input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
+input[name="bSlider"][value="0"]:checked ~ .slider-pos{transform:translateX(0)}
+input[name="bSlider"][value="1"]:checked ~ .slider-pos{transform:translateX(20%)}
+input[name="bSlider"][value="2"]:checked ~ .slider-pos{transform:translateX(40%)}
+input[name="bSlider"][value="3"]:checked ~ .slider-pos{transform:translateX(60%)}
+input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)}
 .builder-slider-labels{
   display:flex;
   margin-top:6px;
@@ -436,7 +481,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   font-size:0.78rem;
   line-height:1rem;
   color:var(--c-text-muted);
-  transition:color .15s, font-weight .15s;
+  transition:color .15s;
   text-align:center;
 }
 .builder-slider-label.active .bl-text{
@@ -528,11 +573,25 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   margin-top:4px;
   padding-left:2rem;
 }
+/* Acilir/kapanir YZ alanlari: grid-template-rows 0fr<->1fr gecisi.
+   Eski tarayicilarda gecis atlanir, gorunurluk yine dogru calisir. */
 .builder-ai-fields{
-  transition:opacity .3s;
+  display:grid;
+  grid-template-rows:1fr;
+  transition:grid-template-rows .35s var(--ease-out), opacity .25s ease, visibility 0s;
 }
 .builder-ai-fields.hidden{
-  display:none;
+  grid-template-rows:0fr;
+  opacity:0;
+  visibility:hidden;
+  transition:grid-template-rows .35s var(--ease-out), opacity .25s ease, visibility 0s .35s;
+}
+/* padding/negatif margin: overflow:hidden fokus halkasini kirpmasin diye */
+.builder-ai-inner{
+  overflow:hidden;
+  min-height:0;
+  padding:0 4px;
+  margin:0 -4px;
 }
 
 /* Builder result */
@@ -599,10 +658,11 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   font-weight:600;
   cursor:pointer;
   white-space:nowrap;
-  transition:opacity .2s;
+  transition:opacity .2s, transform .15s var(--ease-out);
   flex-shrink:0;
 }
 .builder-copy-btn:hover{opacity:0.85}
+.builder-copy-btn:active{transform:scale(0.96)}
 .builder-result-text{
   font-size:0.85rem;
   color:#3a4a5c;
@@ -690,6 +750,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   font-size:2rem;
   font-weight:800;
   line-height:1.2;
+  letter-spacing:-0.02em;
   color:var(--c-text);
 }
 .home-hero-desc{
@@ -709,9 +770,10 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   border-radius:4px;
   cursor:pointer;
   border:2px solid var(--c-primary);
-  transition:background .2s, color .2s;
+  transition:background .2s, color .2s, transform .15s var(--ease-out);
   font-family:var(--font-sans);
 }
+.home-btn:active{transform:scale(0.97)}
 .home-btn-primary{
   background:var(--c-primary);
   color:#fff;
@@ -908,6 +970,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
   *,*::before,*::after{
     transition-duration:0.01ms !important;
     animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
   }
 }
 :focus-visible{
@@ -1151,6 +1214,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
     </div>
 
     <div class="builder-ai-fields hidden" id="builderAiFields">
+      <div class="builder-ai-inner">
       <!-- 2. Stages -->
       <div class="builder-group" id="bStagesGroup">
         <div class="builder-group-title"><span class="builder-step-num">2</span> <span data-i18n="builder_q2">Yapay zeka hangi aşamalarda katkı sağladı?</span></div>
@@ -1204,6 +1268,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{left:90%}
       <div class="builder-group">
         <div class="builder-group-title"><span class="builder-step-num">5</span> <span data-i18n="builder_q5">Editör Notu</span> <span style="font-weight:400;color:var(--c-text-muted)" data-i18n="builder_q5_optional">(opsiyonel)</span></div>
         <input type="text" class="builder-text-input" id="bNote" data-i18n-placeholder="builder_note_placeholder" placeholder="AI kullanımına dair ek açıklama gerekiyorsa buraya yazın">
+      </div>
       </div>
     </div>
 

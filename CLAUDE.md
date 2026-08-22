@@ -38,12 +38,15 @@ README.md           # Proje dokumantasyonu
 
 ## CSS Konvansiyonlari
 
-- CSS degiskenleri `:root` icinde tanimli (`--c-primary`, `--c-accent`, `--c-bg`, `--c-text`, `--font-sans`, `--font-mono`)
+- CSS degiskenleri `:root` icinde tanimli (`--c-primary`, `--c-accent`, `--c-bg`, `--c-text`, `--font-sans`, `--font-mono`, `--ease-out`, `--ease-in-out`)
+- Animasyon easing'leri icin `--ease-out` / `--ease-in-out` token'lari kullanilir; `transition:all` yazilmaz, ozellikler tek tek listelenir
+- Sadece `transform` ve `opacity` animate edilir (layout tetikleyen `left`/`width` gibi ozellikler degil)
 - Tum font boyutlari `rem` birimi kullanir
 - Responsive breakpoint'ler: `960px` (tablet), `768px` (kucuk tablet), `600px` (mobil)
-- `prefers-reduced-motion` ve `:focus-visible` destegi mevcut
+- `prefers-reduced-motion`, `prefers-reduced-transparency` ve `:focus-visible` destegi mevcut
+- Sticky nav yari saydam (`backdrop-filter`), `@supports` fallback'i ile
 - Sticky nav icin `-webkit-sticky` fallback'i var
-- Vendor prefix'ler: `-webkit-user-select`
+- Vendor prefix'ler: `-webkit-user-select`, `-webkit-backdrop-filter`
 
 ## JavaScript Konvansiyonlari
 
