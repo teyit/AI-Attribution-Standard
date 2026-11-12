@@ -300,8 +300,17 @@ a{color:var(--c-accent)}
   margin:0;
 }
 
-/* Library */
+/* Library: a reference panel, kept visually apart from the interpret result above it */
+.lib-section{
+  background:var(--c-bg-alt);
+  border:1px solid var(--c-border);
+  border-radius:12px;
+  padding:24px;
+  margin-bottom:32px;
+}
+.lib-section .section-title{border-bottom:none;padding-bottom:0;margin-bottom:4px}
 .lib-group{margin-bottom:28px}
+.lib-group:last-child{margin-bottom:0}
 .lib-group-title{
   font-size:0.95rem;font-weight:700;
   margin-bottom:10px;
@@ -821,7 +830,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)
 }
 .anatomy-grid{
   display:grid;
-  grid-template-columns:repeat(8,auto);
+  grid-template-columns:repeat(7,auto);
   grid-template-rows:auto auto auto;
   justify-content:center;
   gap:0 20px;
@@ -957,6 +966,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)
   .topnav-brand{font-size:0.82rem}
   .topnav-tab{font-size:0.78rem}
   .cards{grid-template-columns:1fr}
+  .lib-section{padding:16px}
   .builder-slider-label .bl-text{width:auto;font-size:0.7rem}
   .builder-options{padding-left:0}
   .builder-text-input{margin-left:0;width:100%}
@@ -1037,7 +1047,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)
         <div class="anatomy-grid">
           <!-- Row 1: top labels -->
           <div class="ag-label-top">
-            <span class="anatomy-part-label" data-i18n-html="anatomy_label_prefix">Atıf standardı<br>anahtar kodu</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_prefix">Atıf standardı<br>ve sürüm numarası</span>
             <span class="anatomy-line"></span>
           </div>
           <div class="ag-label-top ag-empty"></div>
@@ -1052,19 +1062,17 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)
           </div>
           <div class="ag-label-top ag-empty"></div>
           <div class="ag-label-top">
-            <span class="anatomy-part-label" data-i18n-html="anatomy_label_note">Editör notu<br>(opsiyonel)</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_icons">İfadelere karşılık<br>gelen ikonlar</span>
             <span class="anatomy-line"></span>
           </div>
-          <div class="ag-label-top ag-empty"></div>
           <!-- Row 2: code parts (all same line) -->
-          <div class="ag-code ag-border-top"><span>AIAS</span></div>
+          <div class="ag-code ag-border-top"><span>AIAS-1.0</span></div>
           <div class="ag-code ag-border-bottom"><span>Ph</span></div>
           <div class="ag-code ag-border-top"><span>Ed</span></div>
           <div class="ag-code ag-border-bottom"><span>R</span></div>
           <div class="ag-code ag-border-top"><span>ChatGPT, Gemini</span></div>
-          <div class="ag-code ag-border-bottom"><span>v1.0</span></div>
-          <div class="ag-code ag-border-top"><span data-i18n="anatomy_note_example">| Kapak görseli YZ ile üretildi.</span></div>
-          <div class="ag-code ag-border-bottom ag-icons-cell"><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><path d="m12 0v12h12c0 6.627-5.373 12-12 12-6.623 0-12-5.377-12-12 0-6.627 5.373-12 12-12z" fill-opacity=".6" transform="matrix(.920833 0 0 .920833 .95 .95)"/></g></svg><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g stroke="#161616"><circle cx="12" cy="12" fill="#fff" r="11.5"/><path d="m557.76 211.05c-4.375 6.441-8.262 15.051-16.031 32.27l-12.648 28.027-254.64 441.04c-12.223 21.176-18.336 31.762-21.402 43.328-1.016 3.84-1.777 7.734-2.281 11.672-1.516 11.871.16 23.98 3.508 48.195l15.816 114.36 106.94-43.48c22.652-9.207 33.973-13.809 43.5-21.059 3.156-2.402 6.152-5.012 8.961-7.809 8.488-8.441 14.601-19.027 26.824-40.203l254.63-441.04 17.948-24.965c11.028-15.34 16.539-23.012 19.93-30.02 17.984-37.16 8.375-81.785-23.293-108.26-5.976-4.992-14.156-9.714-30.516-19.16-16.363-9.445-24.543-14.168-31.855-16.848-38.762-14.191-82.211-.195-105.4 33.953zm112.21 176.28-129.91-75-241.33 418c-8.18 14.168-12.27 21.246-14.312 28.988-.68 2.566-1.187 5.176-1.519 7.805-1.004 7.945.136 16.043 2.41 32.238l11.777 83.816 78.477-31.707c15.16-6.129 22.746-9.196 29.121-14.031 2.113-1.606 4.117-3.348 6.004-5.223 5.675-5.641 9.765-12.719 17.945-26.887zm-90.754-151.14c15.141-31.449 53.828-43.383 84.055-25.934l33.492 19.336c30.227 17.453 39.234 56.93 19.566 85.766l-31.359 45.988-129.91-75z" fill="#161616" stroke-miterlimit="2" stroke-width="17.12" transform="matrix(.018584 .002351 -.00238 .018816 4.392389 .094858)"/></g></svg><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616" fill-rule="nonzero" transform="matrix(.018333 0 0 .018333 1 1)"><path d="m1048.6 435.3c.043-69.762-25.445-137.13-71.656-189.39-46.215-52.262-109.96-85.801-179.2-94.289-69.246-8.488-139.21 8.66-196.68 48.211s-98.473 98.766-115.28 166.47c-55.148 1.148-108.73 18.539-154.05 49.988-45.316 31.445-80.352 75.562-100.72 126.82l-79.055 197.71c-1.52 3.789-2.086 7.898-1.652 11.957.433 4.063 1.859 7.957 4.148 11.336 2.289 3.387 5.375 6.156 8.981 8.07 3.609 1.914 7.632 2.914 11.719 2.911h118.7v118.7c.031 25.684 10.246 50.309 28.406 68.469s42.785 28.375 68.469 28.405h82.766v35.106c0 6.632 2.636 12.991 7.324 17.68 4.687 4.688 11.047 7.324 17.68 7.324 6.629 0 12.988-2.637 17.676-7.324 4.688-4.688 7.324-11.047 7.324-17.68v-60.106c0-3.281-.645-6.535-1.902-9.566-1.254-3.035-3.098-5.793-5.418-8.113-2.321-2.324-5.078-4.164-8.114-5.418-3.031-1.258-6.281-1.903-9.566-1.903h-107.77c-12.426-.019-24.336-4.964-33.125-13.75-8.785-8.785-13.73-20.695-13.75-33.125v-143.7c.004-3.285-.645-6.535-1.898-9.57-1.258-3.035-3.098-5.789-5.418-8.109-2.325-2.324-5.082-4.164-8.114-5.422-3.035-1.254-6.285-1.899-9.57-1.899h-106.79l65.332-163.43c16.223-40.691 43.699-75.918 79.215-101.56 35.512-25.637 77.598-40.629 121.33-43.219-.395 6.118-.93 12.199-.93 18.41.118 69.188 25.316 135.98 70.91 188.02 45.602 52.031 108.52 85.773 177.09 94.977v307.48c0 6.637 2.637 12.992 7.325 17.68 4.687 4.692 11.047 7.325 17.68 7.325 6.628 0 12.988-2.633 17.676-7.325 4.687-4.687 7.32-11.042 7.32-17.68v-305.3c73.547-3.175 143.03-34.594 193.99-87.711 50.961-53.125 79.473-123.85 79.598-197.46zm-285.79 235.79c-46.633 0-92.223-13.832-131-39.738-38.777-25.91-69-62.734-86.848-105.82-17.848-43.082-22.516-90.492-13.418-136.23 9.098-45.734 31.555-87.75 64.535-120.73 32.973-32.977 74.988-55.434 120.73-64.531 45.738-9.098 93.148-4.426 136.23 13.418 43.082 17.848 79.906 48.07 105.82 86.844 25.91 38.777 39.734 84.363 39.734 131-.063 62.516-24.926 122.45-69.129 166.66-44.207 44.207-104.14 69.066-166.66 69.137z"/><path d="m858.27 345.26-143.95 143.95-46.969-46.977c-2.316-2.359-5.07-4.238-8.113-5.523-3.043-1.289-6.313-1.957-9.614-1.977-3.304-.016-6.582.621-9.636 1.879-3.055 1.254-5.832 3.109-8.168 5.445-2.34 2.336-4.188 5.11-5.442 8.168-1.258 3.055-1.894 6.328-1.879 9.633.016 3.305.688 6.57 1.977 9.613 1.285 3.043 3.164 5.797 5.523 8.114l64.648 64.648c2.321 2.32 5.078 4.164 8.11 5.418 3.031 1.261 6.281 1.906 9.566 1.906 3.281 0 6.535-.645 9.567-1.906 3.031-1.254 5.789-3.098 8.109-5.418l161.62-161.62c4.609-4.704 7.176-11.035 7.145-17.621-.036-6.586-2.668-12.895-7.321-17.551-4.656-4.657-10.965-7.29-17.551-7.321-6.59-.035-12.918 2.535-17.625 7.145z"/></g></svg></div>
+          <div class="ag-code ag-border-bottom"><span data-i18n="anatomy_note_example">| Kapak görseli YZ ile üretildi.</span></div>
+          <div class="ag-code ag-border-top ag-icons-cell"><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616"><path d="m80 31.051c-1.539.75-3 1.75-4.328 3.039-1.289 1.289-2.311 2.789-3.061 4.371-.75-1.578-1.728-3.078-3.017-4.371-1.289-1.289-2.789-2.289-4.371-3.039 1.578-.75 3.078-1.75 4.371-3.039 1.289-1.289 2.306-2.789 3.017-4.371.75 1.578 1.772 3.039 3.061 4.371 1.328 1.289 2.789 2.289 4.328 3.039z" fill-rule="nonzero" transform="translate(-60.6113 -19.051)"/><path d="m12 0v12h12c0 6.627-5.373 12-12 12-6.623 0-12-5.377-12-12 0-6.627 5.373-12 12-12z" fill-opacity=".6" transform="matrix(.920833 0 0 .920833 .95 .95)"/></g></svg><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g stroke="#161616"><circle cx="12" cy="12" fill="#fff" r="11.5"/><path d="m557.76 211.05c-4.375 6.441-8.262 15.051-16.031 32.27l-12.648 28.027-254.64 441.04c-12.223 21.176-18.336 31.762-21.402 43.328-1.016 3.84-1.777 7.734-2.281 11.672-1.516 11.871.16 23.98 3.508 48.195l15.816 114.36 106.94-43.48c22.652-9.207 33.973-13.809 43.5-21.059 3.156-2.402 6.152-5.012 8.961-7.809 8.488-8.441 14.601-19.027 26.824-40.203l254.63-441.04 17.948-24.965c11.028-15.34 16.539-23.012 19.93-30.02 17.984-37.16 8.375-81.785-23.293-108.26-5.976-4.992-14.156-9.714-30.516-19.16-16.363-9.445-24.543-14.168-31.855-16.848-38.762-14.191-82.211-.195-105.4 33.953zm112.21 176.28-129.91-75-241.33 418c-8.18 14.168-12.27 21.246-14.312 28.988-.68 2.566-1.187 5.176-1.519 7.805-1.004 7.945.136 16.043 2.41 32.238l11.777 83.816 78.477-31.707c15.16-6.129 22.746-9.196 29.121-14.031 2.113-1.606 4.117-3.348 6.004-5.223 5.675-5.641 9.765-12.719 17.945-26.887zm-90.754-151.14c15.141-31.449 53.828-43.383 84.055-25.934l33.492 19.336c30.227 17.453 39.234 56.93 19.566 85.766l-31.359 45.988-129.91-75z" fill="#161616" stroke-miterlimit="2" stroke-width="17.12" transform="matrix(.018584 .002351 -.00238 .018816 4.392389 .094858)"/></g></svg><svg clip-rule="evenodd" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><circle cx="12" cy="12" fill="#fff" r="11.5" stroke="#161616"/><g fill="#161616" fill-rule="nonzero" transform="matrix(.018333 0 0 .018333 1 1)"><path d="m1048.6 435.3c.043-69.762-25.445-137.13-71.656-189.39-46.215-52.262-109.96-85.801-179.2-94.289-69.246-8.488-139.21 8.66-196.68 48.211s-98.473 98.766-115.28 166.47c-55.148 1.148-108.73 18.539-154.05 49.988-45.316 31.445-80.352 75.562-100.72 126.82l-79.055 197.71c-1.52 3.789-2.086 7.898-1.652 11.957.433 4.063 1.859 7.957 4.148 11.336 2.289 3.387 5.375 6.156 8.981 8.07 3.609 1.914 7.632 2.914 11.719 2.911h118.7v118.7c.031 25.684 10.246 50.309 28.406 68.469s42.785 28.375 68.469 28.405h82.766v35.106c0 6.632 2.636 12.991 7.324 17.68 4.687 4.688 11.047 7.324 17.68 7.324 6.629 0 12.988-2.637 17.676-7.324 4.688-4.688 7.324-11.047 7.324-17.68v-60.106c0-3.281-.645-6.535-1.902-9.566-1.254-3.035-3.098-5.793-5.418-8.113-2.321-2.324-5.078-4.164-8.114-5.418-3.031-1.258-6.281-1.903-9.566-1.903h-107.77c-12.426-.019-24.336-4.964-33.125-13.75-8.785-8.785-13.73-20.695-13.75-33.125v-143.7c.004-3.285-.645-6.535-1.898-9.57-1.258-3.035-3.098-5.789-5.418-8.109-2.325-2.324-5.082-4.164-8.114-5.422-3.035-1.254-6.285-1.899-9.57-1.899h-106.79l65.332-163.43c16.223-40.691 43.699-75.918 79.215-101.56 35.512-25.637 77.598-40.629 121.33-43.219-.395 6.118-.93 12.199-.93 18.41.118 69.188 25.316 135.98 70.91 188.02 45.602 52.031 108.52 85.773 177.09 94.977v307.48c0 6.637 2.637 12.992 7.325 17.68 4.687 4.692 11.047 7.325 17.68 7.325 6.628 0 12.988-2.633 17.676-7.325 4.687-4.687 7.32-11.042 7.32-17.68v-305.3c73.547-3.175 143.03-34.594 193.99-87.711 50.961-53.125 79.473-123.85 79.598-197.46zm-285.79 235.79c-46.633 0-92.223-13.832-131-39.738-38.777-25.91-69-62.734-86.848-105.82-17.848-43.082-22.516-90.492-13.418-136.23 9.098-45.734 31.555-87.75 64.535-120.73 32.973-32.977 74.988-55.434 120.73-64.531 45.738-9.098 93.148-4.426 136.23 13.418 43.082 17.848 79.906 48.07 105.82 86.844 25.91 38.777 39.734 84.363 39.734 131-.063 62.516-24.926 122.45-69.129 166.66-44.207 44.207-104.14 69.066-166.66 69.137z"/><path d="m858.27 345.26-143.95 143.95-46.969-46.977c-2.316-2.359-5.07-4.238-8.113-5.523-3.043-1.289-6.313-1.957-9.614-1.977-3.304-.016-6.582.621-9.636 1.879-3.055 1.254-5.832 3.109-8.168 5.445-2.34 2.336-4.188 5.11-5.442 8.168-1.258 3.055-1.894 6.328-1.879 9.633.016 3.305.688 6.57 1.977 9.613 1.285 3.043 3.164 5.797 5.523 8.114l64.648 64.648c2.321 2.32 5.078 4.164 8.11 5.418 3.031 1.261 6.281 1.906 9.566 1.906 3.281 0 6.535-.645 9.567-1.906 3.031-1.254 5.789-3.098 8.109-5.418l161.62-161.62c4.609-4.704 7.176-11.035 7.145-17.621-.036-6.586-2.668-12.895-7.321-17.551-4.656-4.657-10.965-7.29-17.551-7.321-6.59-.035-12.918 2.535-17.625 7.145z"/></g></svg></div>
           <!-- Row 3: bottom labels -->
           <div class="ag-label-bottom ag-empty"></div>
           <div class="ag-label-bottom">
@@ -1079,13 +1087,9 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)
           <div class="ag-label-bottom ag-empty"></div>
           <div class="ag-label-bottom">
             <span class="anatomy-line"></span>
-            <span class="anatomy-part-label" data-i18n-html="anatomy_label_version">Standart<br>sürüm numarası</span>
+            <span class="anatomy-part-label" data-i18n-html="anatomy_label_note">Editör notu<br>(opsiyonel)</span>
           </div>
           <div class="ag-label-bottom ag-empty"></div>
-          <div class="ag-label-bottom">
-            <span class="anatomy-line"></span>
-            <span class="anatomy-part-label" data-i18n-html="anatomy_label_icons">İfadelere karşılık<br>gelen ikonlar</span>
-          </div>
       </div>
       </div>
     </section>
@@ -1140,16 +1144,16 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)
   <div id="tab-interpret" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-interpret">
   <section class="section">
     <h2 class="section-title" data-i18n="interpret_title">AIAS Kodu Girerek Anlamını Göster</h2>
-    <p class="info-text" data-i18n-html="interpret_info">Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code></p>
+    <p class="info-text" data-i18n-html="interpret_info">Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS-1.0 Ph RePr R ChatGPT</code></p>
     <div class="interpret-form">
-      <input type="text" class="interpret-input" id="stmtInput" data-i18n-placeholder="interpret_placeholder" placeholder="Örn.: AIAS HAb Ed R ChatGPT, Claude v1.0" autocomplete="off">
+      <input type="text" class="interpret-input" id="stmtInput" data-i18n-placeholder="interpret_placeholder" placeholder="Örn.: AIAS-1.0 HAb Ed R ChatGPT, Claude" autocomplete="off">
       <button class="interpret-btn" id="interpretBtn" data-i18n="interpret_btn">Anlamını Göster</button>
     </div>
     <div class="result-box" id="resultBox"></div>
     <div id="resultCards"></div>
   </section>
 
-  <section class="section">
+  <section class="section lib-section">
     <h2 class="section-title" data-i18n="interpret_library_title">Bileşen Kütüphanesi (Tüm Kodlar)</h2>
     <p class="info-text" data-i18n="interpret_library_info">AIAS beyanlarında kullanılan tüm bileşen kodları ve anlamları aşağıda listelenmiştir.</p>
     <div id="library"></div>
@@ -1277,7 +1281,7 @@ input[name="bSlider"][value="4"]:checked ~ .slider-pos{transform:translateX(80%)
       <div id="builderResult">
         <div class="builder-result-label" data-i18n="builder_result_code_label">Oluşturulan AIAS Kodu</div>
         <div class="builder-result-code">
-          <span class="builder-code-inner"><span id="builderCode">AIAS Eh v1.0</span><span id="builderIcons" class="builder-icons"></span></span>
+          <span class="builder-code-inner"><span id="builderCode">AIAS-1.0 Eh</span><span id="builderIcons" class="builder-icons"></span></span>
           <button class="builder-copy-btn" id="builderCopyBtn" data-i18n="copy_btn">Kopyala</button>
         </div>
       </div>
@@ -1501,11 +1505,20 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
     Nr: { key:'not_reviewed', name:'İncelenmedi',                desc:'Yapay zeka tarafından üretilen içerik insan editör tarafından incelenmemiştir.' }
   };
 
+  // Current standard version. It is written right after the prefix: "AIAS-1.0 Ph Pr R ChatGPT".
+  // (The old notation with the version at the end, "AIAS Ph Pr R ChatGPT v1.0", read like the
+  // model's version number and is no longer accepted.)
+  var VERSION = '1.0';
+
   // ── Parser ──
   function parseStatement(raw) {
     var s = raw.trim();
-    if (s.indexOf('AIAS ') !== 0) return { error: t('error_no_prefix') };
-    s = s.slice(5); // remove "AIAS "
+
+    // Prefix and version come first as one token: "AIAS-1.0"
+    var head = s.match(/^AIAS-(\d+\.\d+)(\s+|$)/);
+    if (!head) return { error: t('error_no_prefix') };
+    var version = head[1];
+    s = s.slice(head[0].length);
 
     // Extract note
     var note = null;
@@ -1514,12 +1527,6 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
       note = s.slice(pipeIdx + 3).trim();
       s = s.slice(0, pipeIdx).trim();
     }
-
-    // Check version suffix (v*.*)
-    var verMatch = s.match(/\s+(v\d+\.\d+)$/);
-    if (!verMatch) return { error: t('error_no_version') };
-    var version = verMatch[1];
-    s = s.slice(0, verMatch.index).trim();
 
     if (!s) return { error: t('error_no_proportion') };
 
@@ -1653,6 +1660,15 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
         '<div class="card-desc">' + esc(t('card_aias_desc')) + '</div>' +
       '</div></div>';
 
+    // Version card (follows the prefix, as in the code)
+    cards += '<div class="card">' +
+      '<div class="card-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;font-family:var(--font-mono);background:var(--c-bg-alt);border-radius:50%;border:1.5px solid var(--c-border)">' + esc(parsed.version) + '</div>' +
+      '<div class="card-body">' +
+        '<div class="card-name">' + esc(t('card_version_name')) + '</div>' +
+        '<div class="card-code">' + esc(parsed.version) + '</div>' +
+        '<div class="card-desc">' + esc(t('card_version_desc')) + '</div>' +
+      '</div></div>';
+
     // Proportion
     cards += cardHTML(p.key, p.name, parsed.proportion, p.desc);
 
@@ -1678,15 +1694,6 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
           '<div class="card-desc">' + esc(t('card_models_desc')) + '</div>' +
         '</div></div>';
     }
-
-    // Version card
-    cards += '<div class="card">' +
-      '<div class="card-icon" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;font-family:var(--font-mono);background:var(--c-bg-alt);border-radius:50%;border:1.5px solid var(--c-border)">' + esc(parsed.version) + '</div>' +
-      '<div class="card-body">' +
-        '<div class="card-name">' + esc(t('card_version_name')) + '</div>' +
-        '<div class="card-code">' + esc(parsed.version) + '</div>' +
-        '<div class="card-desc">' + esc(t('card_version_desc')) + '</div>' +
-      '</div></div>';
 
     resultCards.innerHTML = '<div class="cards">' + cards + '</div>';
   }
@@ -1873,7 +1880,7 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
       if (rCode) parts.push(rCode);
       if (models.length) parts.push(models.join(', '));
     }
-    var code = 'AIAS ' + parts.join(' ') + ' v1.0';
+    var code = 'AIAS-' + VERSION + ' ' + parts.join(' ');
     if (isAIUsed && note) code += ' | ' + note;
 
     builderCodeEl.textContent = code;
@@ -1903,6 +1910,9 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
     // AIAS prefix
     rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">AIAS:</span> ' + esc(t('card_aias_desc')) + '</div></div>';
 
+    // Version (follows the prefix, as in the code)
+    rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">' + VERSION + ':</span> ' + esc(t('card_version_desc')) + '</div></div>';
+
     // Proportion
     var pr = PROPORTION[pCode];
     rows += '<div class="builder-expl-row"><div class="builder-expl-icons">' + ICONS[pr.key] + '</div><div class="builder-expl-text"><span class="builder-expl-code">' + esc(pCode) + ':</span> ' + esc(pr.desc) + '</div></div>';
@@ -1928,9 +1938,6 @@ window.TRANSLATIONS = window.TRANSLATIONS || {};
     if (isAIUsed && models.length) {
       rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">' + esc(models.join(', ')) + ':</span> ' + esc(t('card_models_desc')) + '</div></div>';
     }
-
-    // Version
-    rows += '<div class="builder-expl-row"><div class="builder-expl-text"><span class="builder-expl-code">v1.0:</span> ' + esc(t('card_version_desc')) + '</div></div>';
 
     // Note
     if (isAIUsed && note) {

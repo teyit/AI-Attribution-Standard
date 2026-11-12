@@ -78,13 +78,18 @@ README.md           # Proje dokumantasyonu
 
 ## AIAS Kod Yapisi
 
-Bir AIAS kodu su formati izler: `AIAS-1.[oran].[asamalar].[inceleme].[modeller] | [not]`
+Bir AIAS kodu su formati izler: `AIAS-[surum] [oran] [asamalar] [inceleme] [modeller] | [not]`
 
+Ornek: `AIAS-1.0 PAI ReEd R ChatGPT, Midjourney | Kapak gorseli YZ ile uretildi.`
+
+- **Surum:** Kodun basinda, AIAS'a tireyle bitisik (`AIAS-1.0`). Guncel surum `index.html` icindeki `VERSION` sabitinde.
+  Eski yazilis (`AIAS Ph Pr R ChatGPT v1.0`, surum sonda) model surumu gibi okundugu icin 2026-11'de birakildi ve artik okunmuyor.
 - **Oran kodlari:** `Eh` (tamamen insan), `Ph` (cogunlukla insan), `HAb` (insan-YZ dengesi), `PAI` (cogunlukla YZ), `EAI` (tamamen YZ)
-- **Asama kodlari:** `Re` (arastirma), `Pr` (uretim), `Ed` (duzenleme) — virgülle ayrilir
+- **Asama kodlari:** `Re` (arastirma), `Pr` (uretim), `Ed` (duzenleme); ayiricisiz birlesir (`RePrEd`)
 - **Inceleme kodlari:** `R` (insan tarafindan incelendi), `Nr` (incelenmedi)
-- **Modeller:** Serbest metin (ornegin `ChatGPT,Midjourney`)
-- **Not:** `|` karakteriyle ayrilir, istege bagli editor notu
+- `Eh` (tamamen insan) ise asama, inceleme ve model almaz: `AIAS-1.0 Eh`
+- **Modeller:** Serbest metin, virgulle ayrilir, birden cok kelime olabilir (ornegin `ChatGPT, Gemini 2.5 Pro`)
+- **Not:** ` | ` ile ayrilir, istege bagli editor notu
 
 ## Erisilebirlik (a11y)
 

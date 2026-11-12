@@ -24,13 +24,12 @@ window.TRANSLATIONS.tr = {
   // -- Home anatomy --
   home_anatomy_title: 'Atıf Beyanı Kod Formatı',
   home_anatomy_desc: 'AIAS (Yapay Zeka Atıf Standardı), yapay zeka kullanımının her boyutunu tek bir standart kod ile özetler.',
-  anatomy_label_prefix: 'Atıf standardı<br>anahtar kodu',
+  anatomy_label_prefix: 'Atıf standardı<br>ve sürüm numarası',
   anatomy_label_stages: 'YZ hangi<br>aşamada katkı sağladı?',
   anatomy_label_models: 'Kullanılan YZ<br>modelleri ve uygulamaları',
   anatomy_label_note: 'Editör notu<br>(opsiyonel)',
   anatomy_label_proportion: 'YZ ne kadar<br>katkı sağladı?',
   anatomy_label_review: 'İnsan<br>denetimi var mı?',
-  anatomy_label_version: 'Standart<br>sürüm numarası',
   anatomy_label_icons: 'İfadelere karşılık<br>gelen ikonlar',
   anatomy_note_example: '| Kapak görseli YZ ile üretildi.',
 
@@ -55,8 +54,8 @@ window.TRANSLATIONS.tr = {
 
   // -- Interpret tab --
   interpret_title: 'AIAS Kodu Girerek Anlamını Göster',
-  interpret_info: 'Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code>',
-  interpret_placeholder: 'Örn.: AIAS HAb Ed R ChatGPT, Claude v1.0',
+  interpret_info: 'Yayınlanmış bir AIAS kodu girerek ne anlama geldiğini görüntüleyin. Örnek: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS-1.0 Ph RePr R ChatGPT</code>',
+  interpret_placeholder: 'Örn.: AIAS-1.0 HAb Ed R ChatGPT, Claude',
   interpret_btn: 'Anlamını Göster',
   interpret_library_title: 'Bileşen Kütüphanesi (Tüm Kodlar)',
   interpret_library_info: 'AIAS beyanlarında kullanılan tüm bileşen kodları ve anlamları aşağıda listelenmiştir.',
@@ -128,8 +127,7 @@ window.TRANSLATIONS.tr = {
   review_Nr_desc: 'Yapay zeka tarafından üretilen içerik insan editör tarafından incelenmemiştir.',
 
   // -- Parser errors --
-  error_no_prefix: 'Beyan "AIAS" ön eki ile başlamalıdır.',
-  error_no_version: 'Beyan sürüm numarası (örn.: v1.0) ile bitmelidir.',
+  error_no_prefix: 'Beyan, AIAS ön eki ve sürüm numarasıyla başlamalıdır (örn.: AIAS-1.0).',
   error_no_proportion: 'Oran kodu eksik.',
   error_invalid_proportion: 'Geçersiz oran kodu: "{code}". Geçerli kodlar: Eh, Ph, HAb, PAI, EAI',
   error_no_review: 'İnceleme kodu eksik.',

@@ -24,13 +24,12 @@ window.TRANSLATIONS.en = {
   // -- Home anatomy --
   home_anatomy_title: 'Attribution Statement Code Format',
   home_anatomy_desc: 'AIAS (AI Attribution Standard) summarizes every dimension of AI usage in a single standardized code.',
-  anatomy_label_prefix: 'Attribution standard<br>identifier',
+  anatomy_label_prefix: 'Attribution standard<br>and version number',
   anatomy_label_stages: 'At which stages<br>did AI contribute?',
   anatomy_label_models: 'AI models and<br>applications used',
   anatomy_label_note: 'Editor note<br>(optional)',
   anatomy_label_proportion: 'How much did<br>AI contribute?',
   anatomy_label_review: 'Was AI content<br>reviewed by a human?',
-  anatomy_label_version: 'Standard<br>version number',
   anatomy_label_icons: 'Icons representing<br>the statements',
   anatomy_note_example: '| Cover image generated with AI.',
 
@@ -55,8 +54,8 @@ window.TRANSLATIONS.en = {
 
   // -- Interpret tab --
   interpret_title: 'Interpret an Attribution Statement',
-  interpret_info: 'Enter a published AIAS code to see what it means. Example: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS Ph RePr R ChatGPT v1.0</code>',
-  interpret_placeholder: 'Type or paste an AIAS code, e.g.: AIAS HAb Ed R ChatGPT, Claude v1.0',
+  interpret_info: 'Enter a published AIAS code to see what it means. Example: <code style="font-family:var(--font-mono);font-size:0.85rem;background:var(--c-bg-alt);padding:2px 6px;border-radius:3px">AIAS-1.0 Ph RePr R ChatGPT</code>',
+  interpret_placeholder: 'Type or paste an AIAS code, e.g.: AIAS-1.0 HAb Ed R ChatGPT, Claude',
   interpret_btn: 'Interpret',
   interpret_library_title: 'Component Library (All Codes)',
   interpret_library_info: 'All component codes used in AIAS statements and their meanings are listed below.',
@@ -128,8 +127,7 @@ window.TRANSLATIONS.en = {
   review_Nr_desc: 'Content produced by AI has not been reviewed by a human editor.',
 
   // -- Parser errors --
-  error_no_prefix: 'Statement must start with the "AIAS" prefix.',
-  error_no_version: 'Statement must end with a version number (e.g.: v1.0).',
+  error_no_prefix: 'Statement must start with the AIAS prefix and the version number (e.g.: AIAS-1.0).',
   error_no_proportion: 'Proportion code is missing.',
   error_invalid_proportion: 'Invalid proportion code: "{code}". Valid codes: Eh, Ph, HAb, PAI, EAI',
   error_no_review: 'Review code is missing.',
